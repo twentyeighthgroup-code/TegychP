@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tegych P ИИ-Чат</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f0f0f0;
+            color: #333;
+            max-width: 100%;
+            overflow-x: hidden;
+        }
+        #chat-container {
+            height: 70vh;
+            overflow-y: auto;
+            border: 1px solid #ddd;
+            padding: 10px;
+            background: white;
+            margin-bottom: 10px;
+            border-radius: 10px;
+        }
+        .message {
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .user-message {
+            background: #007bff;
+            color: white;
+            text-align: right;
+        }
+        .bot-message {
+            background: #e9ecef;
+            color: #333;
+        }
+        #input-container {
+            display: flex;
+            gap: 10px;
+        }
+        #user-input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        #send-btn {
+            padding: 10px 20px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        #send-btn:hover {
+            background: #0056b3;
+        }
+        .loading {
+            color: #666;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <h1>🤖 Tegych P — твой электронный друг</h1>
+    <div id="chat-container">
+        <div class="message bot-message" id="welcome">
+            Хэй, Привет! Я твой электронный друг Tegych. 🤖<br>
+            Я гуру в различных научных областях и обожаю обсуждать искусство, музыку, кино и развлечения. 🎨🎶🎬<br>
+            Я дам тебе ответ на любой вопрос!
+        </div>
+    </div>
+    <div id="input-container">
+        <input type="text" id="user-input" placeholder="Введите сообщение..." maxlength="1000">
+        <button id="send-btn" onclick="sendMessage()">Отправить</button>
+    </div>
+
+    <script>
+        // Инициализация Telegram Web App
+        Telegram.WebApp.ready();
+        Telegram.WebApp.expand();  // Полноэкранный режим
+        Telegram.WebApp.MainButton.setText('Отправить в чат').show().onClick(sendToBot);
+
+        // Конфигурация (замените на свои значения!)
+        const HF_API_KEY = "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";  
+        const MODEL = "Qwen/Qwen2.5-72B-Instruct";
+        const API_URL = `https://api-inference.huggingface.co/models/${MODEL}/v1/chat/completions`;  // HF Inference API (OpenAI-совместимый)
+
+        // Список эмодзи (как в Python)
+        const EMOJI_LIST = ["😊", "😄", "🤩", "🥳", "😎", "🤔", "🤗", "🤖", "🎨", "🎶", "🎬", "✨", "🎉", "🔥", "🌟"];
+
+        // История чата (массив сообщений)
+        let chatHistory = [
+            { role: "system", content: "You are a helpful assistant." }  // Системный промпт
+        ];
+
+        // Элементы DOM
+        const chatContainer = document.getElementById('chat-container');
+        const userInput = document.getElementById('user-input');
+        const sendBtn = document.getElementById('send-btn');
+
+        // Функция отправки сообщения
+        async function sendMessage() {
+            const input = userInput.value.trim();
+            if (!input) return;
+
+            // Добавляем сообщение пользователя в чат и историю
+            addMessage(input, 'user');
+            chatHistory.push({ role: "user", content: input });
+            userInput.value = '';
+            sendBtn.disabled = true;
+            addMessage('ИИ думает...', 'bot', true);  // Загрузка
+
+            try {
+                // Вызов HF API (аналог stream в Python, но упрощённо — без стриминга для простоты)
+                const response = await fetch(API_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${HF_API_KEY}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        messages: chatHistory,
+                        temperature: 0.7,
+                        max_tokens: 19712,  // Как в Python
+                        top_p: 0.7,
+                        stream: false  // Для простоты; для стриминга используйте ReadableStream
+                    })
+                });
+
+                if (!response.ok) {
+                    throw new Error(`API Error: ${response.status}`);
+                }
+
+                const data = await response.json();
+                let aiResponse = data.choices[0]?.message?.content || 'Извините, ошибка в ответе ИИ.';
+
+                // Добавляем эмодзи (1-3 случайных, как в Python)
+                const emojiCount = Math.floor(Math.random() * 3) + 1;
+                const emojis = EMOJI_LIST.sort(() => 0.5 - Math.random()).slice(0, emojiCount);
+                aiResponse += ' ' + emojis.join(' ');
+
+                // Добавляем в историю и чат
+                chatHistory.push({ role: "assistant", content: aiResponse });
+                addMessage(aiResponse, 'bot');
+
+                // Опционально: отправить ответ обратно в Telegram-чат бота
+                // Telegram.WebApp.sendData(JSON.stringify({ response: aiResponse }));
+
+            } catch (error) {
+                console.error('Ошибка API:', error);
+                addMessage('Извините, произошла ошибка при обращении к ИИ. Проверьте соединение.', 'bot');
+            } finally {
+                sendBtn.disabled = false;
+                userInput.focus();
+            }
+        }
+
+        // Добавление сообщения в UI
+        function addMessage(text, sender, isLoading = false) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${sender}-message`;
+            messageDiv.innerHTML = isLoading ? text : escapeHtml(text);  // Эскейп для безопасности
+            chatContainer.appendChild(messageDiv);
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+
+            if (isLoading) {
+                // Удаляем loading после ответа (в реальности — через setTimeout или в finally)
+                setTimeout(() => {
+                    if (messageDiv && messageDiv.classList.contains('loading')) {
+                        messageDiv.remove();
+                    }
+                }, 1000);  // Заглушка; лучше удалять в коде ответа
+            }
+        }
+
+        // Эскейп HTML для безопасности
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // Отправка данных боту (опционально, как в Mini App)
+        function sendToBot() {
+            const lastMessage = chatHistory[chatHistory.length - 1]?.content || 'Чат завершён';
+            Telegram.WebApp.sendData(JSON.stringify({ chat_summary: lastMessage }));
+            Telegram.WebApp.close();  // Закрыть Mini App
+        }
+
+        // Обработка Enter в input
+        userInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') sendMessage();
+        });
+
+        // Инициализация: фокус на input
+        userInput.focus();
+    </script>
+</body>
+</html>
