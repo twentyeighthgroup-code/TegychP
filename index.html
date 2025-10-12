@@ -20,6 +20,9 @@
             --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
             --shadow-soft: 0 4px 20px rgba(0, 0, 0, 0.4);
             --shadow-glow: 0 0 15px rgba(212, 175, 55, 0.3);
+            --success: #28a745;
+            --warning: #ffc107;
+            --danger: #dc3545;
         }
 
         * {
@@ -519,6 +522,132 @@
             color: var(--text-muted);
         }
 
+        .chat-actions {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .chat-action-btn {
+            background: rgba(40, 40, 40, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-light);
+            padding: 10px 20px;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .chat-action-btn:hover {
+            background: rgba(212, 175, 55, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 25px;
+            border-radius: var(--border-radius);
+            color: white;
+            font-weight: 500;
+            z-index: 1000;
+            transform: translateX(150%);
+            transition: transform 0.3s ease;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .notification.show {
+            transform: translateX(0);
+        }
+
+        .notification.success {
+            background: linear-gradient(135deg, var(--success), #1e7e34);
+        }
+
+        .notification.error {
+            background: linear-gradient(135deg, var(--danger), #c82333);
+        }
+
+        .notification.warning {
+            background: linear-gradient(135deg, var(--warning), #e0a800);
+        }
+
+        .chat-history {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(20, 20, 20, 0.9);
+            border-radius: var(--border-radius);
+            padding: 20px;
+            width: 300px;
+            box-shadow: var(--shadow-soft);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            display: none;
+            z-index: 100;
+        }
+
+        .chat-history h3 {
+            margin-bottom: 15px;
+            color: var(--accent-gold);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .history-item {
+            padding: 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .history-item:hover {
+            background: rgba(212, 175, 55, 0.1);
+        }
+
+        .history-item:last-child {
+            border-bottom: none;
+        }
+
+        .history-item strong {
+            color: var(--accent-gold);
+        }
+
+        .history-item .timestamp {
+            font-size: 12px;
+            color: var(--text-muted);
+            float: right;
+        }
+
+        .history-item .preview {
+            font-size: 14px;
+            color: var(--text-light);
+            margin-top: 5px;
+        }
+
+        .toggle-history {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(212, 175, 55, 0.2);
+            border: none;
+            color: var(--text-light);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 99;
+            box-shadow: var(--shadow-soft);
+        }
+
         @media (max-width: 768px) {
             .header {
                 flex-direction: column;
@@ -556,6 +685,15 @@
             .chat-stats {
                 flex-direction: column;
                 gap: 15px;
+            }
+            
+            .chat-actions {
+                flex-wrap: wrap;
+            }
+            
+            .chat-history {
+                width: 250px;
+                right: 10px;
             }
         }
 
@@ -683,16 +821,28 @@
         </div>
     </div>
 
+    <div class="chat-actions">
+        <button class="chat-action-btn" onclick="clearChat()">
+            <i class="fas fa-trash"></i> Очистить чат
+        </button>
+        <button class="chat-action-btn" onclick="exportChat()">
+            <i class="fas fa-download"></i> Экспорт чата
+        </button>
+        <button class="chat-action-btn" onclick="toggleHistory()">
+            <i class="fas fa-history"></i> История чатов
+        </button>
+    </div>
+
     <div class="input-container">
         <input type="text" id="user-input" placeholder="Введите сообщение..." maxlength="1000">
         <div class="input-actions">
-            <div class="action-btn" title="Прикрепить файл">
+            <div class="action-btn" title="Прикрепить файл" onclick="attachFile()">
                 <i class="fas fa-paperclip"></i>
             </div>
-            <div class="action-btn" title="Эмодзи">
+            <div class="action-btn" title="Эмодзи" onclick="toggleEmojiPicker()">
                 <i class="far fa-smile"></i>
             </div>
-            <div class="action-btn" title="Голосовой ввод">
+            <div class="action-btn" title="Голосовой ввод" onclick="startVoiceInput()">
                 <i class="fas fa-microphone"></i>
             </div>
         </div>
@@ -702,13 +852,45 @@
     </div>
 
     <div class="footer">
-        <div>© 2025 Tegcompany. Все права защищены.</div>
+        <div>© 2025 Tegych. Все права защищены.</div>
         <div class="footer-links">
             <a href="#" class="footer-link">Политика конфиденциальности</a>
             <a href="#" class="footer-link">Условия использования</a>
             <a href="#" class="footer-link">Поддержка</a>
             <a href="#" class="footer-link">Контакты</a>
         </div>
+    </div>
+
+    <button class="toggle-history" onclick="toggleHistory()">
+        <i class="fas fa-history"></i>
+    </button>
+    
+    <div class="chat-history" id="chat-history">
+        <h3>История чатов <i class="fas fa-times" onclick="toggleHistory()" style="cursor: pointer;"></i></h3>
+        <div class="history-item">
+            <strong>Наука и технологии</strong>
+            <div class="timestamp">Сегодня, 14:30</div>
+            <div class="preview">Обсуждали квантовые вычисления и ИИ</div>
+        </div>
+        <div class="history-item">
+            <strong>Музыкальные рекомендации</strong>
+            <div class="timestamp">Вчера, 19:45</div>
+            <div class="preview">Список новых треков в жанре лоу-фай</div>
+        </div>
+        <div class="history-item">
+            <strong>Кино и сериалы</strong>
+            <div class="timestamp">12.10.2023</div>
+            <div class="preview">Рекомендации фильмов ужасов</div>
+        </div>
+        <div class="history-item">
+            <strong>Философия</strong>
+            <div class="timestamp">10.10.2023</div>
+            <div class="preview">Обсуждение экзистенциализма</div>
+        </div>
+    </div>
+
+    <div class="notification" id="notification">
+        Уведомление
     </div>
 
     <script>
@@ -734,11 +916,97 @@
         const chatContainer = document.getElementById('chat-container');
         const userInput = document.getElementById('user-input');
         const sendBtn = document.getElementById('send-btn');
+        const notificationEl = document.getElementById('notification');
+        const chatHistoryEl = document.getElementById('chat-history');
+
+        // Функция показа уведомлений
+        function showNotification(message, type = 'success') {
+            notificationEl.textContent = message;
+            notificationEl.className = 'notification ' + type;
+            notificationEl.classList.add('show');
+            
+            setTimeout(() => {
+                notificationEl.classList.remove('show');
+            }, 3000);
+        }
 
         // Функция вставки быстрых действий
         function insertQuickAction(text) {
             userInput.value = text;
             userInput.focus();
+        }
+
+        // Функция очистки чата
+        function clearChat() {
+            chatContainer.innerHTML = '';
+            chatHistory = [
+                { role: "system", content: "Ты Tegych, полезный ассистент. Ты эксперт в науке, искусстве, музыке, кино и развлечениях. Отвечай на русском языке, дружелюбно и креативно." }
+            ];
+            addWelcomeMessage();
+            showNotification('Чат очищен', 'success');
+        }
+
+        // Функция добавления приветственного сообщения
+        function addWelcomeMessage() {
+            const welcomeMessage = document.createElement('div');
+            welcomeMessage.className = 'message bot-message';
+            welcomeMessage.innerHTML = `
+                <div class="message-header">
+                    <i class="fas fa-robot"></i>
+                    <span>Tegych</span>
+                </div>
+                <div class="message-content">
+                    Хэй, Привет! Я твой электронный друг Tegych. 🤖<br>
+                    Я гуру в различных научных областях и обожаю обсуждать искусство, музыку, кино и развлечения. 🎨🎶🎬<br>
+                    Я дам тебе ответ на любой вопрос!
+                </div>
+            `;
+            chatContainer.appendChild(welcomeMessage);
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
+
+        // Функция экспорта чата
+        function exportChat() {
+            const messages = [];
+            document.querySelectorAll('.message').forEach(msg => {
+                const sender = msg.classList.contains('user-message') ? 'Пользователь' : 'Tegych';
+                const content = msg.querySelector('.message-content').textContent;
+                messages.push(`${sender}: ${content}`);
+            });
+            
+            const chatText = messages.join('\n\n');
+            const blob = new Blob([chatText], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `chat_${new Date().toISOString().slice(0, 10)}.txt`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            
+            showNotification('Чат экспортирован', 'success');
+        }
+
+        // Функция переключения истории чатов
+        function toggleHistory() {
+            chatHistoryEl.style.display = chatHistoryEl.style.display === 'block' ? 'none' : 'block';
+        }
+
+        // Функция прикрепления файла
+        function attachFile() {
+            showNotification('Функция прикрепления файлов скоро будет', 'warning');
+        }
+
+        // Функция переключения эмодзи-пикера
+        function toggleEmojiPicker() {
+            showNotification('Эмодзи-пикер скоро будет', 'warning');
+        }
+
+        // Функция голосового ввода
+        function startVoiceInput() {
+            showNotification('Голосовой ввод скоро будет', 'warning');
         }
 
         // Функция отправки сообщения (с поддержкой стриминга)
@@ -843,6 +1111,7 @@
                 hideTypingIndicator();
                 aiMessageDiv.innerHTML = `Ошибка: ${error.message}. Статус: ${error.message.includes('401') ? '401 (проверьте ключ)' : error.message.includes('429') ? '429 (лимиты Mistral)' : 'Другая'}.`;
                 aiMessageDiv.classList.remove('streaming');
+                showNotification('Ошибка при отправке сообщения', 'error');
             } finally {
                 sendBtn.disabled = false;
                 userInput.focus();
