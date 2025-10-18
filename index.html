@@ -1259,7 +1259,7 @@
                     const lines = chunk.split('\n');
 
                     for (const line of lines) {
-                        if (line.startsWith(' ')) {
+                        if (line.startsWith('data: ')) {
                             const data = line.slice(6);
                             if (data === '[DONE]') continue;
 
