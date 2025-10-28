@@ -783,6 +783,40 @@
             text-align: right;
         }
 
+        .emoji-picker {
+            position: absolute;
+            bottom: 80px;
+            right: 20px;
+            background: rgba(20, 20, 20, 0.95);
+            border-radius: var(--border-radius);
+            padding: 15px;
+            width: 300px;
+            display: grid;
+            grid-template-columns: repeat(8, 1fr);
+            gap: 8px;
+            box-shadow: var(--shadow-soft);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 100;
+            display: none;
+        }
+
+        .emoji-picker.show {
+            display: grid;
+        }
+
+        .emoji-item {
+            font-size: 24px;
+            text-align: center;
+            cursor: pointer;
+            padding: 5px;
+            border-radius: 5px;
+            transition: var(--transition);
+        }
+
+        .emoji-item:hover {
+            background: rgba(212, 175, 55, 0.2);
+        }
+
         @media (max-width: 768px) {
             .header {
                 flex-direction: column;
@@ -833,6 +867,12 @@
             
             .update-features {
                 grid-template-columns: 1fr;
+            }
+            
+            .emoji-picker {
+                width: 250px;
+                right: 10px;
+                grid-template-columns: repeat(7, 1fr);
             }
         }
 
@@ -1017,6 +1057,36 @@
         </button>
     </div>
 
+    <div class="emoji-picker" id="emoji-picker">
+        <div class="emoji-item" onclick="insertEmoji('😊')">😊</div>
+        <div class="emoji-item" onclick="insertEmoji('😄')">😄</div>
+        <div class="emoji-item" onclick="insertEmoji('🤩')">🤩</div>
+        <div class="emoji-item" onclick="insertEmoji('🥳')">🥳</div>
+        <div class="emoji-item" onclick="insertEmoji('😎')">😎</div>
+        <div class="emoji-item" onclick="insertEmoji('🤔')">🤔</div>
+        <div class="emoji-item" onclick="insertEmoji('🤗')">🤗</div>
+        <div class="emoji-item" onclick="insertEmoji('🤖')">🤖</div>
+        <div class="emoji-item" onclick="insertEmoji('🎨')">🎨</div>
+        <div class="emoji-item" onclick="insertEmoji('🎶')">🎶</div>
+        <div class="emoji-item" onclick="insertEmoji('🎬')">🎬</div>
+        <div class="emoji-item" onclick="insertEmoji('✨')">✨</div>
+        <div class="emoji-item" onclick="insertEmoji('🎉')">🎉</div>
+        <div class="emoji-item" onclick="insertEmoji('🔥')">🔥</div>
+        <div class="emoji-item" onclick="insertEmoji('🌟')">🌟</div>
+        <div class="emoji-item" onclick="insertEmoji('❤️')">❤️</div>
+        <div class="emoji-item" onclick="insertEmoji('👍')">👍</div>
+        <div class="emoji-item" onclick="insertEmoji('👏')">👏</div>
+        <div class="emoji-item" onclick="insertEmoji('🙌')">🙌</div>
+        <div class="emoji-item" onclick="insertEmoji('💪')">💪</div>
+        <div class="emoji-item" onclick="insertEmoji('🧠')">🧠</div>
+        <div class="emoji-item" onclick="insertEmoji('💡')">💡</div>
+        <div class="emoji-item" onclick="insertEmoji('🚀')">🚀</div>
+        <div class="emoji-item" onclick="insertEmoji('💬')">💬</div>
+        <div class="emoji-item" onclick="insertEmoji('✅')">✅</div>
+        <div class="emoji-item" onclick="insertEmoji('❌')">❌</div>
+        <div class="emoji-item" onclick="insertEmoji('⚠️')">⚠️</div>
+    </div>
+
     <div class="footer">
         <div>© 2025 Tegcompany. Все права защищены.</div>
         <div class="footer-links">
@@ -1045,12 +1115,12 @@
         </div>
         <div class="history-item">
             <strong>Кино и сериалы</strong>
-            <div class="timestamp">12.10.2025</div>
+            <div class="timestamp">28.10.2025</div>
             <div class="preview">Рекомендации фильмов ужасов</div>
         </div>
         <div class="history-item">
             <strong>Философия</strong>
-            <div class="timestamp">10.10.2025</div>
+            <div class="timestamp">28.10.2025</div>
             <div class="preview">Обсуждение экзистенциализма</div>
         </div>
     </div>
@@ -1087,6 +1157,7 @@
         const sendBtn = document.getElementById('send-btn');
         const notificationEl = document.getElementById('notification');
         const chatHistoryEl = document.getElementById('chat-history');
+        const emojiPicker = document.getElementById('emoji-picker');
 
         // Функция показа уведомлений
         function showNotification(message, type = 'success') {
@@ -1180,7 +1251,14 @@
 
         // Функция переключения эмодзи-пикера
         function toggleEmojiPicker() {
-            showNotification('Эмодзи-пикер скоро будет', 'warning');
+            emojiPicker.classList.toggle('show');
+        }
+
+        // Функция вставки эмодзи
+        function insertEmoji(emoji) {
+            userInput.value += emoji;
+            userInput.focus();
+            emojiPicker.classList.remove('show');
         }
 
         // Функция голосового ввода
@@ -1377,6 +1455,13 @@
         // Обработка Enter
         userInput.addEventListener('keypress', (e) => {
             if (e.key === 'Enter') sendMessage();
+        });
+
+        // Закрытие эмодзи-пикера при клике вне его
+        document.addEventListener('click', (e) => {
+            if (!emojiPicker.contains(e.target) && !e.target.closest('.action-btn')) {
+                emojiPicker.classList.remove('show');
+            }
         });
 
         // Инициализация
