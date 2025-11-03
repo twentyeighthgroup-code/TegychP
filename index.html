@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tegych AI | Maximum Functionality</title>
+    <title>Tegych AI | All Features Working</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
@@ -1015,25 +1015,25 @@
     </div>
 
     <div class="update-banner">
-        <h2 class="update-title">🚀 Maximum Functionality</h2>
-        <p>Optimized code, improved API performance, and new features</p>
+        <h2 class="update-title">🚀 All Features Working</h2>
+        <p>Fixed API issues, emoji picker, and language switching</p>
         
         <div class="update-features">
             <div class="update-feature">
                 <i class="fas fa-bolt"></i>
-                <div>Fast Processing</div>
+                <div>Fixed API</div>
             </div>
             <div class="update-feature">
-                <i class="fas fa-memory"></i>
-                <div>Efficient Caching</div>
+                <i class="fas fa-smile"></i>
+                <div>Working Emojis</div>
             </div>
             <div class="update-feature">
-                <i class="fas fa-network-wired"></i>
-                <div>Optimized Requests</div>
+                <i class="fas fa-language"></i>
+                <div>Language Switch</div>
             </div>
             <div class="update-feature">
-                <i class="fas fa-chart-line"></i>
-                <div>Performance Monitoring</div>
+                <i class="fas fa-palette"></i>
+                <div>Theme Selector</div>
             </div>
         </div>
     </div>
@@ -1174,6 +1174,36 @@
         </button>
     </div>
 
+    <div class="emoji-picker" id="emoji-picker">
+        <div class="emoji-item" onclick="insertEmoji('😊')">😊</div>
+        <div class="emoji-item" onclick="insertEmoji('😄')">😄</div>
+        <div class="emoji-item" onclick="insertEmoji('🤩')">🤩</div>
+        <div class="emoji-item" onclick="insertEmoji('🥳')">🥳</div>
+        <div class="emoji-item" onclick="insertEmoji('😎')">😎</div>
+        <div class="emoji-item" onclick="insertEmoji('🤔')">🤔</div>
+        <div class="emoji-item" onclick="insertEmoji('🤗')">🤗</div>
+        <div class="emoji-item" onclick="insertEmoji('🤖')">🤖</div>
+        <div class="emoji-item" onclick="insertEmoji('🎨')">🎨</div>
+        <div class="emoji-item" onclick="insertEmoji('🎶')">🎶</div>
+        <div class="emoji-item" onclick="insertEmoji('🎬')">🎬</div>
+        <div class="emoji-item" onclick="insertEmoji('✨')">✨</div>
+        <div class="emoji-item" onclick="insertEmoji('🎉')">🎉</div>
+        <div class="emoji-item" onclick="insertEmoji('🔥')">🔥</div>
+        <div class="emoji-item" onclick="insertEmoji('🌟')">🌟</div>
+        <div class="emoji-item" onclick="insertEmoji('❤️')">❤️</div>
+        <div class="emoji-item" onclick="insertEmoji('👍')">👍</div>
+        <div class="emoji-item" onclick="insertEmoji('👏')">👏</div>
+        <div class="emoji-item" onclick="insertEmoji('🙌')">🙌</div>
+        <div class="emoji-item" onclick="insertEmoji('💪')">💪</div>
+        <div class="emoji-item" onclick="insertEmoji('🧠')">🧠</div>
+        <div class="emoji-item" onclick="insertEmoji('💡')">💡</div>
+        <div class="emoji-item" onclick="insertEmoji('🚀')">🚀</div>
+        <div class="emoji-item" onclick="insertEmoji('💬')">💬</div>
+        <div class="emoji-item" onclick="insertEmoji('✅')">✅</div>
+        <div class="emoji-item" onclick="insertEmoji('❌')">❌</div>
+        <div class="emoji-item" onclick="insertEmoji('⚠️')">⚠️</div>
+    </div>
+
     <div class="footer">
         <div>© 2025 Tegcompany. All rights reserved.</div>
         <div class="footer-links">
@@ -1245,6 +1275,7 @@
         const notificationEl = document.getElementById('notification');
         const chatHistoryEl = document.getElementById('chat-history');
         const emojiPicker = document.getElementById('emoji-picker');
+        const languageSelect = document.getElementById('language-select');
 
         // Текущий язык
         let currentLanguage = 'en';
@@ -1280,17 +1311,33 @@
         function addWelcomeMessage() {
             const welcomeMessage = document.createElement('div');
             welcomeMessage.className = 'message bot-message';
-            welcomeMessage.innerHTML = `
-                <div class="message-header">
-                    <i class="fas fa-robot"></i>
-                    <span>Tegych</span>
-                </div>
-                <div class="message-content">
-                    Hey, Hi! I'm your electronic friend Tegych. 🤖<br>
-                    I'm a guru in various scientific fields and love discussing art, music, movies, and entertainment. 🎨🎶🎬<br>
-                    I'll give you an answer to any question!
-                </div>
-            `;
+            
+            if (currentLanguage === 'ru') {
+                welcomeMessage.innerHTML = `
+                    <div class="message-header">
+                        <i class="fas fa-robot"></i>
+                        <span>Tegych</span>
+                    </div>
+                    <div class="message-content">
+                        Привет! Я твой электронный друг Tegych. 🤖<br>
+                        Я гуру в различных научных областях и обожаю обсуждать искусство, музыку, кино и развлечения. 🎨🎶🎬<br>
+                        Я дам тебе ответ на любой вопрос!
+                    </div>
+                `;
+            } else {
+                welcomeMessage.innerHTML = `
+                    <div class="message-header">
+                        <i class="fas fa-robot"></i>
+                        <span>Tegych</span>
+                    </div>
+                    <div class="message-content">
+                        Hey, Hi! I'm your electronic friend Tegych. 🤖<br>
+                        I'm a guru in various scientific fields and love discussing art, music, movies, and entertainment. 🎨🎶🎬<br>
+                        I'll give you an answer to any question!
+                    </div>
+                `;
+            }
+            
             chatContainer.appendChild(welcomeMessage);
             chatContainer.scrollTop = chatContainer.scrollHeight;
         }
@@ -1299,7 +1346,7 @@
         function exportChat() {
             const messages = [];
             document.querySelectorAll('.message').forEach(msg => {
-                const sender = msg.classList.contains('user-message') ? 'User' : 'Tegych';
+                const sender = msg.classList.contains('user-message') ? (currentLanguage === 'ru' ? 'Пользователь' : 'User') : 'Tegych';
                 const content = msg.querySelector('.message-content').textContent;
                 messages.push(`${sender}: ${content}`);
             });
@@ -1316,7 +1363,7 @@
             document.body.removeChild(a);
             URL.revokeObjectURL(url);
             
-            showNotification('Chat exported', 'success');
+            showNotification(currentLanguage === 'ru' ? 'Чат экспортирован' : 'Chat exported', 'success');
         }
 
         // Функция переключения истории чатов
@@ -1327,12 +1374,18 @@
         // Функция смены темы
         function changeTheme(theme) {
             document.body.setAttribute('data-theme', theme);
-            showNotification(`Theme changed to ${theme}`, 'info');
+            showNotification(
+                currentLanguage === 'ru' ? 
+                `Тема изменена на ${theme}` : 
+                `Theme changed to ${theme}`, 
+                'info'
+            );
         }
 
         // Функция смены языка
         function changeLanguage(lang) {
             currentLanguage = lang;
+            languageSelect.value = lang;
             
             // Обновляем системное сообщение
             if (lang === 'ru') {
@@ -1340,14 +1393,29 @@
                     role: "system", 
                     content: "Вы Tegych, полезный ассистент. Вы эксперт в науке, искусстве, музыке, кино и развлечениях. Отвечайте на русском языке, дружелюбно и креативно." 
                 };
+                showNotification('Язык изменен на Русский', 'info');
             } else {
                 chatHistory[0] = { 
                     role: "system", 
                     content: "You are Tegych, a helpful assistant. You are an expert in science, art, music, movies, and entertainment. Answer in English, friendly and creative." 
                 };
+                showNotification('Language changed to English', 'info');
             }
             
-            showNotification(`Language changed to ${lang === 'ru' ? 'Русский' : 'English'}`, 'info');
+            // Обновляем интерфейс
+            updateInterfaceLanguage();
+        }
+
+        // Функция обновления интерфейса при смене языка
+        function updateInterfaceLanguage() {
+            const elements = document.querySelectorAll('[data-en]');
+            elements.forEach(el => {
+                if (currentLanguage === 'ru') {
+                    el.textContent = el.getAttribute('data-ru') || el.textContent;
+                } else {
+                    el.textContent = el.getAttribute('data-en') || el.textContent;
+                }
+            });
         }
 
         // Функция прикрепления файла
@@ -1376,7 +1444,7 @@
                     messageDiv.innerHTML = `
                         <div class="message-header">
                             <i class="fas fa-user"></i>
-                            <span>User</span>
+                            <span>${currentLanguage === 'ru' ? 'Вы' : 'User'}</span>
                         </div>
                         <div class="message-content">
                             <div class="file-preview">
@@ -1406,7 +1474,9 @@
                                 <span>Tegych</span>
                             </div>
                             <div class="message-content">
-                                I received your file: <strong>${file.name}</strong>. How can I help you with it?
+                                ${currentLanguage === 'ru' ? 
+                                `Я получил ваш файл: <strong>${file.name}</strong>. Как я могу помочь вам с ним?` : 
+                                `I received your file: <strong>${file.name}</strong>. How can I help you with it?`}
                             </div>
                         `;
                         chatContainer.appendChild(botMessage);
@@ -1446,7 +1516,12 @@
 
         // Функция голосового ввода
         function startVoiceInput() {
-            showNotification('Voice input coming soon', 'warning');
+            showNotification(
+                currentLanguage === 'ru' ? 
+                'Голосовой ввод скоро будет' : 
+                'Voice input coming soon', 
+                'warning'
+            );
         }
 
         // Функция отправки сообщения (с поддержкой стриминга)
@@ -1459,7 +1534,12 @@
                 const cachedResponse = questionCache.get(input);
                 addMessage(input, 'user');
                 addMessage(cachedResponse, 'bot');
-                showNotification('Response from cache', 'info');
+                showNotification(
+                    currentLanguage === 'ru' ? 
+                    'Ответ из кэша' : 
+                    'Response from cache', 
+                    'info'
+                );
                 return;
             }
 
@@ -1520,7 +1600,7 @@
                     const lines = chunk.split('\n');
 
                     for (const line of lines) {
-                        if (line.startsWith(' ')) {
+                        if (line.startsWith('data: ')) {
                             const data = line.slice(6);
                             if (data === '[DONE]') continue;
 
@@ -1540,7 +1620,10 @@
                 }
 
                 // Финализируем ответ (если пустой — fallback)
-                if (!aiResponse) aiResponse = 'No response from AI. Try again.';
+                if (!aiResponse) aiResponse = 
+                    currentLanguage === 'ru' ? 
+                    'Нет ответа от ИИ. Попробуйте снова.' : 
+                    'No response from AI. Try again.';
 
                 // Добавляем эмодзи (1-3 случайных)
                 const emojiCount = Math.floor(Math.random() * 3) + 1;
@@ -1563,9 +1646,17 @@
                 console.error('Full Mistral API Error:', error);
                 console.error('MISTRAL_API_KEY preview:', MISTRAL_API_KEY ? MISTRAL_API_KEY.substring(0, 10) + '...' : 'EMPTY');
                 hideTypingIndicator();
-                aiMessageDiv.innerHTML = `Error: ${error.message}. Status: ${error.message.includes('401') ? '401 (check key)' : error.message.includes('429') ? '429 (Mistral limits)' : 'Other'}.`;
+                aiMessageDiv.innerHTML = 
+                    currentLanguage === 'ru' ? 
+                    `Ошибка: ${error.message}. Статус: ${error.message.includes('401') ? '401 (проверьте ключ)' : error.message.includes('429') ? '429 (лимиты Mistral)' : 'Другая'}.` :
+                    `Error: ${error.message}. Status: ${error.message.includes('401') ? '401 (check key)' : error.message.includes('429') ? '429 (Mistral limits)' : 'Other'}.`;
                 aiMessageDiv.classList.remove('streaming');
-                showNotification('Error sending message', 'error');
+                showNotification(
+                    currentLanguage === 'ru' ? 
+                    'Ошибка при отправке сообщения' : 
+                    'Error sending message', 
+                    'error'
+                );
             } finally {
                 sendBtn.disabled = false;
                 userInput.focus();
@@ -1581,7 +1672,7 @@
             header.className = 'message-header';
             
             if (sender === 'user') {
-                header.innerHTML = '<i class="fas fa-user"></i><span>User</span>';
+                header.innerHTML = `<i class="fas fa-user"></i><span>${currentLanguage === 'ru' ? 'Вы' : 'User'}</span>`;
             } else {
                 header.innerHTML = '<i class="fas fa-robot"></i><span>Tegych</span>';
             }
@@ -1607,7 +1698,7 @@
                 <div class="typing-dot"></div>
                 <div class="typing-dot"></div>
                 <div class="typing-dot"></div>
-                <span>Tegych is typing...</span>
+                <span>${currentLanguage === 'ru' ? 'Tegych печатает...' : 'Tegych is typing...'}</span>
             `;
             chatContainer.appendChild(typingDiv);
             chatContainer.scrollTop = chatContainer.scrollHeight;
