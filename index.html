@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tegych | Максимальная производительность</title>
+    <title>Tegych AI | Maximum Functionality</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
@@ -24,6 +24,39 @@
             --warning: #ffc107;
             --danger: #dc3545;
             --info: #17a2b8;
+        }
+
+        [data-theme="light"] {
+            --primary-dark: #f0f0f0;
+            --secondary-dark: #e0e0e0;
+            --tertiary-dark: #d0d0d0;
+            --text-light: #333;
+            --text-muted: #666;
+            --accent-gold: #b8860b;
+            --accent-blue: #0056b3;
+            --accent-purple: #6a1b9a;
+        }
+
+        [data-theme="dark-blue"] {
+            --primary-dark: #0a1929;
+            --secondary-dark: #1a2939;
+            --tertiary-dark: #2a3949;
+            --text-light: #e0f7fa;
+            --text-muted: #80deea;
+            --accent-gold: #ffd54f;
+            --accent-blue: #4fc3f7;
+            --accent-purple: #ba68c8;
+        }
+
+        [data-theme="dark-purple"] {
+            --primary-dark: #1a0a1a;
+            --secondary-dark: #2a1a2a;
+            --tertiary-dark: #3a2a3a;
+            --text-light: #f3e5f5;
+            --text-muted: #ce93d8;
+            --accent-gold: #ffd54f;
+            --accent-blue: #4fc3f7;
+            --accent-purple: #ba68c8;
         }
 
         * {
@@ -817,6 +850,73 @@
             background: rgba(212, 175, 55, 0.2);
         }
 
+        .file-preview {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 15px;
+            background: rgba(40, 40, 40, 0.8);
+            border-radius: 50px;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+
+        .file-preview i {
+            color: var(--accent-gold);
+        }
+
+        .file-preview .remove-file {
+            margin-left: auto;
+            cursor: pointer;
+            color: var(--danger);
+        }
+
+        .language-selector {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(40, 40, 40, 0.8);
+            padding: 8px 15px;
+            border-radius: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .language-selector select {
+            background: transparent;
+            border: none;
+            color: var(--text-light);
+            outline: none;
+            cursor: pointer;
+        }
+
+        .language-selector select option {
+            background: var(--secondary-dark);
+            color: var(--text-light);
+        }
+
+        .theme-selector {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(40, 40, 40, 0.8);
+            padding: 8px 15px;
+            border-radius: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .theme-selector select {
+            background: transparent;
+            border: none;
+            color: var(--text-light);
+            outline: none;
+            cursor: pointer;
+        }
+
+        .theme-selector select option {
+            background: var(--secondary-dark);
+            color: var(--text-light);
+        }
+
         @media (max-width: 768px) {
             .header {
                 flex-direction: column;
@@ -874,6 +974,10 @@
                 right: 10px;
                 grid-template-columns: repeat(7, 1fr);
             }
+            
+            .file-preview {
+                flex-wrap: wrap;
+            }
         }
 
         /* Стили для скроллбара */
@@ -896,7 +1000,7 @@
         }
     </style>
 </head>
-<body>
+<body data-theme="dark">
     <div class="header">
         <div class="logo">
             <div class="logo-icon">
@@ -906,54 +1010,54 @@
         </div>
         <div class="user-info">
             <div class="avatar">U</div>
-            <div class="user-name">Пользователь</div>
+            <div class="user-name">User</div>
         </div>
     </div>
 
     <div class="update-banner">
-        <h2 class="update-title">🚀 Максимальная производительность</h2>
-        <p>Оптимизированный код, улучшенная работа с API и кэширование</p>
+        <h2 class="update-title">🚀 Maximum Functionality</h2>
+        <p>Optimized code, improved API performance, and new features</p>
         
         <div class="update-features">
             <div class="update-feature">
                 <i class="fas fa-bolt"></i>
-                <div>Быстрая обработка</div>
+                <div>Fast Processing</div>
             </div>
             <div class="update-feature">
                 <i class="fas fa-memory"></i>
-                <div>Эффективное кэширование</div>
+                <div>Efficient Caching</div>
             </div>
             <div class="update-feature">
                 <i class="fas fa-network-wired"></i>
-                <div>Оптимизированные запросы</div>
+                <div>Optimized Requests</div>
             </div>
             <div class="update-feature">
                 <i class="fas fa-chart-line"></i>
-                <div>Мониторинг производительности</div>
+                <div>Performance Monitoring</div>
             </div>
         </div>
     </div>
 
     <div class="welcome-banner">
-        <h2 class="welcome-title">🤖 Добро пожаловать в Tegych!</h2>
-        <p class="welcome-text">Ваш интеллектуальный помощник в мире науки, искусства, музыки и развлечений. Я готов ответить на любой ваш вопрос и поддержать интересную беседу.</p>
+        <h2 class="welcome-title">🤖 Welcome to Tegych!</h2>
+        <p class="welcome-text">Your intelligent assistant in the world of science, art, music, and entertainment. I'm ready to answer any of your questions and engage in an interesting conversation.</p>
     </div>
 
     <div class="chat-stats">
         <div class="stat-item">
-            <span class="stat-label">Сообщений</span>
+            <span class="stat-label">Messages</span>
             <div class="stat-value">127</div>
         </div>
         <div class="stat-item">
-            <span class="stat-label">Активность</span>
+            <span class="stat-label">Activity</span>
             <div class="stat-value">98%</div>
         </div>
         <div class="stat-item">
-            <span class="stat-label">Отзывчивость</span>
-            <div class="stat-value">0.8с</div>
+            <span class="stat-label">Responsiveness</span>
+            <div class="stat-value">0.8s</div>
         </div>
         <div class="stat-item">
-            <span class="stat-label">Удовлетворенность</span>
+            <span class="stat-label">Satisfaction</span>
             <div class="stat-value">96%</div>
         </div>
     </div>
@@ -963,29 +1067,29 @@
             <div class="feature-icon">
                 <i class="fas fa-brain"></i>
             </div>
-            <h3 class="feature-title">Интеллект</h3>
-            <p class="feature-desc">Глубокое понимание тем в науке, технологиях и философии</p>
+            <h3 class="feature-title">Intelligence</h3>
+            <p class="feature-desc">Deep understanding of topics in science, technology, and philosophy</p>
         </div>
         <div class="feature-card">
             <div class="feature-icon">
                 <i class="fas fa-palette"></i>
             </div>
-            <h3 class="feature-title">Искусство</h3>
-            <p class="feature-desc">Обсуждение живописи, скульптуры, архитектуры и современного искусства</p>
+            <h3 class="feature-title">Art</h3>
+            <p class="feature-desc">Discussion of painting, sculpture, architecture, and modern art</p>
         </div>
         <div class="feature-card">
             <div class="feature-icon">
                 <i class="fas fa-music"></i>
             </div>
-            <h3 class="feature-title">Музыка</h3>
-            <p class="feature-desc">Рекомендации треков, обсуждение жанров и исполнителей</p>
+            <h3 class="feature-title">Music</h3>
+            <p class="feature-desc">Track recommendations, discussion of genres and artists</p>
         </div>
         <div class="feature-card">
             <div class="feature-icon">
                 <i class="fas fa-film"></i>
             </div>
-            <h3 class="feature-title">Кино</h3>
-            <p class="feature-desc">Обзоры фильмов, рекомендации и обсуждение режиссеров</p>
+            <h3 class="feature-title">Movies</h3>
+            <p class="feature-desc">Movie reviews, recommendations, and director discussions</p>
         </div>
     </div>
 
@@ -996,104 +1100,87 @@
                 <span>Tegych</span>
             </div>
             <div class="message-content">
-                Хэй, Привет! Я твой электронный друг Tegych. 🤖<br>
-                Я гуру в различных научных областях и обожаю обсуждать искусство, музыку, кино и развлечения. 🎨🎶🎬<br>
-                Я дам тебе ответ на любой вопрос!
+                Hey, Hi! I'm your electronic friend Tegych. 🤖<br>
+                I'm a guru in various scientific fields and love discussing art, music, movies, and entertainment. 🎨🎶🎬<br>
+                I'll give you an answer to any question!
             </div>
         </div>
     </div>
 
     <div class="quick-actions">
-        <div class="quick-action" onclick="insertQuickAction('Расскажи о себе')">
-            <i class="fas fa-user"></i> Расскажи о себе
+        <div class="quick-action" onclick="insertQuickAction('Tell me about yourself')">
+            <i class="fas fa-user"></i> Tell me about yourself
         </div>
-        <div class="quick-action" onclick="insertQuickAction('Что нового в науке?')">
-            <i class="fas fa-flask"></i> Наука
+        <div class="quick-action" onclick="insertQuickAction('What is new in science?')">
+            <i class="fas fa-flask"></i> Science
         </div>
-        <div class="quick-action" onclick="insertQuickAction('Порекомендуй фильм')">
-            <i class="fas fa-film"></i> Фильмы
+        <div class="quick-action" onclick="insertQuickAction('Recommend a movie')">
+            <i class="fas fa-film"></i> Movies
         </div>
-        <div class="quick-action" onclick="insertQuickAction('Какая музыка сейчас популярна?')">
-            <i class="fas fa-music"></i> Музыка
+        <div class="quick-action" onclick="insertQuickAction('What music is popular now?')">
+            <i class="fas fa-music"></i> Music
         </div>
-        <div class="quick-action" onclick="insertQuickAction('Напиши стихотворение')">
-            <i class="fas fa-feather"></i> Поэзия
+        <div class="quick-action" onclick="insertQuickAction('Write a poem')">
+            <i class="fas fa-feather"></i> Poetry
         </div>
-        <div class="quick-action" onclick="insertQuickAction('Расскажи анекдот')">
-            <i class="fas fa-laugh"></i> Юмор
+        <div class="quick-action" onclick="insertQuickAction('Tell me a joke')">
+            <i class="fas fa-laugh"></i> Humor
         </div>
     </div>
 
     <div class="chat-actions">
         <button class="chat-action-btn" onclick="clearChat()">
-            <i class="fas fa-trash"></i> Очистить чат
+            <i class="fas fa-trash"></i> Clear Chat
         </button>
         <button class="chat-action-btn" onclick="exportChat()">
-            <i class="fas fa-download"></i> Экспорт чата
+            <i class="fas fa-download"></i> Export Chat
         </button>
         <button class="chat-action-btn" onclick="toggleHistory()">
-            <i class="fas fa-history"></i> История чатов
+            <i class="fas fa-history"></i> Chat History
         </button>
-        <button class="chat-action-btn" onclick="toggleTheme()">
-            <i class="fas fa-palette"></i> Сменить тему
-        </button>
+        <div class="theme-selector">
+            <i class="fas fa-palette"></i>
+            <select id="theme-select" onchange="changeTheme(this.value)">
+                <option value="dark">Dark Theme</option>
+                <option value="light">Light Theme</option>
+                <option value="dark-blue">Dark Blue</option>
+                <option value="dark-purple">Dark Purple</option>
+            </select>
+        </div>
+        <div class="language-selector">
+            <i class="fas fa-language"></i>
+            <select id="language-select" onchange="changeLanguage(this.value)">
+                <option value="en">English</option>
+                <option value="ru">Русский</option>
+            </select>
+        </div>
     </div>
 
     <div class="input-container">
-        <input type="text" id="user-input" placeholder="Введите сообщение..." maxlength="1000">
+        <input type="text" id="user-input" placeholder="Enter message..." maxlength="1000">
         <div class="input-actions">
-            <div class="action-btn" title="Прикрепить файл" onclick="attachFile()">
+            <div class="action-btn" title="Attach file" onclick="attachFile()">
                 <i class="fas fa-paperclip"></i>
             </div>
-            <div class="action-btn" title="Эмодзи" onclick="toggleEmojiPicker()">
+            <div class="action-btn" title="Emoji" onclick="toggleEmojiPicker()">
                 <i class="far fa-smile"></i>
             </div>
-            <div class="action-btn" title="Голосовой ввод" onclick="startVoiceInput()">
+            <div class="action-btn" title="Voice input" onclick="startVoiceInput()">
                 <i class="fas fa-microphone"></i>
             </div>
         </div>
         <button id="send-btn" onclick="sendMessage()">
-            <i class="fas fa-paper-plane"></i> Отправить
+            <i class="fas fa-paper-plane"></i> Send
         </button>
     </div>
 
-    <div class="emoji-picker" id="emoji-picker">
-        <div class="emoji-item" onclick="insertEmoji('😊')">😊</div>
-        <div class="emoji-item" onclick="insertEmoji('😄')">😄</div>
-        <div class="emoji-item" onclick="insertEmoji('🤩')">🤩</div>
-        <div class="emoji-item" onclick="insertEmoji('🥳')">🥳</div>
-        <div class="emoji-item" onclick="insertEmoji('😎')">😎</div>
-        <div class="emoji-item" onclick="insertEmoji('🤔')">🤔</div>
-        <div class="emoji-item" onclick="insertEmoji('🤗')">🤗</div>
-        <div class="emoji-item" onclick="insertEmoji('🤖')">🤖</div>
-        <div class="emoji-item" onclick="insertEmoji('🎨')">🎨</div>
-        <div class="emoji-item" onclick="insertEmoji('🎶')">🎶</div>
-        <div class="emoji-item" onclick="insertEmoji('🎬')">🎬</div>
-        <div class="emoji-item" onclick="insertEmoji('✨')">✨</div>
-        <div class="emoji-item" onclick="insertEmoji('🎉')">🎉</div>
-        <div class="emoji-item" onclick="insertEmoji('🔥')">🔥</div>
-        <div class="emoji-item" onclick="insertEmoji('🌟')">🌟</div>
-        <div class="emoji-item" onclick="insertEmoji('❤️')">❤️</div>
-        <div class="emoji-item" onclick="insertEmoji('👍')">👍</div>
-        <div class="emoji-item" onclick="insertEmoji('👏')">👏</div>
-        <div class="emoji-item" onclick="insertEmoji('🙌')">🙌</div>
-        <div class="emoji-item" onclick="insertEmoji('💪')">💪</div>
-        <div class="emoji-item" onclick="insertEmoji('🧠')">🧠</div>
-        <div class="emoji-item" onclick="insertEmoji('💡')">💡</div>
-        <div class="emoji-item" onclick="insertEmoji('🚀')">🚀</div>
-        <div class="emoji-item" onclick="insertEmoji('💬')">💬</div>
-        <div class="emoji-item" onclick="insertEmoji('✅')">✅</div>
-        <div class="emoji-item" onclick="insertEmoji('❌')">❌</div>
-        <div class="emoji-item" onclick="insertEmoji('⚠️')">⚠️</div>
-    </div>
-
     <div class="footer">
-        <div>© 2025 Tegcompany. Все права защищены.</div>
+        <div>© 2025 Tegcompany. All rights reserved.</div>
         <div class="footer-links">
-            <a href="#" class="footer-link">Политика конфиденциальности</a>
-            <a href="#" class="footer-link">Условия использования</a>
-            <a href="#" class="footer-link">Поддержка</a>
-            <a href="#" class="footer-link">Контакты</a>
+            <a href="#" class="footer-link">Privacy Policy</a>
+            <a href="#" class="footer-link">Terms of Use</a>
+            <a href="#" class="footer-link">Support</a>
+            <a href="#" class="footer-link">Contacts</a>
         </div>
     </div>
 
@@ -1102,38 +1189,38 @@
     </button>
     
     <div class="chat-history" id="chat-history">
-        <h3>История чатов <i class="fas fa-times" onclick="toggleHistory()" style="cursor: pointer;"></i></h3>
+        <h3>Chat History <i class="fas fa-times" onclick="toggleHistory()" style="cursor: pointer;"></i></h3>
         <div class="history-item">
-            <strong>Наука и технологии</strong>
-            <div class="timestamp">Сегодня, 14:30</div>
-            <div class="preview">Обсуждали квантовые вычисления и ИИ</div>
+            <strong>Science & Technology</strong>
+            <div class="timestamp">Today, 14:30</div>
+            <div class="preview">Discussed quantum computing and AI</div>
         </div>
         <div class="history-item">
-            <strong>Музыкальные рекомендации</strong>
-            <div class="timestamp">Вчера, 19:45</div>
-            <div class="preview">Список новых треков в жанре лоу-фай</div>
+            <strong>Music Recommendations</strong>
+            <div class="timestamp">Yesterday, 19:45</div>
+            <div class="preview">List of new tracks in lo-fi genre</div>
         </div>
         <div class="history-item">
-            <strong>Кино и сериалы</strong>
-            <div class="timestamp">28.10.2025</div>
-            <div class="preview">Рекомендации фильмов ужасов</div>
+            <strong>Movies & Series</strong>
+            <div class="timestamp">10/12/2023</div>
+            <div class="preview">Horror movie recommendations</div>
         </div>
         <div class="history-item">
-            <strong>Философия</strong>
-            <div class="timestamp">28.10.2025</div>
-            <div class="preview">Обсуждение экзистенциализма</div>
+            <strong>Philosophy</strong>
+            <div class="timestamp">10/10/2023</div>
+            <div class="preview">Discussion of existentialism</div>
         </div>
     </div>
 
     <div class="notification" id="notification">
-        Уведомление
+        Notification
     </div>
 
     <script>
         // Инициализация Telegram Web App
         Telegram.WebApp.ready();
         Telegram.WebApp.expand();  // Полноэкранный режим
-        Telegram.WebApp.MainButton.setText('Отправить в чат').show().onClick(sendToBot);
+        Telegram.WebApp.MainButton.setText('Send to chat').show().onClick(sendToBot);
 
         // Конфигурация (плейсхолдер заменяется в build из GitHub Secrets)
         const MISTRAL_API_KEY = "WXHCU91Wo13xgvAxLactfpjBhET0TEaA";  // 
@@ -1145,7 +1232,7 @@
 
         // История чата (messages для Mistral)
         let chatHistory = [
-            { role: "system", content: "Ты Tegych, полезный ассистент. Ты эксперт в науке, искусстве, музыке, кино и развлечениях. Отвечай на русском языке, дружелюбно и креативно." }
+            { role: "system", content: "You are Tegych, a helpful assistant. You are an expert in science, art, music, movies, and entertainment. Answer in English, friendly and creative." }
         ];
 
         // Кэш для часто задаваемых вопросов
@@ -1158,6 +1245,9 @@
         const notificationEl = document.getElementById('notification');
         const chatHistoryEl = document.getElementById('chat-history');
         const emojiPicker = document.getElementById('emoji-picker');
+
+        // Текущий язык
+        let currentLanguage = 'en';
 
         // Функция показа уведомлений
         function showNotification(message, type = 'success') {
@@ -1180,10 +1270,10 @@
         function clearChat() {
             chatContainer.innerHTML = '';
             chatHistory = [
-                { role: "system", content: "Ты Tegych, полезный ассистент. Ты эксперт в науке, искусстве, музыке, кино и развлечениях. Отвечай на русском языке, дружелюбно и креативно." }
+                { role: "system", content: "You are Tegych, a helpful assistant. You are an expert in science, art, music, movies, and entertainment. Answer in English, friendly and creative." }
             ];
             addWelcomeMessage();
-            showNotification('Чат очищен', 'success');
+            showNotification('Chat cleared', 'success');
         }
 
         // Функция добавления приветственного сообщения
@@ -1196,9 +1286,9 @@
                     <span>Tegych</span>
                 </div>
                 <div class="message-content">
-                    Хэй, Привет! Я твой электронный друг Tegych. 🤖<br>
-                    Я гуру в различных научных областях и обожаю обсуждать искусство, музыку, кино и развлечения. 🎨🎶🎬<br>
-                    Я дам тебе ответ на любой вопрос!
+                    Hey, Hi! I'm your electronic friend Tegych. 🤖<br>
+                    I'm a guru in various scientific fields and love discussing art, music, movies, and entertainment. 🎨🎶🎬<br>
+                    I'll give you an answer to any question!
                 </div>
             `;
             chatContainer.appendChild(welcomeMessage);
@@ -1209,7 +1299,7 @@
         function exportChat() {
             const messages = [];
             document.querySelectorAll('.message').forEach(msg => {
-                const sender = msg.classList.contains('user-message') ? 'Пользователь' : 'Tegych';
+                const sender = msg.classList.contains('user-message') ? 'User' : 'Tegych';
                 const content = msg.querySelector('.message-content').textContent;
                 messages.push(`${sender}: ${content}`);
             });
@@ -1226,7 +1316,7 @@
             document.body.removeChild(a);
             URL.revokeObjectURL(url);
             
-            showNotification('Чат экспортирован', 'success');
+            showNotification('Chat exported', 'success');
         }
 
         // Функция переключения истории чатов
@@ -1235,18 +1325,111 @@
         }
 
         // Функция смены темы
-        function toggleTheme() {
-            document.body.classList.toggle('dark-theme');
-            if (document.body.classList.contains('dark-theme')) {
-                showNotification('Темная тема включена', 'info');
+        function changeTheme(theme) {
+            document.body.setAttribute('data-theme', theme);
+            showNotification(`Theme changed to ${theme}`, 'info');
+        }
+
+        // Функция смены языка
+        function changeLanguage(lang) {
+            currentLanguage = lang;
+            
+            // Обновляем системное сообщение
+            if (lang === 'ru') {
+                chatHistory[0] = { 
+                    role: "system", 
+                    content: "Вы Tegych, полезный ассистент. Вы эксперт в науке, искусстве, музыке, кино и развлечениях. Отвечайте на русском языке, дружелюбно и креативно." 
+                };
             } else {
-                showNotification('Светлая тема включена', 'info');
+                chatHistory[0] = { 
+                    role: "system", 
+                    content: "You are Tegych, a helpful assistant. You are an expert in science, art, music, movies, and entertainment. Answer in English, friendly and creative." 
+                };
             }
+            
+            showNotification(`Language changed to ${lang === 'ru' ? 'Русский' : 'English'}`, 'info');
         }
 
         // Функция прикрепления файла
         function attachFile() {
-            showNotification('Функция прикрепления файлов скоро будет', 'warning');
+            // Создаем элемент input для выбора файла
+            const fileInput = document.createElement('input');
+            fileInput.type = 'file';
+            fileInput.accept = 'image/*,audio/*,video/*,.pdf,.doc,.docx,.txt';
+            fileInput.style.display = 'none';
+            
+            fileInput.onchange = function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    // Показываем предварительный просмотр файла
+                    const filePreview = document.createElement('div');
+                    filePreview.className = 'file-preview';
+                    filePreview.innerHTML = `
+                        <i class="fas fa-file"></i>
+                        <span>${file.name}</span>
+                        <span class="remove-file" onclick="removeFile(this)">×</span>
+                    `;
+                    
+                    // Добавляем к сообщению
+                    const messageDiv = document.createElement('div');
+                    messageDiv.className = 'message user-message';
+                    messageDiv.innerHTML = `
+                        <div class="message-header">
+                            <i class="fas fa-user"></i>
+                            <span>User</span>
+                        </div>
+                        <div class="message-content">
+                            <div class="file-preview">
+                                <i class="fas fa-file"></i>
+                                <span>${file.name}</span>
+                                <span class="remove-file" onclick="removeFile(this)">×</span>
+                            </div>
+                        </div>
+                    `;
+                    
+                    chatContainer.appendChild(messageDiv);
+                    chatContainer.scrollTop = chatContainer.scrollHeight;
+                    
+                    // Добавляем в историю
+                    chatHistory.push({ 
+                        role: "user", 
+                        content: `File attached: ${file.name} (${file.type})` 
+                    });
+                    
+                    // Имитируем ответ бота
+                    setTimeout(() => {
+                        const botMessage = document.createElement('div');
+                        botMessage.className = 'message bot-message';
+                        botMessage.innerHTML = `
+                            <div class="message-header">
+                                <i class="fas fa-robot"></i>
+                                <span>Tegych</span>
+                            </div>
+                            <div class="message-content">
+                                I received your file: <strong>${file.name}</strong>. How can I help you with it?
+                            </div>
+                        `;
+                        chatContainer.appendChild(botMessage);
+                        chatContainer.scrollTop = chatContainer.scrollHeight;
+                        
+                        // Добавляем в историю
+                        chatHistory.push({ 
+                            role: "assistant", 
+                            content: `I received your file: ${file.name}. How can I help you with it?` 
+                        });
+                    }, 1000);
+                }
+            };
+            
+            document.body.appendChild(fileInput);
+            fileInput.click();
+            document.body.removeChild(fileInput);
+        }
+
+        // Функция удаления файла
+        function removeFile(element) {
+            const filePreview = element.parentElement;
+            filePreview.remove();
         }
 
         // Функция переключения эмодзи-пикера
@@ -1263,7 +1446,7 @@
 
         // Функция голосового ввода
         function startVoiceInput() {
-            showNotification('Голосовой ввод скоро будет', 'warning');
+            showNotification('Voice input coming soon', 'warning');
         }
 
         // Функция отправки сообщения (с поддержкой стриминга)
@@ -1276,7 +1459,7 @@
                 const cachedResponse = questionCache.get(input);
                 addMessage(input, 'user');
                 addMessage(cachedResponse, 'bot');
-                showNotification('Ответ из кэша', 'info');
+                showNotification('Response from cache', 'info');
                 return;
             }
 
@@ -1294,7 +1477,7 @@
             showTypingIndicator();
 
             try {
-                console.log('Отправляем запрос к Mistral:', { model: MODEL, messages: chatHistory.slice(-5) });  // Лог (последние 5 сообщений)
+                console.log('Sending request to Mistral:', { model: MODEL, messages: chatHistory.slice(-5) });  // Лог (последние 5 сообщений)
 
                 const response = await fetch(API_URL, {
                     method: 'POST',
@@ -1337,7 +1520,7 @@
                     const lines = chunk.split('\n');
 
                     for (const line of lines) {
-                        if (line.startsWith('data: ')) {
+                        if (line.startsWith(' ')) {
                             const data = line.slice(6);
                             if (data === '[DONE]') continue;
 
@@ -1357,7 +1540,7 @@
                 }
 
                 // Финализируем ответ (если пустой — fallback)
-                if (!aiResponse) aiResponse = 'Нет ответа от ИИ. Попробуйте снова.';
+                if (!aiResponse) aiResponse = 'No response from AI. Try again.';
 
                 // Добавляем эмодзи (1-3 случайных)
                 const emojiCount = Math.floor(Math.random() * 3) + 1;
@@ -1377,12 +1560,12 @@
                 // Telegram.WebApp.sendData(JSON.stringify({ response: aiResponse }));
 
             } catch (error) {
-                console.error('Полная ошибка Mistral API:', error);
+                console.error('Full Mistral API Error:', error);
                 console.error('MISTRAL_API_KEY preview:', MISTRAL_API_KEY ? MISTRAL_API_KEY.substring(0, 10) + '...' : 'EMPTY');
                 hideTypingIndicator();
-                aiMessageDiv.innerHTML = `Ошибка: ${error.message}. Статус: ${error.message.includes('401') ? '401 (проверьте ключ)' : error.message.includes('429') ? '429 (лимиты Mistral)' : 'Другая'}.`;
+                aiMessageDiv.innerHTML = `Error: ${error.message}. Status: ${error.message.includes('401') ? '401 (check key)' : error.message.includes('429') ? '429 (Mistral limits)' : 'Other'}.`;
                 aiMessageDiv.classList.remove('streaming');
-                showNotification('Ошибка при отправке сообщения', 'error');
+                showNotification('Error sending message', 'error');
             } finally {
                 sendBtn.disabled = false;
                 userInput.focus();
@@ -1398,7 +1581,7 @@
             header.className = 'message-header';
             
             if (sender === 'user') {
-                header.innerHTML = '<i class="fas fa-user"></i><span>Вы</span>';
+                header.innerHTML = '<i class="fas fa-user"></i><span>User</span>';
             } else {
                 header.innerHTML = '<i class="fas fa-robot"></i><span>Tegych</span>';
             }
@@ -1424,7 +1607,7 @@
                 <div class="typing-dot"></div>
                 <div class="typing-dot"></div>
                 <div class="typing-dot"></div>
-                <span>Tegych печатает...</span>
+                <span>Tegych is typing...</span>
             `;
             chatContainer.appendChild(typingDiv);
             chatContainer.scrollTop = chatContainer.scrollHeight;
@@ -1447,7 +1630,7 @@
 
         // Отправка данных боту
         function sendToBot() {
-            const lastMessage = chatHistory[chatHistory.length - 1]?.content || 'Чат завершён';
+            const lastMessage = chatHistory[chatHistory.length - 1]?.content || 'Chat ended';
             Telegram.WebApp.sendData(JSON.stringify({ chat_summary: lastMessage }));
             Telegram.WebApp.close();
         }
