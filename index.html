@@ -1872,11 +1872,13 @@
                     const { done, value } = await reader.read();
                     if (done) break;
                     const chunk = decoder.decode(value);
+                    // Разбиваем чанк на строки
                     const lines = chunk.split('\n');
                     for (const line of lines) {
+                        // Проверяем, начинается ли строка с 'data: '
                         if (line.startsWith('data: ')) {
-                            const data = line.slice(6);
-                            if (data === '[DONE]') continue;
+                            const data = line.slice(6); // Убираем 'data: '
+                            if (data === '[DONE]') continue; // Пропускаем специальное сообщение [DONE]
                             try {
                                 const parsed = JSON.parse(data);
                                 const content = parsed.choices[0]?.delta?.content || '';
@@ -1884,13 +1886,17 @@
                                     aiResponse += content;
                                     // Грубая оценка токенов: 1 токен ~ 4 символа
                                     rawTokenCount += content.length / 4;
+                                    // Обновляем ТОЛЬКО содержимое сообщения, а не весь div
                                     aiMessageDiv.querySelector('.message-content').innerHTML = escapeHtml(aiResponse);
                                     chatContainer.scrollTop = chatContainer.scrollHeight;
                                 }
                             } catch (e) {
                                 console.warn('Parse error in chunk:', e);
+                                // console.warn('Problematic line:', line); // Можно раскомментировать для отладки
                             }
                         }
+                        // Обработка других типов строк (если нужно) может быть добавлена здесь
+                        // Но Mistral API в основном использует 'data: '
                     }
                 }
                 if (!aiResponse) aiResponse = currentLanguage === 'ru' ? 'Нет ответа от ИИ. Попробуйте снова.' : 'No response from AI. Try again.';
@@ -1898,8 +1904,9 @@
                 const emojiCount = Math.floor(Math.random() * 3) + 1;
                 const emojis = EMOJI_LIST.sort(() => 0.5 - Math.random()).slice(0, emojiCount);
                 aiResponse += ' ' + emojis.join(' ');
+                // Обновляем ТОЛЬКО содержимое сообщения, а не весь div (после завершения стриминга)
                 aiMessageDiv.querySelector('.message-content').innerHTML = escapeHtml(aiResponse);
-                aiMessageDiv.classList.remove('streaming', 'loading');
+                aiMessageDiv.classList.remove('streaming');
                 // Обновляем статистику токенов и времени ответа
                 stats.tokens += Math.round(rawTokenCount);
                 // Усредненное время ответа
@@ -1916,6 +1923,7 @@
             } catch (error) {
                 console.error('Full Mistral API Error:', error);
                 hideTypingIndicator();
+                // Обновляем ТОЛЬКО содержимое сообщения, а не весь div (в случае ошибки)
                 aiMessageDiv.querySelector('.message-content').innerHTML = currentLanguage === 'ru' ? `Ошибка: ${error.message}.` : `Error: ${error.message}.`;
                 aiMessageDiv.classList.remove('streaming');
                 showNotification(
