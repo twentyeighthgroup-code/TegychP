@@ -1209,7 +1209,7 @@
         // --- КОНФИГУРАЦИЯ ДЛЯ MISTRAL AI ---
         // ЗАМЕНИТЬ НА РЕАЛЬНЫЙ API-КЛЮЧ ИЗ Mistral AI
         const MISTRAL_API_KEY = "dq3s0NDreHr7WODWudS7sJfLaFuvOciU";
-        const MODEL = "mistral-large-latest";  // Модель от Mistral AI
+        const MODEL = "mistral-small-latest";  // Модель от Mistral AI (изменили на более лёгкую)
         const API_URL = "https://api.mistral.ai/v1/chat/completions";
         // --- КОНЕЦ КОНФИГУРАЦИИ ---
 
@@ -1565,7 +1565,7 @@
                     const chunk = decoder.decode(value);
                     const lines = chunk.split('\n');
                     for (const line of lines) {
-                        if (line.startsWith('data: ')) {
+                        if (line.startsWith('data: ')) { // Mistral использует 'data: ' как префикс для SSE
                             const data = line.slice(6);
                             if (data === '[DONE]') continue;
                             try {
