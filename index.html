@@ -82,7 +82,7 @@
         }
         [data-theme="dark-red"] {
             --primary-dark: #1a0a1a;
-            --secondary-dark: #2a1a2a;
+            --secondary-dark: #2a1a1a;
             --tertiary-dark: #3a2a2a;
             --text-light: #ffebee;
             --text-muted: #f48fb1;
@@ -1206,20 +1206,19 @@
             document.getElementById('user-name').textContent = user.first_name + (user.last_name ? ' ' + user.last_name : '');
         }
 
-        // --- КОНФИГУРАЦИЯ ДЛЯ GOOGLE AI ---
-        // ЗАМЕНИТЬ НА РЕАЛЬНЫЙ API-КЛЮЧ ИЗ Google AI Studio
-        const GOOGLE_API_KEY = "AIzaSyD6xUsgPomhm1yp-Mw9-HNw5PEJu9wrpKQ";
-        const MODEL = "gemini-2.5-flash";  // Модель от Google
-        const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent?key=${GOOGLE_API_KEY}`;
+        // --- КОНФИГУРАЦИЯ ДЛЯ MISTRAL AI ---
+        // ЗАМЕНИТЬ НА РЕАЛЬНЫЙ API-КЛЮЧ ИЗ Mistral AI
+        const MISTRAL_API_KEY = "dq3s0NDreHr7WODWudS7sJfLaFuvOciU";
+        const MODEL = "mistral-large-latest";  // Модель от Mistral AI
+        const API_URL = "https://api.mistral.ai/v1/chat/completions";
         // --- КОНЕЦ КОНФИГУРАЦИИ ---
 
         // Список эмодзи (как в оригинале)
         const EMOJI_LIST = ["😊", "😄", "🤩", "🥳", "😎", "🤔", "🤗", "🤖", "🎨", "🎶", "🎬", "✨", "🎉", "🔥", "🌟"];
 
-        // История чата (messages для Google AI)
-        // Google AI не поддерживает system message, поэтому используем user-сообщение как инструкцию
+        // История чата (messages для Mistral AI)
         let chatHistory = [
-            { role: "user", content: "You are Tegych, a helpful assistant. You are an expert in science, art, music, movies, and entertainment. Answer in English, friendly and creative." }
+            { role: "system", content: "You are Tegych, a helpful assistant. You are an expert in science, art, music, movies, and entertainment. Answer in English, friendly and creative." }
         ];
 
         // Загружаем историю из localStorage
@@ -1268,16 +1267,9 @@
         // Функция очистки чата
         function clearChat() {
             chatContainer.innerHTML = '';
-            // Восстанавливаем системное сообщение как первое user-сообщение
-            if (currentLanguage === 'ru') {
-                chatHistory = [
-                    { role: "user", content: "Вы Tegych, полезный ассистент. Вы эксперт в науке, искусстве, музыке, кино и развлечениях. Отвечайте на русском языке, дружелюбно и креативно." }
-                ];
-            } else {
-                chatHistory = [
-                    { role: "user", content: "You are Tegych, a helpful assistant. You are an expert in science, art, music, movies, and entertainment. Answer in English, friendly and creative." }
-                ];
-            }
+            chatHistory = [
+                { role: "system", content: "You are Tegych, a helpful assistant. You are an expert in science, art, music, movies, and entertainment. Answer in English, friendly and creative." }
+            ];
             localStorage.removeItem('chatHistory');
             addWelcomeMessage();
             showNotification('Chat cleared', 'success');
@@ -1320,8 +1312,7 @@
         function renderChatFromHistory() {
             chatContainer.innerHTML = '';
             for (const msg of chatHistory) {
-                // Пропускаем системное сообщение при отображении
-                if (msg.role === 'user' && msg.content.includes('You are Tegych')) continue;
+                if (msg.role === 'system') continue;
                 addMessage(msg.content, msg.role === 'user' ? 'user' : 'bot');
             }
         }
@@ -1368,17 +1359,17 @@
         function changeLanguage(lang) {
             currentLanguage = lang;
             languageSelect.value = lang;
-            // Обновляем системное сообщение как первое сообщение от пользователя
+            // Обновляем системное сообщение
             if (lang === 'ru') {
-                chatHistory[0] = {
-                    role: "user",
-                    content: "Вы Tegych, полезный ассистент. Вы эксперт в науке, искусстве, музыке, кино и развлечениях. Отвечайте на русском языке, дружелюбно и креативно."
+                chatHistory[0] = { 
+                    role: "system", 
+                    content: "Вы Tegych, полезный ассистент. Вы эксперт в науке, искусстве, музыке, кино и развлечениях. Отвечайте на русском языке, дружелюбно и креативно." 
                 };
                 showNotification('Язык изменен на Русский', 'info');
             } else {
-                chatHistory[0] = {
-                    role: "user",
-                    content: "You are Tegych, a helpful assistant. You are an expert in science, art, music, movies, and entertainment. Answer in English, friendly and creative."
+                chatHistory[0] = { 
+                    role: "system", 
+                    content: "You are Tegych, a helpful assistant. You are an expert in science, art, music, movies, and entertainment. Answer in English, friendly and creative." 
                 };
                 showNotification('Language changed to English', 'info');
             }
@@ -1461,7 +1452,7 @@
                         chatContainer.scrollTop = chatContainer.scrollHeight;
                         // Добавляем в историю
                         chatHistory.push({ 
-                            role: "model", // Google AI использует 'model' вместо 'assistant'
+                            role: "assistant", 
                             content: `I received your file: ${file.name}. How can I help you with it?` 
                         });
                         localStorage.setItem('chatHistory', JSON.stringify(chatHistory));
@@ -1501,20 +1492,20 @@
             );
         }
 
-        // Функция отправки сообщения (с использованием Google AI API)
+        // Функция отправки сообщения (с поддержкой стриминга от Mistral)
         async function sendMessage() {
             const input = userInput.value.trim();
             if (!input) return;
 
-            // Проверка кэша (если нужна)
+            // Проверка кэша
             if (questionCache.has(input)) {
                 const cachedResponse = questionCache.get(input);
                 addMessage(input, 'user');
                 addMessage(cachedResponse, 'bot');
                 showNotification(
-                    currentLanguage === 'ru' ?
-                    'Ответ из кэша' :
-                    'Response from cache',
+                    currentLanguage === 'ru' ? 
+                    'Ответ из кэша' : 
+                    'Response from cache', 
                     'info'
                 );
                 return;
@@ -1522,22 +1513,13 @@
 
             // Добавляем сообщение пользователя
             addMessage(input, 'user');
-
-            // Преобразуем chatHistory в формат Google AI (только для текущего запроса)
-            // Google AI не поддерживает стриминг в бесплатной версии через REST, но мы можем имитировать.
-            const googleMessages = chatHistory.slice(1).map(msg => ({ // Убираем system message, т.к. Google AI не поддерживает
-                role: msg.role === 'user' ? 'user' : 'model', // Google использует 'user' и 'model'
-                parts: [{ text: msg.content }]
-            }));
-            googleMessages.push({
-                role: 'user',
-                parts: [{ text: input }]
-            });
+            chatHistory.push({ role: "user", content: input });
+            localStorage.setItem('chatHistory', JSON.stringify(chatHistory));
 
             userInput.value = '';
             sendBtn.disabled = true;
 
-            // Создаём div для ответа ИИ
+            // Создаём div для ответа ИИ (с стримингом)
             const aiMessageDiv = addMessage('', 'bot');
             aiMessageDiv.classList.add('streaming');
 
@@ -1545,55 +1527,77 @@
             showTypingIndicator();
 
             try {
-                console.log('Sending request to Google AI:', { model: MODEL, contents: googleMessages });
+                console.log('Sending request to Mistral:', { model: MODEL, messages: chatHistory.slice(-5) });
                 const response = await fetch(API_URL, {
                     method: 'POST',
                     headers: {
+                        'Authorization': `Bearer ${MISTRAL_API_KEY}`,
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify({
-                        contents: googleMessages,
-                        generationConfig: {
-                            temperature: 0.7,
-                            maxOutputTokens: 1024,
-                            topP: 0.9
-                        }
+                        model: MODEL,
+                        messages: chatHistory,
+                        temperature: 0.7,
+                        max_tokens: 1024,
+                        top_p: 0.9,
+                        stream: true  // Включаем стриминг
                     })
                 });
 
                 console.log('Response status:', response.status);
                 if (!response.ok) {
                     const errorText = await response.text();
-                    console.error('Google AI API Error:', response.status, errorText);
+                    console.error('Mistral API Error:', response.status, errorText);
                     throw new Error(`API ${response.status}: ${errorText}`);
-                }
-
-                const data = await response.json();
-                console.log('Full API Response:', data);
-
-                // Извлекаем текст ответа из API
-                let aiResponse = '';
-                if (data.candidates && data.candidates[0].content.parts && data.candidates[0].content.parts[0].text) {
-                    aiResponse = data.candidates[0].content.parts[0].text.trim();
-                } else {
-                    aiResponse = currentLanguage === 'ru' ? 'Нет ответа от ИИ. Попробуйте снова.' : 'No response from AI. Try again.';
                 }
 
                 // Убираем индикатор набора
                 hideTypingIndicator();
+
+                // Обработка стриминга (SSE-формат)
+                const reader = response.body.getReader();
+                const decoder = new TextDecoder();
+                let aiResponse = '';
+
+                while (true) {
+                    const { done, value } = await reader.read();
+                    if (done) break;
+                    const chunk = decoder.decode(value);
+                    const lines = chunk.split('\n');
+                    for (const line of lines) {
+                        if (line.startsWith('data: ')) {
+                            const data = line.slice(6);
+                            if (data === '[DONE]') continue;
+                            try {
+                                const parsed = JSON.parse(data);
+                                const content = parsed.choices[0]?.delta?.content || '';
+                                if (content) {
+                                    aiResponse += content;
+                                    aiMessageDiv.innerHTML = escapeHtml(aiResponse);  // Обновляем UI по частям
+                                    chatContainer.scrollTop = chatContainer.scrollHeight;
+                                }
+                            } catch (e) {
+                                console.warn('Parse error in chunk:', e);
+                            }
+                        }
+                    }
+                }
+
+                // Финализируем ответ (если пустой — fallback)
+                if (!aiResponse) aiResponse = 
+                    currentLanguage === 'ru' ? 
+                    'Нет ответа от ИИ. Попробуйте снова.' : 
+                    'No response from AI. Try again.';
 
                 // Добавляем эмодзи (1-3 случайных)
                 const emojiCount = Math.floor(Math.random() * 3) + 1;
                 const emojis = EMOJI_LIST.sort(() => 0.5 - Math.random()).slice(0, emojiCount);
                 aiResponse += ' ' + emojis.join(' ');
 
-                // Обновляем UI с полным ответом
                 aiMessageDiv.innerHTML = escapeHtml(aiResponse);
-                aiMessageDiv.classList.remove('streaming');
+                aiMessageDiv.classList.remove('streaming', 'loading');
 
-                // Добавляем в chatHistory
-                chatHistory.push({ role: "user", content: input });
-                chatHistory.push({ role: "model", content: aiResponse }); // 'model' для Google AI
+                chatHistory.push({ role: "assistant", content: aiResponse });
                 localStorage.setItem('chatHistory', JSON.stringify(chatHistory));
 
                 // Кэшируем ответ (если вопрос короче 100 символов)
@@ -1602,18 +1606,18 @@
                 }
 
             } catch (error) {
-                console.error('Full Google AI API Error:', error);
-                console.error('GOOGLE_API_KEY preview:', GOOGLE_API_KEY ? GOOGLE_API_KEY.substring(0, 10) + '...' : 'EMPTY');
+                console.error('Full Mistral API Error:', error);
+                console.error('MISTRAL_API_KEY preview:', MISTRAL_API_KEY ? MISTRAL_API_KEY.substring(0, 10) + '...' : 'EMPTY');
                 hideTypingIndicator();
-                aiMessageDiv.innerHTML =
-                    currentLanguage === 'ru' ?
+                aiMessageDiv.innerHTML = 
+                    currentLanguage === 'ru' ? 
                     `Ошибка: ${error.message}.` :
                     `Error: ${error.message}.`;
                 aiMessageDiv.classList.remove('streaming');
                 showNotification(
-                    currentLanguage === 'ru' ?
-                    'Ошибка при отправке сообщения' :
-                    'Error sending message',
+                    currentLanguage === 'ru' ? 
+                    'Ошибка при отправке сообщения' : 
+                    'Error sending message', 
                     'error'
                 );
             } finally {
