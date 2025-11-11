@@ -1804,7 +1804,7 @@
                 'warning'
             );
         }
-        // Функция отправки сообщения (с поддержкой стриминга)
+                // Функция отправки сообщения (с поддержкой стриминга)
         async function sendMessage() {
             const input = userInput.value.trim();
             if (!input) return;
@@ -1863,21 +1863,29 @@
                 }
                 // Убираем индикатор набора
                 hideTypingIndicator();
-                // Обработка стриминга
+                // --- КОРРЕКТНАЯ ОБРАБОТКА СТРИМИНГА ---
                 const reader = response.body.getReader();
                 const decoder = new TextDecoder();
+                let buffer = ''; // Буфер для хранения неполных строк
                 let aiResponse = '';
                 let rawTokenCount = 0; // Счетчик токенов (грубая оценка)
+
                 while (true) {
                     const { done, value } = await reader.read();
                     if (done) break;
-                    const chunk = decoder.decode(value);
-                    // Разбиваем чанк на строки
-                    const lines = chunk.split('\n');
+
+                    buffer += decoder.decode(value, { stream: true });
+
+                    // Разбиваем буфер на строки по \n
+                    const lines = buffer.split('
+');
+                    // Последняя строка может быть неполной, оставляем в буфере
+                    buffer = lines.pop() || '';
+
                     for (const line of lines) {
                         // Проверяем, начинается ли строка с 'data: '
-                        if (line.startsWith('data: ')) {
-                            const data = line.slice(6); // Убираем 'data: '
+                        if (line.startsWith(' ')) {
+                            const data = line.slice(6); // Убираем ' '
                             if (data === '[DONE]') continue; // Пропускаем специальное сообщение [DONE]
                             try {
                                 const parsed = JSON.parse(data);
@@ -1896,9 +1904,31 @@
                             }
                         }
                         // Обработка других типов строк (если нужно) может быть добавлена здесь
-                        // Но Mistral API в основном использует 'data: '
+                        // Но Mistral API в основном использует ' '
                     }
                 }
+
+                // Обработка оставшейся части буфера (если есть)
+                if (buffer.trim() !== '') {
+                     if (buffer.startsWith(' ')) {
+                        const data = buffer.slice(6); // Убираем ' '
+                        if (data !== '[DONE]') {
+                            try {
+                                const parsed = JSON.parse(data);
+                                const content = parsed.choices[0]?.delta?.content || '';
+                                if (content) {
+                                    aiResponse += content;
+                                    rawTokenCount += content.length / 4;
+                                    aiMessageDiv.querySelector('.message-content').innerHTML = escapeHtml(aiResponse);
+                                    chatContainer.scrollTop = chatContainer.scrollHeight;
+                                }
+                            } catch (e) {
+                                console.warn('Parse error in final buffer chunk:', e);
+                            }
+                        }
+                    }
+                }
+
                 if (!aiResponse) aiResponse = currentLanguage === 'ru' ? 'Нет ответа от ИИ. Попробуйте снова.' : 'No response from AI. Try again.';
                 // Добавляем эмодзи
                 const emojiCount = Math.floor(Math.random() * 3) + 1;
