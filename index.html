@@ -9,7 +9,7 @@
     <!-- Fonts & Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&family=Press+Start+2P&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <!-- Telegram Web App -->
@@ -17,7 +17,7 @@
 
     <style>
         :root {
-            /* Palette - Deep Space (Default) */
+            /* --- DEFAULT (Deep Space) --- */
             --bg-gradient: radial-gradient(circle at top left, #1a1a2e, #16213e, #0f0f1a);
             --glass-bg: rgba(20, 20, 35, 0.65);
             --glass-border: rgba(255, 255, 255, 0.08);
@@ -25,15 +25,27 @@
             --text-secondary: #a0a0b0;
             --accent-primary: #4e54c8;
             --accent-secondary: #8f94fb;
-            --accent-gold: #ffd700;
             --user-msg-bg: linear-gradient(135deg, #4e54c8, #8f94fb);
             --bot-msg-bg: rgba(255, 255, 255, 0.05);
             --shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
             --font-main: 'Outfit', sans-serif;
-            --radius: 24px;
         }
 
-        /* Cyberpunk Theme Overrides */
+        /* --- 1. LIGHT THEME --- */
+        [data-theme="light"] {
+            --bg-gradient: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            --glass-bg: rgba(255, 255, 255, 0.7);
+            --glass-border: rgba(0, 0, 0, 0.05);
+            --text-main: #1a1a2e;
+            --text-secondary: #555;
+            --accent-primary: #2575fc;
+            --accent-secondary: #6a11cb;
+            --user-msg-bg: linear-gradient(135deg, #2575fc, #6a11cb);
+            --bot-msg-bg: rgba(255, 255, 255, 0.8);
+            --shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+        }
+
+        /* --- 2. CYBERPUNK --- */
         [data-theme="cyberpunk"] {
             --bg-gradient: linear-gradient(180deg, #0b0b0b 0%, #1a0b1a 100%);
             --glass-bg: rgba(10, 5, 10, 0.8);
@@ -42,39 +54,96 @@
             --text-secondary: #00fff2;
             --accent-primary: #ff0055;
             --accent-secondary: #00fff2;
-            --accent-gold: #ffee00;
             --user-msg-bg: linear-gradient(90deg, #ff0055, #ff00aa);
             --bot-msg-bg: rgba(0, 255, 242, 0.05);
             --font-main: 'JetBrains Mono', monospace;
         }
 
-        /* Light Theme Overrides */
-        [data-theme="light"] {
-            --bg-gradient: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            --glass-bg: rgba(255, 255, 255, 0.7);
-            --glass-border: rgba(0, 0, 0, 0.05);
-            --text-main: #1a1a2e;
-            --text-secondary: #555;
-            --accent-primary: #2575fc;
-            --bot-msg-bg: rgba(255, 255, 255, 0.8);
-            --shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+        /* --- 3. MATRIX (New) --- */
+        [data-theme="matrix"] {
+            --bg-gradient: #000000;
+            --glass-bg: rgba(0, 20, 0, 0.9);
+            --glass-border: #00ff00;
+            --text-main: #00ff41;
+            --text-secondary: #008f11;
+            --accent-primary: #003b00;
+            --accent-secondary: #00ff41;
+            --user-msg-bg: #003b00;
+            --bot-msg-bg: #0d0d0d;
+            --font-main: 'JetBrains Mono', monospace;
+            --shadow: 0 0 15px rgba(0, 255, 0, 0.2);
         }
 
-        /* Base Reset */
+        /* --- 4. SUNSET (New) --- */
+        [data-theme="sunset"] {
+            --bg-gradient: linear-gradient(to bottom, #2b32b2, #1488cc); /* Fallback */
+            --bg-gradient: linear-gradient(45deg, #350048, #9e003a, #ff7c00);
+            --glass-bg: rgba(50, 10, 20, 0.6);
+            --glass-border: rgba(255, 200, 200, 0.15);
+            --text-main: #fff0f5;
+            --text-secondary: #ffcca8;
+            --accent-primary: #ff4b1f;
+            --accent-secondary: #ff9068;
+            --user-msg-bg: linear-gradient(to right, #ff4b1f, #ff9068);
+            --bot-msg-bg: rgba(255, 255, 255, 0.1);
+        }
+
+        /* --- 5. FOREST (New) --- */
+        [data-theme="forest"] {
+            --bg-gradient: linear-gradient(to top, #134e5e, #71b280);
+            --glass-bg: rgba(10, 40, 20, 0.6);
+            --glass-border: rgba(168, 224, 99, 0.2);
+            --text-main: #f0fff4;
+            --text-secondary: #a8e063;
+            --accent-primary: #56ab2f;
+            --accent-secondary: #a8e063;
+            --user-msg-bg: linear-gradient(to right, #56ab2f, #a8e063);
+            --bot-msg-bg: rgba(0, 0, 0, 0.2);
+        }
+
+        /* --- 6. VAPORWAVE (New) --- */
+        [data-theme="vaporwave"] {
+            --bg-gradient: linear-gradient(to right, #240b36, #c31432);
+            --glass-bg: rgba(40, 10, 40, 0.7);
+            --glass-border: rgba(0, 210, 255, 0.3);
+            --text-main: #ffeb3b;
+            --text-secondary: #00d2ff;
+            --accent-primary: #ff66c4;
+            --accent-secondary: #3a7bd5;
+            --user-msg-bg: linear-gradient(to right, #fc00ff, #00dbde);
+            --bot-msg-bg: rgba(0, 0, 0, 0.3);
+        }
+
+        /* --- 7. COFFEE (New) --- */
+        [data-theme="coffee"] {
+            --bg-gradient: radial-gradient(circle, #3e2b26 0%, #231713 100%);
+            --glass-bg: rgba(62, 43, 38, 0.8);
+            --glass-border: rgba(210, 180, 140, 0.1);
+            --text-main: #e6ccb2;
+            --text-secondary: #b08968;
+            --accent-primary: #ddb892;
+            --accent-secondary: #7f5539;
+            --user-msg-bg: linear-gradient(to right, #9c6644, #7f5539);
+            --bot-msg-bg: rgba(0,0,0,0.25);
+        }
+
+        /* --- RESET & LAYOUT --- */
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
         
         body {
             background: var(--bg-gradient);
             color: var(--text-main);
             font-family: var(--font-main);
-            height: 100vh; /* Fixed height for app-like feel */
+            height: 100vh;
             display: flex;
             flex-direction: column;
             overflow: hidden;
+            transition: background 0.5s ease;
         }
 
-        /* Cyberpunk Grid Background */
-        [data-theme="cyberpunk"] body::before {
+        /* Background Effects for Specific Themes */
+        [data-theme="cyberpunk"] body::before, 
+        [data-theme="matrix"] body::before {
             content: "";
             position: absolute;
             top: 0; left: 0; width: 200%; height: 200%;
@@ -90,12 +159,11 @@
 
         @keyframes gridMove { from { transform: perspective(500px) rotateX(60deg) translateY(0); } to { transform: perspective(500px) rotateX(60deg) translateY(40px); } }
 
-        /* Scrollbar Styling */
+        /* Custom Scrollbar */
         ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: transparent; }
         ::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.2); border-radius: 10px; }
-        ::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.4); }
-
+        
         /* --- Header --- */
         .header {
             padding: 15px 20px;
@@ -107,261 +175,106 @@
             -webkit-backdrop-filter: blur(12px);
             border-bottom: 1px solid var(--glass-border);
             z-index: 100;
+            transition: all 0.3s ease;
         }
 
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            text-decoration: none;
-            color: var(--text-main);
-        }
-
-        .logo-img-wrapper {
-            position: relative;
-            width: 45px; height: 45px;
-        }
-
-        .logo-img {
-            width: 100%; height: 100%;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 2px solid var(--accent-primary);
-        }
-
-        .logo-glow {
-            position: absolute;
-            inset: -5px;
-            background: var(--accent-primary);
-            filter: blur(15px);
-            border-radius: 50%;
-            opacity: 0.4;
-            z-index: -1;
-            animation: pulse 3s infinite;
-        }
-
-        .logo-text {
-            font-weight: 800;
-            font-size: 22px;
-            letter-spacing: -0.5px;
-            background: linear-gradient(to right, var(--text-main), var(--accent-secondary));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
+        .logo { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--text-main); }
+        .logo-img { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid var(--accent-primary); }
+        .logo-text { font-weight: 800; font-size: 20px; background: linear-gradient(to right, var(--text-main), var(--accent-secondary)); -webkit-background-clip: text; background-clip: text; color: transparent; }
 
         .header-controls { display: flex; gap: 10px; }
-
         .icon-btn {
-            background: rgba(255,255,255,0.05);
-            border: 1px solid var(--glass-border);
-            color: var(--text-main);
-            width: 40px; height: 40px;
-            border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            cursor: pointer;
-            transition: 0.2s;
+            background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border); color: var(--text-main);
+            width: 38px; height: 38px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            cursor: pointer; transition: 0.2s;
         }
-        .icon-btn:hover { background: var(--accent-primary); border-color: transparent; transform: scale(1.05); }
+        .icon-btn:hover { background: var(--accent-primary); color: #fff; border-color: transparent; }
 
-        /* --- Chat Area --- */
-        .chat-container {
-            flex: 1;
-            overflow-y: auto;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-            scroll-behavior: smooth;
-        }
+        /* --- Chat --- */
+        .chat-container { flex: 1; overflow-y: auto; padding: 20px; display: flex; flex-direction: column; gap: 16px; scroll-behavior: smooth; }
 
         .message {
-            max-width: 80%;
-            padding: 16px 20px;
-            border-radius: 20px;
-            font-size: 15px;
-            line-height: 1.6;
-            position: relative;
-            animation: messageSlide 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            word-wrap: break-word;
+            max-width: 85%; padding: 14px 18px; border-radius: 18px; font-size: 15px; line-height: 1.5; position: relative;
+            animation: messageSlide 0.3s ease-out; word-wrap: break-word;
         }
+        
+        @keyframes messageSlide { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-        @keyframes messageSlide {
-            from { opacity: 0; transform: translateY(20px) scale(0.95); }
-            to { opacity: 1; transform: translateY(0) scale(1); }
-        }
+        .bot-message { background: var(--bot-msg-bg); border: 1px solid var(--glass-border); border-bottom-left-radius: 2px; align-self: flex-start; color: var(--text-main); }
+        .user-message { background: var(--user-msg-bg); border-bottom-right-radius: 2px; align-self: flex-end; color: #fff; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        
+        .message-header { font-size: 10px; font-weight: 700; text-transform: uppercase; margin-bottom: 4px; opacity: 0.7; letter-spacing: 1px; }
 
-        .bot-message {
-            background: var(--bot-msg-bg);
-            border: 1px solid var(--glass-border);
-            border-bottom-left-radius: 4px;
-            align-self: flex-start;
-            color: var(--text-main);
-        }
-
-        .user-message {
-            background: var(--user-msg-bg);
-            box-shadow: 0 4px 15px rgba(78, 84, 200, 0.3);
-            border-bottom-right-radius: 4px;
-            align-self: flex-end;
-            color: white;
-        }
-
-        .message-header {
-            font-size: 11px;
-            font-weight: 700;
-            text-transform: uppercase;
-            margin-bottom: 6px;
-            opacity: 0.7;
-            letter-spacing: 1px;
-            display: flex; align-items: center; gap: 6px;
-        }
-
-        /* Typing Indicator */
-        .typing {
-            display: flex; gap: 5px; padding: 15px;
-            background: var(--bot-msg-bg);
-            border-radius: 20px;
-            width: fit-content;
-            margin-top: 5px;
-        }
-        .dot {
-            width: 8px; height: 8px;
-            background: var(--text-secondary);
-            border-radius: 50%;
-            animation: bounce 1.4s infinite ease-in-out both;
-        }
-        .dot:nth-child(1) { animation-delay: -0.32s; }
-        .dot:nth-child(2) { animation-delay: -0.16s; }
-        @keyframes bounce { 0%, 80%, 100% { transform: scale(0); } 40% { transform: scale(1); } }
-
-        /* --- Input Area (Floating) --- */
-        .input-wrapper {
-            padding: 20px;
-            background: transparent; /* Let body gradient show */
-            position: relative;
-        }
-
+        /* --- Input --- */
+        .input-wrapper { padding: 15px 20px 20px 20px; position: relative; }
         .input-bar {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            background: var(--glass-bg);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid var(--glass-border);
-            border-radius: 50px;
-            padding: 8px 8px 8px 20px;
-            box-shadow: var(--shadow);
-            transition: 0.3s;
+            display: flex; align-items: center; gap: 10px; background: var(--glass-bg); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border); border-radius: 50px; padding: 8px 8px 8px 20px; box-shadow: var(--shadow); transition: 0.3s;
         }
+        .input-bar:focus-within { border-color: var(--accent-primary); }
 
-        .input-bar:focus-within {
-            border-color: var(--accent-primary);
-            box-shadow: 0 0 20px rgba(78, 84, 200, 0.2);
-        }
-
-        #user-input {
-            flex: 1;
-            background: transparent;
-            border: none;
-            color: var(--text-main);
-            font-size: 16px;
-            outline: none;
-        }
-
-        .attach-btn {
-            color: var(--text-secondary);
-            cursor: pointer;
-            padding: 5px;
-            transition: 0.2s;
-        }
-        .attach-btn:hover { color: var(--text-main); }
+        #user-input { flex: 1; background: transparent; border: none; color: var(--text-main); font-size: 16px; outline: none; font-family: inherit; }
+        .attach-btn { color: var(--text-secondary); cursor: pointer; padding: 5px; background: none; border: none; transition: 0.2s; }
+        .attach-btn:hover { color: var(--accent-primary); }
 
         #send-btn {
-            width: 45px; height: 45px;
-            border-radius: 50%;
-            background: var(--accent-primary);
-            border: none;
-            color: white;
-            display: flex; align-items: center; justify-content: center;
-            cursor: pointer;
-            transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            width: 42px; height: 42px; border-radius: 50%; background: var(--accent-primary); border: none; color: white;
+            display: flex; align-items: center; justify-content: center; cursor: pointer; transition: 0.2s;
         }
+        #send-btn:hover { transform: scale(1.05); background: var(--accent-secondary); }
+        #send-btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
-        #send-btn:hover { transform: scale(1.1) rotate(-10deg); background: var(--accent-secondary); }
-        #send-btn:disabled { opacity: 0.5; transform: none; cursor: not-allowed; }
-
-        /* --- Menus & Overlays --- */
-        .quick-actions {
-            display: flex; gap: 10px; overflow-x: auto; 
-            padding: 0 20px 10px 20px;
-            scrollbar-width: none;
-        }
-        .quick-actions::-webkit-scrollbar { display: none; }
-
-        .pill-btn {
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            color: var(--text-secondary);
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 13px;
-            white-space: nowrap;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-        .pill-btn:hover { background: var(--accent-primary); color: white; border-color: transparent; }
-
-        /* Settings Dropdown */
+        /* --- Settings Panel --- */
         .settings-panel {
-            position: absolute;
-            top: 70px; right: 20px;
-            background: #1a1a2e;
-            border: 1px solid var(--glass-border);
-            border-radius: 16px;
-            padding: 15px;
-            width: 200px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
-            display: none;
-            z-index: 200;
-            animation: fadeIn 0.2s;
+            position: absolute; top: 70px; right: 20px; background: var(--glass-bg); backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border); border-radius: 16px; padding: 15px; width: 220px;
+            display: none; z-index: 200; box-shadow: 0 10px 30px rgba(0,0,0,0.5); animation: fadeIn 0.2s;
         }
         .settings-panel.active { display: block; }
-        
-        .setting-item { margin-bottom: 10px; }
-        .setting-item label { display: block; font-size: 12px; color: var(--text-secondary); margin-bottom: 5px; }
-        .setting-item select { width: 100%; padding: 8px; background: rgba(255,255,255,0.05); border: none; color: white; border-radius: 8px; }
+        .setting-item { margin-bottom: 12px; }
+        .setting-item label { display: block; font-size: 12px; color: var(--text-secondary); margin-bottom: 5px; font-weight: 600; }
+        .setting-item select {
+            width: 100%; padding: 10px; background: rgba(0,0,0,0.2); border: 1px solid var(--glass-border);
+            color: var(--text-main); border-radius: 8px; outline: none; cursor: pointer; font-family: inherit;
+        }
+        .setting-item select option { background: #222; color: #fff; }
 
-        /* Emoji Picker */
+        /* --- Quick Actions --- */
+        .quick-actions { display: flex; gap: 8px; overflow-x: auto; padding: 0 20px 10px 20px; scrollbar-width: none; }
+        .quick-actions::-webkit-scrollbar { display: none; }
+        .pill-btn {
+            background: var(--glass-bg); border: 1px solid var(--glass-border); color: var(--text-secondary);
+            padding: 6px 14px; border-radius: 20px; font-size: 12px; white-space: nowrap; cursor: pointer; transition: 0.2s;
+        }
+        .pill-btn:hover { background: var(--accent-primary); color: #fff; border-color: transparent; }
+
+        /* --- Emoji Grid --- */
         .emoji-grid {
-            position: absolute;
-            bottom: 90px; right: 20px;
-            background: rgba(20, 20, 30, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 15px;
-            display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            opacity: 0; pointer-events: none; transform: translateY(20px);
-            transition: 0.3s;
+            position: absolute; bottom: 85px; right: 20px; background: var(--glass-bg); backdrop-filter: blur(20px);
+            border-radius: 16px; padding: 10px; display: grid; grid-template-columns: repeat(5, 1fr); gap: 5px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5); opacity: 0; pointer-events: none; transform: translateY(10px);
+            transition: 0.2s; border: 1px solid var(--glass-border);
         }
         .emoji-grid.show { opacity: 1; pointer-events: all; transform: translateY(0); }
-        .emoji { font-size: 20px; cursor: pointer; text-align: center; padding: 5px; border-radius: 5px; }
-        .emoji:hover { background: rgba(255,255,255,0.1); }
+        .emoji { font-size: 22px; cursor: pointer; padding: 8px; border-radius: 8px; text-align: center; transition: 0.2s; }
+        .emoji:hover { background: rgba(255,255,255,0.1); transform: scale(1.1); }
 
-        /* Utilities */
+        /* --- Notification --- */
         .notification {
             position: fixed; top: 20px; left: 50%; transform: translateX(-50%) translateY(-100px);
-            background: var(--accent-primary); color: white; padding: 10px 20px;
-            border-radius: 30px; box-shadow: 0 10px 20px rgba(0,0,0,0.3);
-            transition: 0.4s; z-index: 1000; font-size: 14px; font-weight: 600;
+            background: var(--accent-primary); color: white; padding: 10px 25px; border-radius: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.4); transition: 0.4s; z-index: 1000; font-weight: 600; font-size: 14px;
         }
         .notification.show { transform: translateX(-50%) translateY(0); }
 
-        @keyframes pulse { 0% { opacity: 0.4; transform: scale(1); } 50% { opacity: 0.7; transform: scale(1.1); } 100% { opacity: 0.4; transform: scale(1); } }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
+        
+        /* Typing Dots */
+        .typing { display: flex; gap: 4px; padding: 12px 16px; background: var(--bot-msg-bg); border-radius: 18px; width: fit-content; border: 1px solid var(--glass-border); }
+        .dot { width: 6px; height: 6px; background: var(--text-secondary); border-radius: 50%; animation: bounce 1.4s infinite ease-in-out both; }
+        .dot:nth-child(1) { animation-delay: -0.32s; }
+        .dot:nth-child(2) { animation-delay: -0.16s; }
+        @keyframes bounce { 0%, 80%, 100% { transform: scale(0); } 40% { transform: scale(1); } }
     </style>
 </head>
 <body data-theme="default">
@@ -369,34 +282,32 @@
     <!-- Header -->
     <header class="header">
         <a href="#" class="logo">
-            <div class="logo-img-wrapper">
-                <div class="logo-glow"></div>
-                <img src="Tegych logo.png" alt="AI" class="logo-img" loading="lazy">
-            </div>
+            <img src="Tegych logo.png" alt="Logo" class="logo-img" onerror="this.style.display='none'">
             <span class="logo-text">Tegych</span>
         </a>
         <div class="header-controls">
-            <button class="icon-btn" onclick="toggleSettings()" aria-label="Settings">
-                <i class="fas fa-sliders-h"></i>
-            </button>
-            <button class="icon-btn" onclick="clearChat()" aria-label="Clear Chat">
-                <i class="fas fa-trash-alt"></i>
-            </button>
+            <button class="icon-btn" onclick="toggleSettings()" aria-label="Settings"><i class="fas fa-palette"></i></button>
+            <button class="icon-btn" onclick="clearChat()" aria-label="Clear"><i class="fas fa-trash-alt"></i></button>
         </div>
     </header>
 
-    <!-- Settings Panel -->
+    <!-- Settings Panel (Themes) -->
     <div class="settings-panel" id="settings-panel">
         <div class="setting-item">
-            <label>Theme Style</label>
+            <label><i class="fas fa-paint-brush"></i> Choose Theme</label>
             <select onchange="changeTheme(this.value)">
-                <option value="default">Deep Space</option>
-                <option value="light">Clean Light</option>
-                <option value="cyberpunk">Cyberpunk Neon</option>
+                <option value="default">🌌 Deep Space</option>
+                <option value="light">☁️ Clean Light</option>
+                <option value="cyberpunk">🤖 Cyberpunk</option>
+                <option value="matrix">💻 Matrix</option>
+                <option value="sunset">🌅 Sunset</option>
+                <option value="forest">🌲 Forest</option>
+                <option value="vaporwave">👾 Vaporwave</option>
+                <option value="coffee">☕ Coffee</option>
             </select>
         </div>
         <div class="setting-item">
-            <label>Language</label>
+            <label><i class="fas fa-globe"></i> Language</label>
             <select onchange="changeLanguage(this.value)">
                 <option value="en">English</option>
                 <option value="ru">Русский</option>
@@ -405,16 +316,14 @@
     </div>
 
     <!-- Chat Area -->
-    <div class="chat-container" id="chat-container">
-        <!-- Messages will appear here -->
-    </div>
+    <div class="chat-container" id="chat-container"></div>
 
-    <!-- Quick Suggestions -->
-    <div class="quick-actions" id="quick-actions">
-        <button class="pill-btn" onclick="quickPrompt('Summarize this doc')">📝 Summarize</button>
-        <button class="pill-btn" onclick="quickPrompt('Explain like I am 5')">👶 ELI5</button>
-        <button class="pill-btn" onclick="quickPrompt('Suggest a movie')">🎬 Movie</button>
-        <button class="pill-btn" onclick="quickPrompt('Write code for...')">💻 Code</button>
+    <!-- Quick Actions -->
+    <div class="quick-actions">
+        <button class="pill-btn" onclick="quickPrompt('Analyze this')">🔍 Analyze</button>
+        <button class="pill-btn" onclick="quickPrompt('Summarize')">📝 Summarize</button>
+        <button class="pill-btn" onclick="quickPrompt('Code this')">💻 Code</button>
+        <button class="pill-btn" onclick="quickPrompt('Creative idea')">💡 Idea</button>
     </div>
 
     <!-- Input Area -->
@@ -422,33 +331,25 @@
         <div class="emoji-grid" id="emoji-grid"></div>
         
         <div class="input-bar">
-            <button class="attach-btn" onclick="toggleEmoji()" aria-label="Emoji">
-                <i class="far fa-smile" style="font-size: 18px;"></i>
-            </button>
-            <button class="attach-btn" onclick="attachFile()" aria-label="Attach">
-                <i class="fas fa-paperclip" style="font-size: 18px;"></i>
-            </button>
+            <button class="attach-btn" onclick="toggleEmoji()"><i class="far fa-smile-beam"></i></button>
+            <button class="attach-btn" onclick="attachFile()"><i class="fas fa-paperclip"></i></button>
             
-            <input type="text" id="user-input" placeholder="Ask Tegych anything..." autocomplete="off">
+            <input type="text" id="user-input" placeholder="Message Tegych..." autocomplete="off">
             
-            <button id="send-btn" onclick="sendMessage()">
-                <i class="fas fa-arrow-up"></i>
-            </button>
+            <button id="send-btn" onclick="sendMessage()"><i class="fas fa-arrow-up"></i></button>
         </div>
     </div>
 
-    <!-- Notification Toast -->
-    <div class="notification" id="notification">Action Successful</div>
+    <div class="notification" id="notification">Notification</div>
 
     <script>
-        /* --- LOGIC --- */
-        const API_KEY = "8fVDXLED6cbXbT0ObTYuBhitYkjB5ABV"; // ⚠️ SERVER-SIDE IS SAFER
+        /* --- CONFIGURATION --- */
+        const API_KEY = "8fVDXLED6cbXbT0ObTYuBhitYkjB5ABV"; 
         const API_URL = "https://api.mistral.ai/v1/chat/completions";
         
-        // State
         let state = {
             lang: 'en',
-            history: [{ role: "system", content: "You are Tegych, an advanced AI assistant." }]
+            history: [{ role: "system", content: "You are Tegych, a smart and friendly AI assistant." }]
         };
 
         const dom = {
@@ -459,22 +360,22 @@
             notif: document.getElementById('notification')
         };
 
-        // Init
+        /* --- INITIALIZATION --- */
         document.addEventListener('DOMContentLoaded', () => {
-            // Add initial welcome
-            addMessage(state.lang === 'en' ? 
-                "Hello! I'm **Tegych**. \nI can analyze files, write code, or chat about art. How can I help?" : 
-                "Привет! Я **Tegych**. \nЯ могу анализировать файлы, писать код или говорить об искусстве.", 
-            'bot');
+            const welcomeText = state.lang === 'en' ? 
+                "**Welcome to Tegych AI!**\nChoose a theme in settings 🎨 or start chatting." : 
+                "**Добро пожаловать в Tegych AI!**\nВыберите тему в настройках 🎨 или начните чат.";
             
-            // Populate Emojis
-            const emojis = ["🔥", "👍", "🤖", "🧠", "🎨", "🚀", "💡", "✅", "❤️", "😂"];
+            addMessage(welcomeText, 'bot');
+            
+            // Init Emojis
+            const emojis = ["🔥", "👍", "❤️", "😂", "🤖", "🤯", "🎉", "👀", "🧠", "🚀"];
             emojis.forEach(e => {
-                const span = document.createElement('span');
-                span.className = 'emoji';
-                span.textContent = e;
-                span.onclick = () => { dom.input.value += e; dom.input.focus(); };
-                dom.emojis.appendChild(span);
+                const div = document.createElement('div');
+                div.className = 'emoji';
+                div.textContent = e;
+                div.onclick = () => { dom.input.value += e; dom.input.focus(); };
+                dom.emojis.appendChild(div);
             });
 
             // Enter key
@@ -483,28 +384,23 @@
             });
         });
 
-        // Functions
+        /* --- FUNCTIONS --- */
         function addMessage(text, sender) {
             const div = document.createElement('div');
             div.className = `message ${sender}-message`;
             
             const header = document.createElement('div');
             header.className = 'message-header';
-            header.innerHTML = sender === 'user' 
-                ? `YOU <i class="fas fa-user"></i>` 
-                : `<i class="fas fa-robot"></i> TEGYCH AI`;
+            header.innerHTML = sender === 'user' ? 'YOU' : 'TEGYCH';
             
             const content = document.createElement('div');
-            // Basic Markdown parsing
-            content.innerHTML = text
-                .replace(/\*\*(.*?)\*\*/g, '<b>$1</b>')
-                .replace(/\n/g, '<br>');
-
+            // Simple Markdown Bold support
+            content.innerHTML = text.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>').replace(/\n/g, '<br>');
+            
             div.appendChild(header);
             div.appendChild(content);
             dom.chat.appendChild(div);
             dom.chat.scrollTop = dom.chat.scrollHeight;
-            return content;
         }
 
         function showTyping() {
@@ -530,7 +426,6 @@
             addMessage(text, 'user');
             showTyping();
 
-            // Add to history
             state.history.push({ role: "user", content: text });
 
             try {
@@ -549,7 +444,9 @@
 
                 removeTyping();
 
-                if(!response.ok) throw new Error("API Error");
+                if(!response.ok) {
+                    throw new Error("API Connection Error");
+                }
 
                 const data = await response.json();
                 const aiText = data.choices[0].message.content;
@@ -559,29 +456,54 @@
 
             } catch (e) {
                 removeTyping();
-                addMessage("⚠️ Connection error. Please check API Key.", 'bot');
+                addMessage(`⚠️ Error: ${e.message}. Check your API Key.`, 'bot');
             }
         }
 
-        // UI Interactions
+        /* --- UI ACTIONS --- */
         function toggleSettings() { dom.settings.classList.toggle('active'); }
         function toggleEmoji() { dom.emojis.classList.toggle('show'); }
-        function changeTheme(theme) { document.body.setAttribute('data-theme', theme); }
-        function changeLanguage(lang) { state.lang = lang; showNotification("Language: " + lang.toUpperCase()); }
-        function clearChat() { dom.chat.innerHTML = ''; state.history = [state.history[0]]; addMessage("Chat cleared.", 'bot'); }
-        function quickPrompt(txt) { dom.input.value = txt; dom.input.focus(); }
-        function attachFile() { showNotification("File upload simulated 📎"); }
         
+        function changeTheme(theme) {
+            document.body.setAttribute('data-theme', theme);
+            showNotification(`Theme: ${theme.charAt(0).toUpperCase() + theme.slice(1)}`);
+            dom.settings.classList.remove('active');
+        }
+        
+        function changeLanguage(lang) {
+            state.lang = lang;
+            showNotification(lang === 'ru' ? "Язык: Русский" : "Language: English");
+        }
+
+        function clearChat() {
+            dom.chat.innerHTML = '';
+            state.history = [state.history[0]];
+            addMessage(state.lang === 'en' ? "Chat cleared." : "Чат очищен.", 'bot');
+        }
+
+        function quickPrompt(txt) {
+            dom.input.value = txt;
+            dom.input.focus();
+        }
+
+        function attachFile() {
+            showNotification(state.lang === 'en' ? "File upload demo 📎" : "Загрузка файла (демо) 📎");
+        }
+
         function showNotification(msg) {
             dom.notif.textContent = msg;
             dom.notif.classList.add('show');
-            setTimeout(() => dom.notif.classList.remove('show'), 2000);
+            setTimeout(() => dom.notif.classList.remove('show'), 2500);
         }
 
-        // Close menus on click outside
+        // Close menus when clicking outside
         document.addEventListener('click', (e) => {
-            if(!e.target.closest('.input-wrapper') && !e.target.closest('.attach-btn')) dom.emojis.classList.remove('show');
-            if(!e.target.closest('.header-controls') && !e.target.closest('.settings-panel')) dom.settings.classList.remove('active');
+            if(!e.target.closest('.header-controls') && !e.target.closest('.settings-panel')) {
+                dom.settings.classList.remove('active');
+            }
+            if(!e.target.closest('.input-wrapper')) {
+                dom.emojis.classList.remove('show');
+            }
         });
     </script>
 </body>
