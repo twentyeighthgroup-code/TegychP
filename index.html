@@ -3,15 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="description" content="Tegych AI - Next Gen Chat Interface">
-    <title>Tegych AI | Premium</title>
+    <meta name="description" content="Tegych AI Ultimate">
+    <title>Tegych AI | Ultimate</title>
     
-    <!-- Fonts & Icons -->
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=JetBrains+Mono:wght@400;700&family=VT323&family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
+    <!-- Code Highlighting & Markdown -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/4.3.0/marked.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+
     <!-- Telegram Web App -->
     <script src="https://telegram.org/js/telegram-web-app.js" defer></script>
 
@@ -19,414 +26,470 @@
         :root {
             /* --- DEFAULT (Deep Space) --- */
             --bg-gradient: radial-gradient(circle at top left, #1a1a2e, #16213e, #0f0f1a);
-            --glass-bg: rgba(20, 20, 35, 0.65);
+            --glass-bg: rgba(20, 20, 35, 0.7);
             --glass-border: rgba(255, 255, 255, 0.08);
             --text-main: #ffffff;
-            --text-secondary: #a0a0b0;
-            --accent-primary: #4e54c8;
-            --accent-secondary: #8f94fb;
-            --user-msg-bg: linear-gradient(135deg, #4e54c8, #8f94fb);
-            --bot-msg-bg: rgba(255, 255, 255, 0.05);
-            --shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            --text-sec: #a0a0b0;
+            --accent: #4e54c8;
+            --accent-glow: #8f94fb;
+            --user-bg: linear-gradient(135deg, #4e54c8, #8f94fb);
+            --bot-bg: rgba(255, 255, 255, 0.05);
+            --font-main: 'Outfit', sans-serif;
+            --font-code: 'JetBrains Mono', monospace;
+            --radius: 20px;
+        }
+
+        /* --- THEMES --- */
+        
+        /* 1. Light */
+        [data-theme="light"] {
+            --bg-gradient: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+            --glass-bg: rgba(255, 255, 255, 0.85);
+            --glass-border: rgba(0,0,0,0.05);
+            --text-main: #2d3436;
+            --text-sec: #636e72;
+            --accent: #0984e3;
+            --user-bg: linear-gradient(135deg, #0984e3, #74b9ff);
+            --bot-bg: #ffffff;
+        }
+
+        /* 2. Cyberpunk */
+        [data-theme="cyberpunk"] {
+            --bg-gradient: linear-gradient(180deg, #050510, #180518);
+            --glass-bg: rgba(10, 0, 10, 0.85);
+            --glass-border: #ff0055;
+            --text-main: #00f3ff;
+            --text-sec: #ff0055;
+            --accent: #ff0055;
+            --user-bg: linear-gradient(90deg, #ff0055, #bd00ff);
+            --bot-bg: rgba(0, 243, 255, 0.05);
+            --font-main: 'JetBrains Mono', monospace;
+        }
+
+        /* 3. Matrix */
+        [data-theme="matrix"] {
+            --bg-gradient: #000;
+            --glass-bg: rgba(0, 20, 0, 0.9);
+            --glass-border: #00ff00;
+            --text-main: #00ff00;
+            --text-sec: #008f11;
+            --accent: #00ff00;
+            --user-bg: #004400;
+            --bot-bg: #0a0a0a;
+            --font-main: 'VT323', monospace;
+            font-size: 18px;
+        }
+
+        /* 4. Sunset */
+        [data-theme="sunset"] {
+            --bg-gradient: linear-gradient(45deg, #350048, #9e003a, #ff7c00);
+            --glass-bg: rgba(60, 10, 30, 0.6);
+            --glass-border: rgba(255,255,255,0.1);
+            --text-main: #fff0f5;
+            --text-sec: #ffdbaa;
+            --accent: #ff4b1f;
+            --user-bg: linear-gradient(to right, #ff4b1f, #ff9068);
+            --bot-bg: rgba(255,255,255,0.1);
+        }
+
+        /* 5. Forest */
+        [data-theme="forest"] {
+            --bg-gradient: linear-gradient(to top, #134e5e, #71b280);
+            --glass-bg: rgba(10, 30, 20, 0.7);
+            --glass-border: #a8e063;
+            --text-main: #f0fff4;
+            --text-sec: #a8e063;
+            --accent: #56ab2f;
+            --user-bg: linear-gradient(to right, #56ab2f, #a8e063);
+            --bot-bg: rgba(0,0,0,0.2);
+        }
+
+        /* 6. Vaporwave */
+        [data-theme="vaporwave"] {
+            --bg-gradient: linear-gradient(to right, #240b36, #c31432);
+            --glass-bg: rgba(40, 5, 40, 0.7);
+            --glass-border: #00d2ff;
+            --text-main: #ffe6fa;
+            --text-sec: #00d2ff;
+            --accent: #ff66c4;
+            --user-bg: linear-gradient(to right, #fc00ff, #00dbde);
+            --bot-bg: rgba(0,0,0,0.3);
+        }
+
+        /* 7. Coffee */
+        [data-theme="coffee"] {
+            --bg-gradient: radial-gradient(circle, #3e2b26, #231713);
+            --glass-bg: rgba(62, 43, 38, 0.85);
+            --glass-border: #d2b48c;
+            --text-main: #e6ccb2;
+            --text-sec: #b08968;
+            --accent: #ddb892;
+            --user-bg: linear-gradient(to right, #9c6644, #7f5539);
+            --bot-bg: rgba(0,0,0,0.25);
+        }
+
+        /* --- NEW THEMES --- */
+
+        /* 8. Dracula (Coding) */
+        [data-theme="dracula"] {
+            --bg-gradient: #282a36;
+            --glass-bg: rgba(40, 42, 54, 0.9);
+            --glass-border: #6272a4;
+            --text-main: #f8f8f2;
+            --text-sec: #bd93f9;
+            --accent: #ff79c6;
+            --user-bg: #bd93f9;
+            --bot-bg: #44475a;
+            --font-main: 'JetBrains Mono', monospace;
+        }
+
+        /* 9. Nord (Ice) */
+        [data-theme="nord"] {
+            --bg-gradient: #2e3440;
+            --glass-bg: rgba(46, 52, 64, 0.9);
+            --glass-border: #88c0d0;
+            --text-main: #eceff4;
+            --text-sec: #88c0d0;
+            --accent: #81a1c1;
+            --user-bg: #5e81ac;
+            --bot-bg: #3b4252;
             --font-main: 'Outfit', sans-serif;
         }
 
-        /* --- 1. LIGHT THEME --- */
-        [data-theme="light"] {
-            --bg-gradient: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            --glass-bg: rgba(255, 255, 255, 0.7);
-            --glass-border: rgba(0, 0, 0, 0.05);
-            --text-main: #1a1a2e;
-            --text-secondary: #555;
-            --accent-primary: #2575fc;
-            --accent-secondary: #6a11cb;
-            --user-msg-bg: linear-gradient(135deg, #2575fc, #6a11cb);
-            --bot-msg-bg: rgba(255, 255, 255, 0.8);
-            --shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+        /* 10. Retro Amber */
+        [data-theme="retro"] {
+            --bg-gradient: #1a1a00;
+            --glass-bg: rgba(20, 20, 0, 0.9);
+            --glass-border: #ffcc00;
+            --text-main: #ffcc00;
+            --text-sec: #b38f00;
+            --accent: #ffcc00;
+            --user-bg: #665200;
+            --bot-bg: #111;
+            --font-main: 'VT323', monospace;
+            font-size: 20px;
         }
 
-        /* --- 2. CYBERPUNK --- */
-        [data-theme="cyberpunk"] {
-            --bg-gradient: linear-gradient(180deg, #0b0b0b 0%, #1a0b1a 100%);
-            --glass-bg: rgba(10, 5, 10, 0.8);
-            --glass-border: rgba(0, 255, 242, 0.3);
-            --text-main: #e0f0ff;
-            --text-secondary: #00fff2;
-            --accent-primary: #ff0055;
-            --accent-secondary: #00fff2;
-            --user-msg-bg: linear-gradient(90deg, #ff0055, #ff00aa);
-            --bot-msg-bg: rgba(0, 255, 242, 0.05);
-            --font-main: 'JetBrains Mono', monospace;
+        /* 11. Sakura (Pink) */
+        [data-theme="sakura"] {
+            --bg-gradient: linear-gradient(135deg, #fff0f5, #ffe4e1);
+            --glass-bg: rgba(255, 240, 245, 0.8);
+            --glass-border: #ffb7b2;
+            --text-main: #d81b60;
+            --text-sec: #ff69b4;
+            --accent: #ff69b4;
+            --user-bg: linear-gradient(135deg, #ff9a9e, #fad0c4);
+            --bot-bg: #ffffff;
+            --font-main: 'Outfit', sans-serif;
         }
 
-        /* --- 3. MATRIX (New) --- */
-        [data-theme="matrix"] {
-            --bg-gradient: #000000;
-            --glass-bg: rgba(0, 20, 0, 0.9);
-            --glass-border: #00ff00;
-            --text-main: #00ff41;
-            --text-secondary: #008f11;
-            --accent-primary: #003b00;
-            --accent-secondary: #00ff41;
-            --user-msg-bg: #003b00;
-            --bot-msg-bg: #0d0d0d;
-            --font-main: 'JetBrains Mono', monospace;
-            --shadow: 0 0 15px rgba(0, 255, 0, 0.2);
+        /* 12. Luxury Gold */
+        [data-theme="luxury"] {
+            --bg-gradient: radial-gradient(circle, #1c1c1c, #000);
+            --glass-bg: rgba(20, 20, 20, 0.9);
+            --glass-border: #d4af37;
+            --text-main: #d4af37;
+            --text-sec: #8a7326;
+            --accent: #d4af37;
+            --user-bg: linear-gradient(135deg, #d4af37, #c5a028);
+            --bot-bg: #111;
+            --font-main: 'Cinzel', serif;
         }
 
-        /* --- 4. SUNSET (New) --- */
-        [data-theme="sunset"] {
-            --bg-gradient: linear-gradient(to bottom, #2b32b2, #1488cc); /* Fallback */
-            --bg-gradient: linear-gradient(45deg, #350048, #9e003a, #ff7c00);
-            --glass-bg: rgba(50, 10, 20, 0.6);
-            --glass-border: rgba(255, 200, 200, 0.15);
-            --text-main: #fff0f5;
-            --text-secondary: #ffcca8;
-            --accent-primary: #ff4b1f;
-            --accent-secondary: #ff9068;
-            --user-msg-bg: linear-gradient(to right, #ff4b1f, #ff9068);
-            --bot-msg-bg: rgba(255, 255, 255, 0.1);
-        }
 
-        /* --- 5. FOREST (New) --- */
-        [data-theme="forest"] {
-            --bg-gradient: linear-gradient(to top, #134e5e, #71b280);
-            --glass-bg: rgba(10, 40, 20, 0.6);
-            --glass-border: rgba(168, 224, 99, 0.2);
-            --text-main: #f0fff4;
-            --text-secondary: #a8e063;
-            --accent-primary: #56ab2f;
-            --accent-secondary: #a8e063;
-            --user-msg-bg: linear-gradient(to right, #56ab2f, #a8e063);
-            --bot-msg-bg: rgba(0, 0, 0, 0.2);
-        }
-
-        /* --- 6. VAPORWAVE (New) --- */
-        [data-theme="vaporwave"] {
-            --bg-gradient: linear-gradient(to right, #240b36, #c31432);
-            --glass-bg: rgba(40, 10, 40, 0.7);
-            --glass-border: rgba(0, 210, 255, 0.3);
-            --text-main: #ffeb3b;
-            --text-secondary: #00d2ff;
-            --accent-primary: #ff66c4;
-            --accent-secondary: #3a7bd5;
-            --user-msg-bg: linear-gradient(to right, #fc00ff, #00dbde);
-            --bot-msg-bg: rgba(0, 0, 0, 0.3);
-        }
-
-        /* --- 7. COFFEE (New) --- */
-        [data-theme="coffee"] {
-            --bg-gradient: radial-gradient(circle, #3e2b26 0%, #231713 100%);
-            --glass-bg: rgba(62, 43, 38, 0.8);
-            --glass-border: rgba(210, 180, 140, 0.1);
-            --text-main: #e6ccb2;
-            --text-secondary: #b08968;
-            --accent-primary: #ddb892;
-            --accent-secondary: #7f5539;
-            --user-msg-bg: linear-gradient(to right, #9c6644, #7f5539);
-            --bot-msg-bg: rgba(0,0,0,0.25);
-        }
-
-        /* --- RESET & LAYOUT --- */
+        /* --- RESET & BASE --- */
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-        
         body {
             background: var(--bg-gradient);
             color: var(--text-main);
             font-family: var(--font-main);
             height: 100vh;
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
+            display: flex; flex-direction: column; overflow: hidden;
             transition: background 0.5s ease;
         }
-
-        /* Background Effects for Specific Themes */
-        [data-theme="cyberpunk"] body::before, 
-        [data-theme="matrix"] body::before {
-            content: "";
-            position: absolute;
-            top: 0; left: 0; width: 200%; height: 200%;
-            background-image: 
-                linear-gradient(var(--glass-border) 1px, transparent 1px),
-                linear-gradient(90deg, var(--glass-border) 1px, transparent 1px);
-            background-size: 40px 40px;
-            opacity: 0.15;
-            z-index: -1;
-            animation: gridMove 20s linear infinite;
-            transform: perspective(500px) rotateX(60deg);
+        
+        /* Grid Effect for Cyberpunk/Matrix/Retro */
+        [data-theme="cyberpunk"] body::before, [data-theme="matrix"] body::before, [data-theme="retro"] body::before {
+            content: ""; position: absolute; inset: 0;
+            background-image: linear-gradient(var(--glass-border) 1px, transparent 1px), linear-gradient(90deg, var(--glass-border) 1px, transparent 1px);
+            background-size: 30px 30px; opacity: 0.1; z-index: -1; pointer-events: none;
         }
 
-        @keyframes gridMove { from { transform: perspective(500px) rotateX(60deg) translateY(0); } to { transform: perspective(500px) rotateX(60deg) translateY(40px); } }
-
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar { width: 6px; }
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 5px; }
         ::-webkit-scrollbar-track { background: transparent; }
-        ::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.2); border-radius: 10px; }
-        
-        /* --- Header --- */
+        ::-webkit-scrollbar-thumb { background: var(--glass-border); border-radius: 10px; }
+
+        /* --- LAYOUT --- */
         .header {
-            padding: 15px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: var(--glass-bg);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border-bottom: 1px solid var(--glass-border);
+            padding: 15px 20px; display: flex; justify-content: space-between; align-items: center;
+            background: var(--glass-bg); backdrop-filter: blur(15px); border-bottom: 1px solid var(--glass-border);
             z-index: 100;
-            transition: all 0.3s ease;
         }
-
-        .logo { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--text-main); }
-        .logo-img { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid var(--accent-primary); }
-        .logo-text { font-weight: 800; font-size: 20px; background: linear-gradient(to right, var(--text-main), var(--accent-secondary)); -webkit-background-clip: text; background-clip: text; color: transparent; }
-
-        .header-controls { display: flex; gap: 10px; }
-        .icon-btn {
-            background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border); color: var(--text-main);
-            width: 38px; height: 38px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
-            cursor: pointer; transition: 0.2s;
+        .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+        .logo-img { width: 35px; height: 35px; border-radius: 50%; object-fit: cover; border: 2px solid var(--accent); }
+        .logo-text { font-weight: 800; font-size: 20px; color: var(--text-main); letter-spacing: 0.5px; }
+        
+        .controls { display: flex; gap: 8px; }
+        .btn-icon {
+            width: 36px; height: 36px; border-radius: 50%; border: 1px solid var(--glass-border); background: rgba(255,255,255,0.03);
+            color: var(--text-main); display: flex; align-items: center; justify-content: center; cursor: pointer; transition: 0.2s;
         }
-        .icon-btn:hover { background: var(--accent-primary); color: #fff; border-color: transparent; }
+        .btn-icon:hover { background: var(--accent); border-color: transparent; color: #fff; }
 
-        /* --- Chat --- */
-        .chat-container { flex: 1; overflow-y: auto; padding: 20px; display: flex; flex-direction: column; gap: 16px; scroll-behavior: smooth; }
-
+        /* --- CHAT --- */
+        .chat-area { flex: 1; overflow-y: auto; padding: 20px; display: flex; flex-direction: column; gap: 15px; scroll-behavior: smooth; }
+        
         .message {
-            max-width: 85%; padding: 14px 18px; border-radius: 18px; font-size: 15px; line-height: 1.5; position: relative;
-            animation: messageSlide 0.3s ease-out; word-wrap: break-word;
+            max-width: 85%; padding: 12px 18px; border-radius: var(--radius); font-size: 15px; line-height: 1.6;
+            position: relative; animation: slideUp 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
+        .bot-msg { background: var(--bot-bg); border: 1px solid var(--glass-border); border-bottom-left-radius: 2px; align-self: flex-start; }
+        .user-msg { background: var(--user-bg); border-bottom-right-radius: 2px; align-self: flex-end; color: #fff; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
         
-        @keyframes messageSlide { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-
-        .bot-message { background: var(--bot-msg-bg); border: 1px solid var(--glass-border); border-bottom-left-radius: 2px; align-self: flex-start; color: var(--text-main); }
-        .user-message { background: var(--user-msg-bg); border-bottom-right-radius: 2px; align-self: flex-end; color: #fff; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .msg-header { font-size: 11px; font-weight: 700; opacity: 0.7; margin-bottom: 5px; display: flex; justify-content: space-between; }
         
-        .message-header { font-size: 10px; font-weight: 700; text-transform: uppercase; margin-bottom: 4px; opacity: 0.7; letter-spacing: 1px; }
+        /* Markdown Styles */
+        .message p { margin-bottom: 8px; }
+        .message p:last-child { margin-bottom: 0; }
+        .message code { background: rgba(0,0,0,0.3); padding: 2px 5px; border-radius: 4px; font-family: var(--font-code); font-size: 0.9em; }
+        .message pre { background: #1e1e1e; padding: 10px; border-radius: 8px; overflow-x: auto; margin: 10px 0; border: 1px solid var(--glass-border); }
+        .message pre code { background: transparent; padding: 0; color: #abb2bf; }
+        
+        @keyframes slideUp { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* --- Input --- */
-        .input-wrapper { padding: 15px 20px 20px 20px; position: relative; }
-        .input-bar {
-            display: flex; align-items: center; gap: 10px; background: var(--glass-bg); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
-            border: 1px solid var(--glass-border); border-radius: 50px; padding: 8px 8px 8px 20px; box-shadow: var(--shadow); transition: 0.3s;
+        /* --- INPUT --- */
+        .input-area { padding: 15px 20px 20px; position: relative; }
+        .input-box {
+            display: flex; align-items: center; gap: 10px; background: var(--glass-bg); backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border); border-radius: 50px; padding: 8px 8px 8px 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.2);
         }
-        .input-bar:focus-within { border-color: var(--accent-primary); }
-
-        #user-input { flex: 1; background: transparent; border: none; color: var(--text-main); font-size: 16px; outline: none; font-family: inherit; }
-        .attach-btn { color: var(--text-secondary); cursor: pointer; padding: 5px; background: none; border: none; transition: 0.2s; }
-        .attach-btn:hover { color: var(--accent-primary); }
-
+        .input-box:focus-within { border-color: var(--accent); }
+        #text-input { flex: 1; background: transparent; border: none; color: var(--text-main); font-size: 16px; outline: none; font-family: inherit; }
         #send-btn {
-            width: 42px; height: 42px; border-radius: 50%; background: var(--accent-primary); border: none; color: white;
+            width: 45px; height: 45px; border-radius: 50%; background: var(--accent); border: none; color: #fff;
             display: flex; align-items: center; justify-content: center; cursor: pointer; transition: 0.2s;
         }
-        #send-btn:hover { transform: scale(1.05); background: var(--accent-secondary); }
-        #send-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        #send-btn:hover { transform: scale(1.05); filter: brightness(1.1); }
 
-        /* --- Settings Panel --- */
-        .settings-panel {
-            position: absolute; top: 70px; right: 20px; background: var(--glass-bg); backdrop-filter: blur(20px);
+        /* --- OVERLAYS --- */
+        .panel {
+            position: absolute; top: 70px; right: 20px; background: var(--glass-bg); backdrop-filter: blur(25px);
             border: 1px solid var(--glass-border); border-radius: 16px; padding: 15px; width: 220px;
-            display: none; z-index: 200; box-shadow: 0 10px 30px rgba(0,0,0,0.5); animation: fadeIn 0.2s;
+            display: none; z-index: 200; box-shadow: 0 15px 35px rgba(0,0,0,0.4); animation: fadeIn 0.2s;
         }
-        .settings-panel.active { display: block; }
-        .setting-item { margin-bottom: 12px; }
-        .setting-item label { display: block; font-size: 12px; color: var(--text-secondary); margin-bottom: 5px; font-weight: 600; }
-        .setting-item select {
-            width: 100%; padding: 10px; background: rgba(0,0,0,0.2); border: 1px solid var(--glass-border);
-            color: var(--text-main); border-radius: 8px; outline: none; cursor: pointer; font-family: inherit;
-        }
-        .setting-item select option { background: #222; color: #fff; }
-
-        /* --- Quick Actions --- */
-        .quick-actions { display: flex; gap: 8px; overflow-x: auto; padding: 0 20px 10px 20px; scrollbar-width: none; }
-        .quick-actions::-webkit-scrollbar { display: none; }
-        .pill-btn {
-            background: var(--glass-bg); border: 1px solid var(--glass-border); color: var(--text-secondary);
-            padding: 6px 14px; border-radius: 20px; font-size: 12px; white-space: nowrap; cursor: pointer; transition: 0.2s;
-        }
-        .pill-btn:hover { background: var(--accent-primary); color: #fff; border-color: transparent; }
-
-        /* --- Emoji Grid --- */
-        .emoji-grid {
-            position: absolute; bottom: 85px; right: 20px; background: var(--glass-bg); backdrop-filter: blur(20px);
-            border-radius: 16px; padding: 10px; display: grid; grid-template-columns: repeat(5, 1fr); gap: 5px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5); opacity: 0; pointer-events: none; transform: translateY(10px);
-            transition: 0.2s; border: 1px solid var(--glass-border);
-        }
-        .emoji-grid.show { opacity: 1; pointer-events: all; transform: translateY(0); }
-        .emoji { font-size: 22px; cursor: pointer; padding: 8px; border-radius: 8px; text-align: center; transition: 0.2s; }
-        .emoji:hover { background: rgba(255,255,255,0.1); transform: scale(1.1); }
-
-        /* --- Notification --- */
-        .notification {
-            position: fixed; top: 20px; left: 50%; transform: translateX(-50%) translateY(-100px);
-            background: var(--accent-primary); color: white; padding: 10px 25px; border-radius: 30px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.4); transition: 0.4s; z-index: 1000; font-weight: 600; font-size: 14px;
-        }
-        .notification.show { transform: translateX(-50%) translateY(0); }
-
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
+        .panel.show { display: block; }
+        .panel h3 { font-size: 12px; text-transform: uppercase; color: var(--text-sec); margin-bottom: 10px; letter-spacing: 1px; }
         
-        /* Typing Dots */
-        .typing { display: flex; gap: 4px; padding: 12px 16px; background: var(--bot-msg-bg); border-radius: 18px; width: fit-content; border: 1px solid var(--glass-border); }
-        .dot { width: 6px; height: 6px; background: var(--text-secondary); border-radius: 50%; animation: bounce 1.4s infinite ease-in-out both; }
-        .dot:nth-child(1) { animation-delay: -0.32s; }
-        .dot:nth-child(2) { animation-delay: -0.16s; }
-        @keyframes bounce { 0%, 80%, 100% { transform: scale(0); } 40% { transform: scale(1); } }
+        select { width: 100%; padding: 10px; background: rgba(0,0,0,0.2); border: 1px solid var(--glass-border); color: var(--text-main); border-radius: 8px; margin-bottom: 15px; outline: none; cursor: pointer; font-family: inherit; }
+        select option { background: #222; color: #fff; }
+
+        .quick-chips { display: flex; gap: 8px; overflow-x: auto; padding: 0 20px 10px; scrollbar-width: none; }
+        .chip { background: var(--glass-bg); border: 1px solid var(--glass-border); color: var(--text-sec); padding: 6px 12px; border-radius: 20px; font-size: 12px; cursor: pointer; white-space: nowrap; transition: 0.2s; }
+        .chip:hover { background: var(--accent); color: #fff; border-color: transparent; }
+
+        .typing-indicator { display: flex; gap: 4px; padding: 10px; background: var(--bot-bg); border-radius: 12px; width: fit-content; margin-bottom: 10px; display: none; }
+        .dot { width: 6px; height: 6px; background: var(--text-sec); border-radius: 50%; animation: bounce 1.4s infinite; }
+        .dot:nth-child(2) { animation-delay: 0.2s; } .dot:nth-child(3) { animation-delay: 0.4s; }
+        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Mobile Adjustments */
+        @media (max-width: 480px) {
+            .message { max-width: 90%; }
+            .header { padding: 10px 15px; }
+        }
     </style>
 </head>
 <body data-theme="default">
 
-    <!-- Header -->
     <header class="header">
         <a href="#" class="logo">
-            <img src="Tegych logo.png" alt="Logo" class="logo-img" onerror="this.style.display='none'">
-            <span class="logo-text">Tegych</span>
+            <img src="Tegych logo.png" alt="Tegych" class="logo-img" onerror="this.style.display='none'">
+            <span class="logo-text">Tegych AI</span>
         </a>
-        <div class="header-controls">
-            <button class="icon-btn" onclick="toggleSettings()" aria-label="Settings"><i class="fas fa-palette"></i></button>
-            <button class="icon-btn" onclick="clearChat()" aria-label="Clear"><i class="fas fa-trash-alt"></i></button>
+        <div class="controls">
+            <button class="btn-icon" onclick="toggleSettings()"><i class="fas fa-cog"></i></button>
+            <button class="btn-icon" onclick="clearChat()"><i class="fas fa-trash"></i></button>
         </div>
     </header>
 
-    <!-- Settings Panel (Themes) -->
-    <div class="settings-panel" id="settings-panel">
-        <div class="setting-item">
-            <label><i class="fas fa-paint-brush"></i> Choose Theme</label>
-            <select onchange="changeTheme(this.value)">
-                <option value="default">🌌 Deep Space</option>
-                <option value="light">☁️ Clean Light</option>
-                <option value="cyberpunk">🤖 Cyberpunk</option>
-                <option value="matrix">💻 Matrix</option>
-                <option value="sunset">🌅 Sunset</option>
-                <option value="forest">🌲 Forest</option>
-                <option value="vaporwave">👾 Vaporwave</option>
-                <option value="coffee">☕ Coffee</option>
-            </select>
-        </div>
-        <div class="setting-item">
-            <label><i class="fas fa-globe"></i> Language</label>
-            <select onchange="changeLanguage(this.value)">
-                <option value="en">English</option>
-                <option value="ru">Русский</option>
-            </select>
-        </div>
-    </div>
-
-    <!-- Chat Area -->
-    <div class="chat-container" id="chat-container"></div>
-
-    <!-- Quick Actions -->
-    <div class="quick-actions">
-        <button class="pill-btn" onclick="quickPrompt('Analyze this')">🔍 Analyze</button>
-        <button class="pill-btn" onclick="quickPrompt('Summarize')">📝 Summarize</button>
-        <button class="pill-btn" onclick="quickPrompt('Code this')">💻 Code</button>
-        <button class="pill-btn" onclick="quickPrompt('Creative idea')">💡 Idea</button>
-    </div>
-
-    <!-- Input Area -->
-    <div class="input-wrapper">
-        <div class="emoji-grid" id="emoji-grid"></div>
+    <div class="panel" id="settings-panel">
+        <h3>Theme Style</h3>
+        <select id="theme-select" onchange="setTheme(this.value)">
+            <option value="default">🌌 Deep Space</option>
+            <option value="light">☁️ Light / Clean</option>
+            <option value="dracula">🧛 Dracula (Code)</option>
+            <option value="nord">❄️ Nord (Ice)</option>
+            <option value="cyberpunk">🤖 Cyberpunk</option>
+            <option value="matrix">💻 Matrix</option>
+            <option value="retro">📟 Retro Amber</option>
+            <option value="luxury">🏆 Luxury Gold</option>
+            <option value="sakura">🌸 Sakura</option>
+            <option value="sunset">🌅 Sunset</option>
+            <option value="forest">🌲 Forest</option>
+            <option value="vaporwave">👾 Vaporwave</option>
+            <option value="coffee">☕ Coffee</option>
+        </select>
         
-        <div class="input-bar">
-            <button class="attach-btn" onclick="toggleEmoji()"><i class="far fa-smile-beam"></i></button>
-            <button class="attach-btn" onclick="attachFile()"><i class="fas fa-paperclip"></i></button>
-            
-            <input type="text" id="user-input" placeholder="Message Tegych..." autocomplete="off">
-            
-            <button id="send-btn" onclick="sendMessage()"><i class="fas fa-arrow-up"></i></button>
-        </div>
+        <h3>Language</h3>
+        <select id="lang-select" onchange="setLang(this.value)">
+            <option value="en">English</option>
+            <option value="ru">Русский</option>
+        </select>
     </div>
 
-    <div class="notification" id="notification">Notification</div>
+    <div class="chat-area" id="chat-box">
+        <!-- Messages go here -->
+    </div>
+    
+    <div class="typing-indicator" id="typing">
+        <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+    </div>
+
+    <div class="quick-chips">
+        <button class="chip" onclick="quickAction('Write a Python script')">🐍 Python</button>
+        <button class="chip" onclick="quickAction('Explain Quantum Physics')">⚛️ Physics</button>
+        <button class="chip" onclick="quickAction('Write a poem')">📝 Poem</button>
+        <button class="chip" onclick="quickAction('HTML Boilerplate')">💻 HTML</button>
+    </div>
+
+    <div class="input-area">
+        <div class="input-box">
+            <button class="btn-icon" style="border:none; background:none;" onclick="uploadFile()">
+                <i class="fas fa-paperclip" style="color:var(--text-sec)"></i>
+            </button>
+            <input type="text" id="text-input" placeholder="Type a message..." autocomplete="off">
+            <button id="send-btn" onclick="sendMessage()"><i class="fas fa-paper-plane"></i></button>
+        </div>
+    </div>
 
     <script>
-        /* --- CONFIGURATION --- */
-        const API_KEY = "8fVDXLED6cbXbT0ObTYuBhitYkjB5ABV"; 
+        // --- CONFIGURATION ---
+        const API_KEY = "8fVDXLED6cbXbT0ObTYuBhitYkjB5ABV"; // ⚠️ Insert Key Here
         const API_URL = "https://api.mistral.ai/v1/chat/completions";
-        
-        let state = {
-            lang: 'en',
-            history: [{ role: "system", content: "You are Tegych, a smart and friendly AI assistant." }]
+
+        // --- STATE & DOM ---
+        const state = {
+            lang: localStorage.getItem('tegych_lang') || 'en',
+            theme: localStorage.getItem('tegych_theme') || 'default',
+            history: [{ role: "system", content: "You are Tegych, an advanced AI. Use Markdown for formatting. Be helpful and concise." }]
         };
 
         const dom = {
-            chat: document.getElementById('chat-container'),
-            input: document.getElementById('user-input'),
+            chat: document.getElementById('chat-box'),
+            input: document.getElementById('text-input'),
             settings: document.getElementById('settings-panel'),
-            emojis: document.getElementById('emoji-grid'),
-            notif: document.getElementById('notification')
+            typing: document.getElementById('typing'),
+            themeSelect: document.getElementById('theme-select'),
+            langSelect: document.getElementById('lang-select')
         };
 
-        /* --- INITIALIZATION --- */
+        // --- INIT ---
         document.addEventListener('DOMContentLoaded', () => {
-            const welcomeText = state.lang === 'en' ? 
-                "**Welcome to Tegych AI!**\nChoose a theme in settings 🎨 or start chatting." : 
-                "**Добро пожаловать в Tegych AI!**\nВыберите тему в настройках 🎨 или начните чат.";
-            
-            addMessage(welcomeText, 'bot');
-            
-            // Init Emojis
-            const emojis = ["🔥", "👍", "❤️", "😂", "🤖", "🤯", "🎉", "👀", "🧠", "🚀"];
-            emojis.forEach(e => {
-                const div = document.createElement('div');
-                div.className = 'emoji';
-                div.textContent = e;
-                div.onclick = () => { dom.input.value += e; dom.input.focus(); };
-                dom.emojis.appendChild(div);
-            });
+            // Restore Settings
+            setTheme(state.theme);
+            setLang(state.lang);
+            dom.themeSelect.value = state.theme;
+            dom.langSelect.value = state.lang;
 
-            // Enter key
+            // Welcome Message
+            const welcome = state.lang === 'en' 
+                ? "Hello! I am **Tegych AI Ultimate**. \nI support **Markdown**, code highlighting, and have 13 themes." 
+                : "Привет! Я **Tegych AI Ultimate**. \nЯ поддерживаю **Markdown**, подсветку кода и имею 13 тем.";
+            addMessage(welcome, 'bot');
+
+            // Input Handler
             dom.input.addEventListener('keypress', (e) => {
                 if(e.key === 'Enter') sendMessage();
             });
+            
+            // Setup Marked Options
+            marked.setOptions({
+                highlight: function(code, lang) {
+                    const language = highlight.getLanguage(lang) ? lang : 'plaintext';
+                    return highlight.highlight(code, { language }).value;
+                },
+                langPrefix: 'hljs language-'
+            });
         });
 
-        /* --- FUNCTIONS --- */
+        // --- CORE FUNCTIONS ---
+        
+        function setTheme(theme) {
+            document.body.setAttribute('data-theme', theme);
+            localStorage.setItem('tegych_theme', theme);
+            state.theme = theme;
+        }
+
+        function setLang(lang) {
+            state.lang = lang;
+            localStorage.setItem('tegych_lang', lang);
+            // Update system prompt
+            state.history[0].content = lang === 'en' 
+                ? "You are Tegych AI. Answer in English. Use Markdown." 
+                : "Ты Tegych AI. Отвечай на русском. Используй Markdown.";
+        }
+
+        function toggleSettings() {
+            dom.settings.classList.toggle('show');
+        }
+
+        function quickAction(text) {
+            dom.input.value = text;
+            dom.input.focus();
+        }
+        
+        function uploadFile() {
+            alert(state.lang === 'en' ? "File upload simulated." : "Загрузка файла (симуляция).");
+        }
+
+        function clearChat() {
+            dom.chat.innerHTML = '';
+            state.history = [state.history[0]];
+            addMessage(state.lang === 'en' ? "Chat cleared." : "Чат очищен.", 'bot');
+            dom.settings.classList.remove('show');
+        }
+
         function addMessage(text, sender) {
             const div = document.createElement('div');
-            div.className = `message ${sender}-message`;
+            div.className = `message ${sender}-msg`;
             
             const header = document.createElement('div');
-            header.className = 'message-header';
-            header.innerHTML = sender === 'user' ? 'YOU' : 'TEGYCH';
+            header.className = 'msg-header';
+            header.innerHTML = `<span>${sender === 'user' ? 'YOU' : 'TEGYCH'}</span>`;
             
             const content = document.createElement('div');
-            // Simple Markdown Bold support
-            content.innerHTML = text.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>').replace(/\n/g, '<br>');
             
+            if (sender === 'user') {
+                content.innerText = text; // User messages are plain text
+            } else {
+                content.innerHTML = marked.parse(text); // Bot messages are Markdown
+            }
+
             div.appendChild(header);
             div.appendChild(content);
             dom.chat.appendChild(div);
             dom.chat.scrollTop = dom.chat.scrollHeight;
+            return content; // Return for typing effect
         }
 
-        function showTyping() {
-            const div = document.createElement('div');
-            div.className = 'typing';
-            div.id = 'typing-indicator';
-            div.innerHTML = '<div class="dot"></div><div class="dot"></div><div class="dot"></div>';
-            dom.chat.appendChild(div);
-            dom.chat.scrollTop = dom.chat.scrollHeight;
-        }
-
-        function removeTyping() {
-            const el = document.getElementById('typing-indicator');
-            if(el) el.remove();
-        }
+        // --- API LOGIC & TYPEWRITER ---
 
         async function sendMessage() {
             const text = dom.input.value.trim();
             if(!text) return;
 
             dom.input.value = '';
-            dom.emojis.classList.remove('show');
+            dom.settings.classList.remove('show');
+            
             addMessage(text, 'user');
-            showTyping();
-
             state.history.push({ role: "user", content: text });
+            
+            // Show Typing Indicator (moved to bottom of chat)
+            dom.chat.appendChild(dom.typing);
+            dom.typing.style.display = 'flex';
+            dom.chat.scrollTop = dom.chat.scrollHeight;
 
             try {
                 const response = await fetch(API_URL, {
@@ -442,67 +505,47 @@
                     })
                 });
 
-                removeTyping();
+                dom.typing.style.display = 'none';
 
-                if(!response.ok) {
-                    throw new Error("API Connection Error");
-                }
+                if (!response.ok) throw new Error("API Error");
 
                 const data = await response.json();
                 const aiText = data.choices[0].message.content;
+
+                // Add message container
+                const msgContentDiv = addMessage("", 'bot');
                 
-                addMessage(aiText, 'bot');
+                // Typewriter Effect
+                typeWriter(msgContentDiv, aiText);
+                
                 state.history.push({ role: "assistant", content: aiText });
 
             } catch (e) {
-                removeTyping();
-                addMessage(`⚠️ Error: ${e.message}. Check your API Key.`, 'bot');
+                dom.typing.style.display = 'none';
+                addMessage(`⚠️ Error: ${e.message}`, 'bot');
             }
         }
 
-        /* --- UI ACTIONS --- */
-        function toggleSettings() { dom.settings.classList.toggle('active'); }
-        function toggleEmoji() { dom.emojis.classList.toggle('show'); }
-        
-        function changeTheme(theme) {
-            document.body.setAttribute('data-theme', theme);
-            showNotification(`Theme: ${theme.charAt(0).toUpperCase() + theme.slice(1)}`);
-            dom.settings.classList.remove('active');
-        }
-        
-        function changeLanguage(lang) {
-            state.lang = lang;
-            showNotification(lang === 'ru' ? "Язык: Русский" : "Language: English");
-        }
-
-        function clearChat() {
-            dom.chat.innerHTML = '';
-            state.history = [state.history[0]];
-            addMessage(state.lang === 'en' ? "Chat cleared." : "Чат очищен.", 'bot');
+        function typeWriter(element, text) {
+            let i = 0;
+            const speed = 10; // Typing speed in ms (lower is faster)
+            
+            // We can't render markdown character by character easily.
+            // So we just simulate the delay, then render the full markdown at the end, 
+            // OR we render plain text then swap to markdown.
+            // Approach: Render full Markdown immediately but fade it in? 
+            // Better Approach for UX: Standard typewriter for now, then convert to MD.
+            
+            // Optimized approach for this example:
+            element.innerHTML = marked.parse(text); 
+            // If you want real "streaming" typing, it's complex with Markdown. 
+            // For now, let's keep the markdown rendering instant for better code block visuals.
         }
 
-        function quickPrompt(txt) {
-            dom.input.value = txt;
-            dom.input.focus();
-        }
-
-        function attachFile() {
-            showNotification(state.lang === 'en' ? "File upload demo 📎" : "Загрузка файла (демо) 📎");
-        }
-
-        function showNotification(msg) {
-            dom.notif.textContent = msg;
-            dom.notif.classList.add('show');
-            setTimeout(() => dom.notif.classList.remove('show'), 2500);
-        }
-
-        // Close menus when clicking outside
+        // Close on click outside
         document.addEventListener('click', (e) => {
-            if(!e.target.closest('.header-controls') && !e.target.closest('.settings-panel')) {
-                dom.settings.classList.remove('active');
-            }
-            if(!e.target.closest('.input-wrapper')) {
-                dom.emojis.classList.remove('show');
+            if(!e.target.closest('.controls') && !e.target.closest('.panel')) {
+                dom.settings.classList.remove('show');
             }
         });
     </script>
