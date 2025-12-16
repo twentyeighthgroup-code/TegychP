@@ -3,19 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="description" content="Tegych AI Ultimate">
-    <title>Tegych AI | Ultimate</title>
+    <meta name="description" content="Tegych AI - Professional Conversational Interface">
+    <title>Tegych AI | Enterprise</title>
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=JetBrains+Mono:wght@400;700&family=VT323&family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Fira+Code&display=swap" rel="stylesheet">
     
     <!-- Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- Code Highlighting & Markdown -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+    <!-- Markdown & Highlight -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/github-dark.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/4.3.0/marked.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
 
@@ -24,472 +24,447 @@
 
     <style>
         :root {
-            /* --- DEFAULT (Deep Space) --- */
-            --bg-gradient: radial-gradient(circle at top left, #1a1a2e, #16213e, #0f0f1a);
-            --glass-bg: rgba(20, 20, 35, 0.7);
-            --glass-border: rgba(255, 255, 255, 0.08);
-            --text-main: #ffffff;
-            --text-sec: #a0a0b0;
-            --accent: #4e54c8;
-            --accent-glow: #8f94fb;
-            --user-bg: linear-gradient(135deg, #4e54c8, #8f94fb);
-            --bot-bg: rgba(255, 255, 255, 0.05);
-            --font-main: 'Outfit', sans-serif;
+            /* --- VARS DEFAULT (Dark Modern) --- */
+            --bg-body: #0f1117;
+            --bg-sidebar: #161b22;
+            --bg-chat: #0f1117;
+            --bg-input: #1f242d;
+            --border: #30363d;
+            --accent: #238636; /* GitHub Greenish */
+            --accent-hover: #2ea043;
+            --text-main: #e6edf3;
+            --text-muted: #8b949e;
+            --msg-user: #1f6feb;
+            --msg-bot: #161b22;
+            --radius: 12px;
+            --shadow: 0 4px 12px rgba(0,0,0,0.2);
+            --font-main: 'Inter', sans-serif;
             --font-code: 'JetBrains Mono', monospace;
-            --radius: 20px;
         }
 
         /* --- THEMES --- */
-        
-        /* 1. Light */
+
+        /* 1. Light (Corporate) */
         [data-theme="light"] {
-            --bg-gradient: linear-gradient(135deg, #f5f7fa, #c3cfe2);
-            --glass-bg: rgba(255, 255, 255, 0.85);
-            --glass-border: rgba(0,0,0,0.05);
-            --text-main: #2d3436;
-            --text-sec: #636e72;
-            --accent: #0984e3;
-            --user-bg: linear-gradient(135deg, #0984e3, #74b9ff);
-            --bot-bg: #ffffff;
+            --bg-body: #ffffff;
+            --bg-sidebar: #f6f8fa;
+            --bg-chat: #ffffff;
+            --bg-input: #f6f8fa;
+            --border: #d0d7de;
+            --accent: #0969da;
+            --text-main: #24292f;
+            --text-muted: #57606a;
+            --msg-user: #0969da;
+            --msg-bot: #f6f8fa;
         }
 
-        /* 2. Cyberpunk */
-        [data-theme="cyberpunk"] {
-            --bg-gradient: linear-gradient(180deg, #050510, #180518);
-            --glass-bg: rgba(10, 0, 10, 0.85);
-            --glass-border: #ff0055;
-            --text-main: #00f3ff;
-            --text-sec: #ff0055;
-            --accent: #ff0055;
-            --user-bg: linear-gradient(90deg, #ff0055, #bd00ff);
-            --bot-bg: rgba(0, 243, 255, 0.05);
-            --font-main: 'JetBrains Mono', monospace;
+        /* 2. Neumorphism (Soft) */
+        [data-theme="neumorphism"] {
+            --bg-body: #e0e5ec;
+            --bg-sidebar: #e0e5ec;
+            --bg-chat: #e0e5ec;
+            --bg-input: #e0e5ec;
+            --border: transparent;
+            --accent: #6d5dfc;
+            --text-main: #4a4a4a;
+            --text-muted: #888;
+            --msg-user: #6d5dfc;
+            --msg-bot: #e0e5ec;
+            --shadow: 9px 9px 16px rgb(163,177,198,0.6), -9px -9px 16px rgba(255,255,255, 0.5);
         }
 
-        /* 3. Matrix */
-        [data-theme="matrix"] {
-            --bg-gradient: #000;
-            --glass-bg: rgba(0, 20, 0, 0.9);
-            --glass-border: #00ff00;
-            --text-main: #00ff00;
-            --text-sec: #008f11;
+        /* 3. Terminal (Hacker) */
+        [data-theme="terminal"] {
+            --bg-body: #000000;
+            --bg-sidebar: #111;
+            --bg-chat: #000;
+            --bg-input: #111;
+            --border: #333;
             --accent: #00ff00;
-            --user-bg: #004400;
-            --bot-bg: #0a0a0a;
-            --font-main: 'VT323', monospace;
-            font-size: 18px;
+            --text-main: #00ff00;
+            --text-muted: #008f11;
+            --msg-user: #003300;
+            --msg-bot: #111;
+            --font-main: 'Fira Code', monospace;
+            --radius: 0px;
         }
 
-        /* 4. Sunset */
-        [data-theme="sunset"] {
-            --bg-gradient: linear-gradient(45deg, #350048, #9e003a, #ff7c00);
-            --glass-bg: rgba(60, 10, 30, 0.6);
-            --glass-border: rgba(255,255,255,0.1);
-            --text-main: #fff0f5;
-            --text-sec: #ffdbaa;
-            --accent: #ff4b1f;
-            --user-bg: linear-gradient(to right, #ff4b1f, #ff9068);
-            --bot-bg: rgba(255,255,255,0.1);
+        /* 4. OLED Black (Mobile Saver) */
+        [data-theme="oled"] {
+            --bg-body: #000000;
+            --bg-sidebar: #000000;
+            --bg-chat: #000000;
+            --bg-input: #111111;
+            --border: #222;
+            --accent: #ffffff;
+            --text-main: #ffffff;
+            --text-muted: #666;
+            --msg-user: #222;
+            --msg-bot: #0a0a0a;
         }
 
-        /* 5. Forest */
-        [data-theme="forest"] {
-            --bg-gradient: linear-gradient(to top, #134e5e, #71b280);
-            --glass-bg: rgba(10, 30, 20, 0.7);
-            --glass-border: #a8e063;
-            --text-main: #f0fff4;
-            --text-sec: #a8e063;
-            --accent: #56ab2f;
-            --user-bg: linear-gradient(to right, #56ab2f, #a8e063);
-            --bot-bg: rgba(0,0,0,0.2);
+        /* 5. Cyberpunk */
+        [data-theme="cyberpunk"] {
+            --bg-body: #050510;
+            --bg-sidebar: #0b0b1a;
+            --bg-chat: #050510;
+            --bg-input: #151525;
+            --border: #ff0055;
+            --accent: #00f3ff;
+            --text-main: #00f3ff;
+            --text-muted: #ff0055;
+            --msg-user: #ff0055;
+            --msg-bot: #0b0b1a;
         }
 
-        /* 6. Vaporwave */
-        [data-theme="vaporwave"] {
-            --bg-gradient: linear-gradient(to right, #240b36, #c31432);
-            --glass-bg: rgba(40, 5, 40, 0.7);
-            --glass-border: #00d2ff;
-            --text-main: #ffe6fa;
-            --text-sec: #00d2ff;
-            --accent: #ff66c4;
-            --user-bg: linear-gradient(to right, #fc00ff, #00dbde);
-            --bot-bg: rgba(0,0,0,0.3);
-        }
-
-        /* 7. Coffee */
-        [data-theme="coffee"] {
-            --bg-gradient: radial-gradient(circle, #3e2b26, #231713);
-            --glass-bg: rgba(62, 43, 38, 0.85);
-            --glass-border: #d2b48c;
-            --text-main: #e6ccb2;
-            --text-sec: #b08968;
-            --accent: #ddb892;
-            --user-bg: linear-gradient(to right, #9c6644, #7f5539);
-            --bot-bg: rgba(0,0,0,0.25);
-        }
-
-        /* --- NEW THEMES --- */
-
-        /* 8. Dracula (Coding) */
+        /* 6. Dracula */
         [data-theme="dracula"] {
-            --bg-gradient: #282a36;
-            --glass-bg: rgba(40, 42, 54, 0.9);
-            --glass-border: #6272a4;
-            --text-main: #f8f8f2;
-            --text-sec: #bd93f9;
+            --bg-body: #282a36;
+            --bg-sidebar: #21222c;
+            --bg-chat: #282a36;
+            --bg-input: #44475a;
+            --border: #6272a4;
             --accent: #ff79c6;
-            --user-bg: #bd93f9;
-            --bot-bg: #44475a;
-            --font-main: 'JetBrains Mono', monospace;
+            --text-main: #f8f8f2;
+            --text-muted: #bd93f9;
+            --msg-user: #bd93f9;
+            --msg-bot: #44475a;
         }
 
-        /* 9. Nord (Ice) */
-        [data-theme="nord"] {
-            --bg-gradient: #2e3440;
-            --glass-bg: rgba(46, 52, 64, 0.9);
-            --glass-border: #88c0d0;
-            --text-main: #eceff4;
-            --text-sec: #88c0d0;
-            --accent: #81a1c1;
-            --user-bg: #5e81ac;
-            --bot-bg: #3b4252;
-            --font-main: 'Outfit', sans-serif;
+        /* 7. Midnight Blue */
+        [data-theme="midnight"] {
+            --bg-body: #0f172a;
+            --bg-sidebar: #1e293b;
+            --bg-chat: #0f172a;
+            --bg-input: #1e293b;
+            --border: #334155;
+            --accent: #38bdf8;
+            --text-main: #f1f5f9;
+            --text-muted: #94a3b8;
+            --msg-user: #0ea5e9;
+            --msg-bot: #1e293b;
         }
 
-        /* 10. Retro Amber */
-        [data-theme="retro"] {
-            --bg-gradient: #1a1a00;
-            --glass-bg: rgba(20, 20, 0, 0.9);
-            --glass-border: #ffcc00;
-            --text-main: #ffcc00;
-            --text-sec: #b38f00;
-            --accent: #ffcc00;
-            --user-bg: #665200;
-            --bot-bg: #111;
-            --font-main: 'VT323', monospace;
-            font-size: 20px;
-        }
-
-        /* 11. Sakura (Pink) */
-        [data-theme="sakura"] {
-            --bg-gradient: linear-gradient(135deg, #fff0f5, #ffe4e1);
-            --glass-bg: rgba(255, 240, 245, 0.8);
-            --glass-border: #ffb7b2;
-            --text-main: #d81b60;
-            --text-sec: #ff69b4;
-            --accent: #ff69b4;
-            --user-bg: linear-gradient(135deg, #ff9a9e, #fad0c4);
-            --bot-bg: #ffffff;
-            --font-main: 'Outfit', sans-serif;
-        }
-
-        /* 12. Luxury Gold */
-        [data-theme="luxury"] {
-            --bg-gradient: radial-gradient(circle, #1c1c1c, #000);
-            --glass-bg: rgba(20, 20, 20, 0.9);
-            --glass-border: #d4af37;
-            --text-main: #d4af37;
-            --text-sec: #8a7326;
-            --accent: #d4af37;
-            --user-bg: linear-gradient(135deg, #d4af37, #c5a028);
-            --bot-bg: #111;
-            --font-main: 'Cinzel', serif;
-        }
-
-
-        /* --- RESET & BASE --- */
-        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        /* --- RESET & LAYOUT --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; outline: none; }
         body {
-            background: var(--bg-gradient);
-            color: var(--text-main);
-            font-family: var(--font-main);
-            height: 100vh;
-            display: flex; flex-direction: column; overflow: hidden;
-            transition: background 0.5s ease;
+            background: var(--bg-body); color: var(--text-main); font-family: var(--font-main);
+            height: 100vh; display: flex; overflow: hidden; transition: background 0.3s ease;
+        }
+
+        /* --- SIDEBAR --- */
+        .sidebar {
+            width: 260px; background: var(--bg-sidebar); border-right: 1px solid var(--border);
+            display: flex; flex-direction: column; padding: 20px;
+            transition: transform 0.3s ease; z-index: 100;
         }
         
-        /* Grid Effect for Cyberpunk/Matrix/Retro */
-        [data-theme="cyberpunk"] body::before, [data-theme="matrix"] body::before, [data-theme="retro"] body::before {
-            content: ""; position: absolute; inset: 0;
-            background-image: linear-gradient(var(--glass-border) 1px, transparent 1px), linear-gradient(90deg, var(--glass-border) 1px, transparent 1px);
-            background-size: 30px 30px; opacity: 0.1; z-index: -1; pointer-events: none;
+        .brand {
+            display: flex; align-items: center; gap: 12px; margin-bottom: 30px;
+            font-size: 20px; font-weight: 700; color: var(--text-main);
+        }
+        .brand-logo {
+            width: 32px; height: 32px; border-radius: 8px; background: var(--accent);
+            display: flex; align-items: center; justify-content: center; color: #fff;
         }
 
-        /* Scrollbar */
-        ::-webkit-scrollbar { width: 5px; }
-        ::-webkit-scrollbar-track { background: transparent; }
-        ::-webkit-scrollbar-thumb { background: var(--glass-border); border-radius: 10px; }
+        .nav-item {
+            display: flex; align-items: center; gap: 10px; padding: 12px; color: var(--text-muted);
+            border-radius: var(--radius); cursor: pointer; transition: 0.2s; font-size: 14px;
+        }
+        .nav-item:hover { background: rgba(255,255,255,0.05); color: var(--text-main); }
+        .nav-item.active { background: rgba(255,255,255,0.05); color: var(--accent); font-weight: 600; }
 
-        /* --- LAYOUT --- */
+        .sidebar-footer { margin-top: auto; border-top: 1px solid var(--border); padding-top: 20px; }
+        
+        .pro-toggle {
+            display: flex; align-items: center; justify-content: space-between; padding: 10px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+            border: 1px solid var(--border); border-radius: var(--radius); cursor: pointer;
+        }
+        .pro-badge { background: var(--accent); color: white; padding: 2px 6px; border-radius: 4px; font-size: 10px; font-weight: 700; }
+
+        /* --- MAIN AREA --- */
+        .main { flex: 1; display: flex; flex-direction: column; position: relative; background: var(--bg-chat); }
+
         .header {
-            padding: 15px 20px; display: flex; justify-content: space-between; align-items: center;
-            background: var(--glass-bg); backdrop-filter: blur(15px); border-bottom: 1px solid var(--glass-border);
-            z-index: 100;
+            height: 60px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between;
+            padding: 0 20px; background: var(--bg-chat); z-index: 10;
         }
-        .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
-        .logo-img { width: 35px; height: 35px; border-radius: 50%; object-fit: cover; border: 2px solid var(--accent); }
-        .logo-text { font-weight: 800; font-size: 20px; color: var(--text-main); letter-spacing: 0.5px; }
+        .header-title { font-weight: 600; display: flex; align-items: center; gap: 10px; }
+        .model-tag { font-size: 11px; padding: 4px 8px; background: var(--bg-input); border-radius: 20px; color: var(--text-muted); border: 1px solid var(--border); }
         
-        .controls { display: flex; gap: 8px; }
-        .btn-icon {
-            width: 36px; height: 36px; border-radius: 50%; border: 1px solid var(--glass-border); background: rgba(255,255,255,0.03);
-            color: var(--text-main); display: flex; align-items: center; justify-content: center; cursor: pointer; transition: 0.2s;
-        }
-        .btn-icon:hover { background: var(--accent); border-color: transparent; color: #fff; }
+        .mobile-menu-btn { display: none; font-size: 20px; cursor: pointer; color: var(--text-muted); }
 
-        /* --- CHAT --- */
-        .chat-area { flex: 1; overflow-y: auto; padding: 20px; display: flex; flex-direction: column; gap: 15px; scroll-behavior: smooth; }
+        /* --- CHAT LIST --- */
+        .chat-list { flex: 1; overflow-y: auto; padding: 20px; display: flex; flex-direction: column; gap: 20px; }
         
-        .message {
-            max-width: 85%; padding: 12px 18px; border-radius: var(--radius); font-size: 15px; line-height: 1.6;
-            position: relative; animation: slideUp 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        .message { display: flex; gap: 15px; max-width: 800px; margin: 0 auto; width: 100%; animation: fadeIn 0.3s ease; }
+        .message.user { flex-direction: row-reverse; }
+        
+        .avatar {
+            width: 36px; height: 36px; border-radius: 8px; flex-shrink: 0;
+            display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px;
         }
-        .bot-msg { background: var(--bot-bg); border: 1px solid var(--glass-border); border-bottom-left-radius: 2px; align-self: flex-start; }
-        .user-msg { background: var(--user-bg); border-bottom-right-radius: 2px; align-self: flex-end; color: #fff; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        .avatar.bot { background: var(--accent); color: #fff; }
+        .avatar.user { background: var(--msg-user); color: #fff; }
+
+        .msg-content {
+            background: var(--msg-bot); padding: 12px 18px; border-radius: 12px; border: 1px solid var(--border);
+            font-size: 15px; line-height: 1.6; min-width: 100px;
+        }
+        .message.user .msg-content { background: var(--msg-user); color: #fff; border: none; }
         
-        .msg-header { font-size: 11px; font-weight: 700; opacity: 0.7; margin-bottom: 5px; display: flex; justify-content: space-between; }
-        
+        /* Neumorphism Overrides */
+        [data-theme="neumorphism"] .msg-content { box-shadow: var(--shadow); border: none; }
+        [data-theme="neumorphism"] .sidebar { box-shadow: 5px 0 15px rgba(0,0,0,0.05); }
+
         /* Markdown Styles */
-        .message p { margin-bottom: 8px; }
-        .message p:last-child { margin-bottom: 0; }
-        .message code { background: rgba(0,0,0,0.3); padding: 2px 5px; border-radius: 4px; font-family: var(--font-code); font-size: 0.9em; }
-        .message pre { background: #1e1e1e; padding: 10px; border-radius: 8px; overflow-x: auto; margin: 10px 0; border: 1px solid var(--glass-border); }
-        .message pre code { background: transparent; padding: 0; color: #abb2bf; }
+        .msg-content p { margin-bottom: 10px; }
+        .msg-content p:last-child { margin-bottom: 0; }
+        .msg-content pre { position: relative; background: #0d1117; padding: 12px; border-radius: 8px; overflow-x: auto; margin: 10px 0; border: 1px solid #30363d; }
+        .msg-content code { font-family: var(--font-code); font-size: 13px; }
+        .msg-content pre code { background: transparent; padding: 0; color: #e6edf3; }
+        .msg-content p code { background: rgba(175, 184, 193, 0.2); padding: 2px 6px; border-radius: 4px; }
         
-        @keyframes slideUp { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+        .copy-btn {
+            position: absolute; top: 5px; right: 5px; background: rgba(255,255,255,0.1); border: none;
+            color: #fff; padding: 4px 8px; border-radius: 4px; cursor: pointer; font-size: 11px;
+        }
+        .copy-btn:hover { background: rgba(255,255,255,0.2); }
 
         /* --- INPUT --- */
-        .input-area { padding: 15px 20px 20px; position: relative; }
-        .input-box {
-            display: flex; align-items: center; gap: 10px; background: var(--glass-bg); backdrop-filter: blur(20px);
-            border: 1px solid var(--glass-border); border-radius: 50px; padding: 8px 8px 8px 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        .input-area {
+            padding: 20px; border-top: 1px solid var(--border); background: var(--bg-chat);
         }
-        .input-box:focus-within { border-color: var(--accent); }
-        #text-input { flex: 1; background: transparent; border: none; color: var(--text-main); font-size: 16px; outline: none; font-family: inherit; }
-        #send-btn {
-            width: 45px; height: 45px; border-radius: 50%; background: var(--accent); border: none; color: #fff;
-            display: flex; align-items: center; justify-content: center; cursor: pointer; transition: 0.2s;
+        .input-container {
+            max-width: 800px; margin: 0 auto; position: relative;
+            background: var(--bg-input); border: 1px solid var(--border); border-radius: var(--radius);
+            padding: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); display: flex; gap: 10px; align-items: flex-end;
         }
-        #send-btn:hover { transform: scale(1.05); filter: brightness(1.1); }
+        .input-container:focus-within { border-color: var(--accent); }
 
-        /* --- OVERLAYS --- */
-        .panel {
-            position: absolute; top: 70px; right: 20px; background: var(--glass-bg); backdrop-filter: blur(25px);
-            border: 1px solid var(--glass-border); border-radius: 16px; padding: 15px; width: 220px;
-            display: none; z-index: 200; box-shadow: 0 15px 35px rgba(0,0,0,0.4); animation: fadeIn 0.2s;
+        #user-input {
+            flex: 1; background: transparent; border: none; padding: 12px; color: var(--text-main);
+            font-size: 15px; resize: none; max-height: 150px; font-family: inherit;
         }
-        .panel.show { display: block; }
-        .panel h3 { font-size: 12px; text-transform: uppercase; color: var(--text-sec); margin-bottom: 10px; letter-spacing: 1px; }
+
+        .action-btn {
+            width: 36px; height: 36px; border-radius: 8px; border: none; background: transparent;
+            color: var(--text-muted); cursor: pointer; transition: 0.2s; display: flex; align-items: center; justify-content: center;
+        }
+        .action-btn:hover { color: var(--text-main); background: rgba(255,255,255,0.05); }
         
-        select { width: 100%; padding: 10px; background: rgba(0,0,0,0.2); border: 1px solid var(--glass-border); color: var(--text-main); border-radius: 8px; margin-bottom: 15px; outline: none; cursor: pointer; font-family: inherit; }
-        select option { background: #222; color: #fff; }
+        #send-btn { background: var(--accent); color: white; }
+        #send-btn:hover { background: var(--accent-hover); }
 
-        .quick-chips { display: flex; gap: 8px; overflow-x: auto; padding: 0 20px 10px; scrollbar-width: none; }
-        .chip { background: var(--glass-bg); border: 1px solid var(--glass-border); color: var(--text-sec); padding: 6px 12px; border-radius: 20px; font-size: 12px; cursor: pointer; white-space: nowrap; transition: 0.2s; }
-        .chip:hover { background: var(--accent); color: #fff; border-color: transparent; }
+        /* --- MODALS & SETTINGS --- */
+        .settings-modal {
+            position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            background: var(--bg-sidebar); border: 1px solid var(--border); padding: 25px;
+            border-radius: var(--radius); width: 300px; z-index: 1000; box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            display: none;
+        }
+        .settings-modal.active { display: block; animation: popIn 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        .overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 900; display: none; }
+        .overlay.active { display: block; }
 
-        .typing-indicator { display: flex; gap: 4px; padding: 10px; background: var(--bot-bg); border-radius: 12px; width: fit-content; margin-bottom: 10px; display: none; }
-        .dot { width: 6px; height: 6px; background: var(--text-sec); border-radius: 50%; animation: bounce 1.4s infinite; }
-        .dot:nth-child(2) { animation-delay: 0.2s; } .dot:nth-child(3) { animation-delay: 0.4s; }
-        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+        .settings-group { margin-bottom: 15px; }
+        .settings-group label { display: block; font-size: 13px; color: var(--text-muted); margin-bottom: 8px; font-weight: 600; }
+        select {
+            width: 100%; padding: 10px; background: var(--bg-input); border: 1px solid var(--border);
+            color: var(--text-main); border-radius: 8px; cursor: pointer;
+        }
 
-        /* Mobile Adjustments */
-        @media (max-width: 480px) {
-            .message { max-width: 90%; }
-            .header { padding: 10px 15px; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes popIn { from { opacity: 0; transform: translate(-50%, -40%); } to { opacity: 1; transform: translate(-50%, -50%); } }
+
+        /* Mobile */
+        @media (max-width: 768px) {
+            .sidebar { position: fixed; left: -260px; height: 100%; box-shadow: 5px 0 15px rgba(0,0,0,0.3); }
+            .sidebar.open { left: 0; transform: none; }
+            .mobile-menu-btn { display: block; }
+            .message { max-width: 100%; }
+            .overlay.mobile-active { display: block; }
         }
     </style>
 </head>
-<body data-theme="default">
+<body data-theme="dark">
 
-    <header class="header">
-        <a href="#" class="logo">
-            <img src="Tegych logo.png" alt="Tegych" class="logo-img" onerror="this.style.display='none'">
-            <span class="logo-text">Tegych AI</span>
-        </a>
-        <div class="controls">
-            <button class="btn-icon" onclick="toggleSettings()"><i class="fas fa-cog"></i></button>
-            <button class="btn-icon" onclick="clearChat()"><i class="fas fa-trash"></i></button>
-        </div>
-    </header>
+    <!-- OVERLAY FOR MOBILE/MODAL -->
+    <div class="overlay" id="overlay" onclick="closeAll()"></div>
 
-    <div class="panel" id="settings-panel">
-        <h3>Theme Style</h3>
-        <select id="theme-select" onchange="setTheme(this.value)">
-            <option value="default">🌌 Deep Space</option>
-            <option value="light">☁️ Light / Clean</option>
-            <option value="dracula">🧛 Dracula (Code)</option>
-            <option value="nord">❄️ Nord (Ice)</option>
-            <option value="cyberpunk">🤖 Cyberpunk</option>
-            <option value="matrix">💻 Matrix</option>
-            <option value="retro">📟 Retro Amber</option>
-            <option value="luxury">🏆 Luxury Gold</option>
-            <option value="sakura">🌸 Sakura</option>
-            <option value="sunset">🌅 Sunset</option>
-            <option value="forest">🌲 Forest</option>
-            <option value="vaporwave">👾 Vaporwave</option>
-            <option value="coffee">☕ Coffee</option>
-        </select>
+    <!-- SETTINGS MODAL -->
+    <div class="settings-modal" id="settings-modal">
+        <h3 style="margin-bottom: 20px;">Preferences</h3>
         
-        <h3>Language</h3>
-        <select id="lang-select" onchange="setLang(this.value)">
-            <option value="en">English</option>
-            <option value="ru">Русский</option>
-        </select>
-    </div>
-
-    <div class="chat-area" id="chat-box">
-        <!-- Messages go here -->
-    </div>
-    
-    <div class="typing-indicator" id="typing">
-        <div class="dot"></div><div class="dot"></div><div class="dot"></div>
-    </div>
-
-    <div class="quick-chips">
-        <button class="chip" onclick="quickAction('Write a Python script')">🐍 Python</button>
-        <button class="chip" onclick="quickAction('Explain Quantum Physics')">⚛️ Physics</button>
-        <button class="chip" onclick="quickAction('Write a poem')">📝 Poem</button>
-        <button class="chip" onclick="quickAction('HTML Boilerplate')">💻 HTML</button>
-    </div>
-
-    <div class="input-area">
-        <div class="input-box">
-            <button class="btn-icon" style="border:none; background:none;" onclick="uploadFile()">
-                <i class="fas fa-paperclip" style="color:var(--text-sec)"></i>
-            </button>
-            <input type="text" id="text-input" placeholder="Type a message..." autocomplete="off">
-            <button id="send-btn" onclick="sendMessage()"><i class="fas fa-paper-plane"></i></button>
+        <div class="settings-group">
+            <label>Visual Theme</label>
+            <select onchange="changeTheme(this.value)">
+                <option value="dark">🌑 Modern Dark</option>
+                <option value="light">☀️ Corporate Light</option>
+                <option value="midnight">🌌 Midnight Blue</option>
+                <option value="dracula">🧛 Dracula</option>
+                <option value="cyberpunk">👾 Cyberpunk</option>
+                <option value="terminal">💻 Terminal</option>
+                <option value="neumorphism">⚪ Neumorphism</option>
+                <option value="oled">⬛ OLED Black</option>
+            </select>
         </div>
+
+        <button onclick="closeAll()" style="width:100%; padding:10px; background:var(--accent); color:#fff; border:none; border-radius:8px; cursor:pointer;">Save Changes</button>
     </div>
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+        <div class="brand">
+            <div class="brand-logo"><i class="fas fa-robot"></i></div>
+            <span>Tegych AI</span>
+        </div>
+
+        <nav style="display:flex; flex-direction:column; gap:5px;">
+            <div class="nav-item active"><i class="fas fa-comment-alt"></i> New Chat</div>
+            <div class="nav-item" onclick="exportChat()"><i class="fas fa-download"></i> Export TXT</div>
+            <div class="nav-item" onclick="openSettings()"><i class="fas fa-cog"></i> Settings</div>
+        </nav>
+
+        <div class="sidebar-footer">
+            <div class="pro-toggle" onclick="togglePro()">
+                <div style="font-size:13px; font-weight:600;">Pro Model</div>
+                <div class="pro-badge" id="pro-badge">OFF</div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- MAIN CHAT -->
+    <main class="main">
+        <header class="header">
+            <div class="header-title">
+                <div class="mobile-menu-btn" onclick="toggleSidebar()"><i class="fas fa-bars"></i></div>
+                <span>Chat Session</span>
+                <span class="model-tag" id="model-display">Mistral Small</span>
+            </div>
+            <div>
+                <button class="action-btn" onclick="clearChat()" title="Clear"><i class="fas fa-trash"></i></button>
+            </div>
+        </header>
+
+        <div class="chat-list" id="chat-container">
+            <!-- Messages go here -->
+        </div>
+
+        <div class="input-area">
+            <div class="input-container">
+                <button class="action-btn" onclick="triggerUpload()"><i class="fas fa-paperclip"></i></button>
+                <input type="text" id="user-input" placeholder="Message Tegych AI..." autocomplete="off">
+                <button class="action-btn" id="send-btn" onclick="sendMessage()"><i class="fas fa-paper-plane"></i></button>
+            </div>
+            <div style="text-align:center; font-size:11px; color:var(--text-muted); margin-top:10px;">
+                AI can make mistakes. Check important info.
+            </div>
+        </div>
+    </main>
 
     <script>
         // --- CONFIGURATION ---
-        const API_KEY = "8fVDXLED6cbXbT0ObTYuBhitYkjB5ABV"; // ⚠️ Insert Key Here
+        const API_KEY = "8fVDXLED6cbXbT0ObTYuBhitYkjB5ABV"; // ⚠️ Insert Key
         const API_URL = "https://api.mistral.ai/v1/chat/completions";
 
-        // --- STATE & DOM ---
-        const state = {
-            lang: localStorage.getItem('tegych_lang') || 'en',
-            theme: localStorage.getItem('tegych_theme') || 'default',
-            history: [{ role: "system", content: "You are Tegych, an advanced AI. Use Markdown for formatting. Be helpful and concise." }]
+        let state = {
+            proMode: false,
+            // 🧠 INTELLIGENT SYSTEM PROMPT
+            history: [{ 
+                role: "system", 
+                content: "You are Tegych AI, a professional assistant. " +
+                         "Detect the language of the user's message. " +
+                         "If they speak Russian, answer in Russian. " +
+                         "If English, answer in English. " +
+                         "Use Markdown for code and formatting. Be concise and helpful." 
+            }]
         };
 
         const dom = {
-            chat: document.getElementById('chat-box'),
-            input: document.getElementById('text-input'),
-            settings: document.getElementById('settings-panel'),
-            typing: document.getElementById('typing'),
-            themeSelect: document.getElementById('theme-select'),
-            langSelect: document.getElementById('lang-select')
+            chat: document.getElementById('chat-container'),
+            input: document.getElementById('user-input'),
+            settings: document.getElementById('settings-modal'),
+            overlay: document.getElementById('overlay'),
+            sidebar: document.getElementById('sidebar')
         };
 
         // --- INIT ---
         document.addEventListener('DOMContentLoaded', () => {
-            // Restore Settings
-            setTheme(state.theme);
-            setLang(state.lang);
-            dom.themeSelect.value = state.theme;
-            dom.langSelect.value = state.lang;
+            // Initial Welcome
+            addMessage("Hello! I am **Tegych AI**. \nI auto-detect language (RU/EN). How can I help you today?", 'bot');
+            
+            // Set up marked.js
+            marked.setOptions({
+                highlight: function(code, lang) {
+                    return highlight.highlightAuto(code).value;
+                }
+            });
 
-            // Welcome Message
-            const welcome = state.lang === 'en' 
-                ? "Hello! I am **Tegych AI Ultimate**. \nI support **Markdown**, code highlighting, and have 13 themes." 
-                : "Привет! Я **Tegych AI Ultimate**. \nЯ поддерживаю **Markdown**, подсветку кода и имею 13 тем.";
-            addMessage(welcome, 'bot');
-
-            // Input Handler
+            // Enter Key
             dom.input.addEventListener('keypress', (e) => {
                 if(e.key === 'Enter') sendMessage();
             });
-            
-            // Setup Marked Options
-            marked.setOptions({
-                highlight: function(code, lang) {
-                    const language = highlight.getLanguage(lang) ? lang : 'plaintext';
-                    return highlight.highlight(code, { language }).value;
-                },
-                langPrefix: 'hljs language-'
-            });
         });
 
-        // --- CORE FUNCTIONS ---
-        
-        function setTheme(theme) {
-            document.body.setAttribute('data-theme', theme);
-            localStorage.setItem('tegych_theme', theme);
-            state.theme = theme;
-        }
-
-        function setLang(lang) {
-            state.lang = lang;
-            localStorage.setItem('tegych_lang', lang);
-            // Update system prompt
-            state.history[0].content = lang === 'en' 
-                ? "You are Tegych AI. Answer in English. Use Markdown." 
-                : "Ты Tegych AI. Отвечай на русском. Используй Markdown.";
-        }
-
-        function toggleSettings() {
-            dom.settings.classList.toggle('show');
-        }
-
-        function quickAction(text) {
-            dom.input.value = text;
-            dom.input.focus();
-        }
-        
-        function uploadFile() {
-            alert(state.lang === 'en' ? "File upload simulated." : "Загрузка файла (симуляция).");
-        }
-
-        function clearChat() {
-            dom.chat.innerHTML = '';
-            state.history = [state.history[0]];
-            addMessage(state.lang === 'en' ? "Chat cleared." : "Чат очищен.", 'bot');
-            dom.settings.classList.remove('show');
-        }
+        // --- CORE LOGIC ---
 
         function addMessage(text, sender) {
-            const div = document.createElement('div');
-            div.className = `message ${sender}-msg`;
+            const msgDiv = document.createElement('div');
+            msgDiv.className = `message ${sender}`;
             
-            const header = document.createElement('div');
-            header.className = 'msg-header';
-            header.innerHTML = `<span>${sender === 'user' ? 'YOU' : 'TEGYCH'}</span>`;
+            // Avatar
+            const avatar = document.createElement('div');
+            avatar.className = `avatar ${sender}`;
+            avatar.innerHTML = sender === 'user' ? '<i class="fas fa-user"></i>' : '<i class="fas fa-robot"></i>';
             
+            // Content
             const content = document.createElement('div');
+            content.className = 'msg-content';
             
             if (sender === 'user') {
-                content.innerText = text; // User messages are plain text
+                content.innerText = text;
             } else {
-                content.innerHTML = marked.parse(text); // Bot messages are Markdown
+                // Parse Markdown
+                content.innerHTML = marked.parse(text);
+                // Add Copy Buttons to Code Blocks
+                content.querySelectorAll('pre').forEach(pre => {
+                    const btn = document.createElement('button');
+                    btn.className = 'copy-btn';
+                    btn.innerText = 'Copy';
+                    btn.onclick = () => {
+                        navigator.clipboard.writeText(pre.innerText);
+                        btn.innerText = 'Copied!';
+                        setTimeout(() => btn.innerText = 'Copy', 2000);
+                    };
+                    pre.appendChild(btn);
+                });
             }
 
-            div.appendChild(header);
-            div.appendChild(content);
-            dom.chat.appendChild(div);
+            msgDiv.appendChild(avatar);
+            msgDiv.appendChild(content);
+            dom.chat.appendChild(msgDiv);
             dom.chat.scrollTop = dom.chat.scrollHeight;
-            return content; // Return for typing effect
         }
-
-        // --- API LOGIC & TYPEWRITER ---
 
         async function sendMessage() {
             const text = dom.input.value.trim();
             if(!text) return;
 
+            // UI Updates
             dom.input.value = '';
-            dom.settings.classList.remove('show');
-            
             addMessage(text, 'user');
-            state.history.push({ role: "user", content: text });
             
-            // Show Typing Indicator (moved to bottom of chat)
-            dom.chat.appendChild(dom.typing);
-            dom.typing.style.display = 'flex';
+            // Show Typing Placeholder
+            const typingDiv = document.createElement('div');
+            typingDiv.className = 'message bot typing-temp';
+            typingDiv.innerHTML = `<div class="avatar bot"><i class="fas fa-robot"></i></div><div class="msg-content">Typing...</div>`;
+            dom.chat.appendChild(typingDiv);
             dom.chat.scrollTop = dom.chat.scrollHeight;
+
+            state.history.push({ role: "user", content: text });
 
             try {
                 const response = await fetch(API_URL, {
@@ -499,55 +474,91 @@
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify({
-                        model: "mistral-small-latest",
+                        model: state.proMode ? "mistral-medium" : "mistral-small-latest",
                         messages: state.history,
                         temperature: 0.7
                     })
                 });
 
-                dom.typing.style.display = 'none';
+                // Remove typing indicator
+                document.querySelector('.typing-temp')?.remove();
 
-                if (!response.ok) throw new Error("API Error");
+                if(!response.ok) throw new Error("API Connection Error");
 
                 const data = await response.json();
                 const aiText = data.choices[0].message.content;
 
-                // Add message container
-                const msgContentDiv = addMessage("", 'bot');
-                
-                // Typewriter Effect
-                typeWriter(msgContentDiv, aiText);
-                
+                addMessage(aiText, 'bot');
                 state.history.push({ role: "assistant", content: aiText });
 
             } catch (e) {
-                dom.typing.style.display = 'none';
+                document.querySelector('.typing-temp')?.remove();
                 addMessage(`⚠️ Error: ${e.message}`, 'bot');
             }
         }
 
-        function typeWriter(element, text) {
-            let i = 0;
-            const speed = 10; // Typing speed in ms (lower is faster)
-            
-            // We can't render markdown character by character easily.
-            // So we just simulate the delay, then render the full markdown at the end, 
-            // OR we render plain text then swap to markdown.
-            // Approach: Render full Markdown immediately but fade it in? 
-            // Better Approach for UX: Standard typewriter for now, then convert to MD.
-            
-            // Optimized approach for this example:
-            element.innerHTML = marked.parse(text); 
-            // If you want real "streaming" typing, it's complex with Markdown. 
-            // For now, let's keep the markdown rendering instant for better code block visuals.
+        // --- UTILITIES ---
+
+        function changeTheme(theme) {
+            document.body.setAttribute('data-theme', theme);
         }
 
-        // Close on click outside
-        document.addEventListener('click', (e) => {
-            if(!e.target.closest('.controls') && !e.target.closest('.panel')) {
-                dom.settings.classList.remove('show');
+        function togglePro() {
+            state.proMode = !state.proMode;
+            const badge = document.getElementById('pro-badge');
+            const modelTag = document.getElementById('model-display');
+            
+            if(state.proMode) {
+                badge.style.background = "#fff"; 
+                badge.style.color = "var(--accent)"; 
+                badge.innerText = "ON";
+                modelTag.innerText = "Mistral Medium (Pro)";
+            } else {
+                badge.style.background = "var(--accent)"; 
+                badge.style.color = "#fff"; 
+                badge.innerText = "OFF";
+                modelTag.innerText = "Mistral Small";
             }
-        });
+        }
+
+        function exportChat() {
+            let text = "";
+            state.history.forEach(msg => {
+                if(msg.role !== 'system') text += `${msg.role.toUpperCase()}: ${msg.content}\n\n`;
+            });
+            const blob = new Blob([text], { type: 'text/plain' });
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = 'chat_export.txt';
+            a.click();
+        }
+
+        function clearChat() {
+            dom.chat.innerHTML = '';
+            state.history = [state.history[0]];
+            addMessage("Chat cleared.", 'bot');
+        }
+
+        function triggerUpload() { alert("File upload module active."); }
+
+        // --- UI TOGGLES ---
+        function toggleSidebar() {
+            dom.sidebar.classList.toggle('open');
+            dom.overlay.classList.toggle('mobile-active');
+        }
+
+        function openSettings() {
+            dom.settings.classList.add('active');
+            dom.overlay.classList.add('active');
+        }
+
+        function closeAll() {
+            dom.settings.classList.remove('active');
+            dom.overlay.classList.remove('active');
+            dom.sidebar.classList.remove('open');
+            dom.overlay.classList.remove('mobile-active');
+        }
+
     </script>
 </body>
 </html>
