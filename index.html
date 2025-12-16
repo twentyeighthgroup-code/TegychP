@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Tegych AI | Next Gen Workspace</title>
+    <title>Tegych AI | Workspace</title>
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -29,7 +29,7 @@
             --bg-panel: #18181b;
             --bg-input: #27272a;
             --border: #27272a;
-            --primary: #3b82f6; /* Tegych Blue */
+            --primary: #3b82f6;
             --primary-glow: rgba(59, 130, 246, 0.4);
             --text-main: #f4f4f5;
             --text-muted: #a1a1aa;
@@ -39,86 +39,23 @@
             --font-main: 'Plus Jakarta Sans', sans-serif;
             --font-code: 'JetBrains Mono', monospace;
             
-            /* Chat Bubbles */
             --user-bubble: #3b82f6;
             --bot-bubble: #18181b;
         }
 
-        /* --- THEME ENGINE --- */
-        
-        /* 1. Light (Clean) */
-        [data-theme="light"] {
-            --bg-app: #ffffff; --bg-sidebar: #f8fafc; --bg-panel: #ffffff; --bg-input: #f1f5f9;
-            --border: #e2e8f0; --primary: #0f172a; --text-main: #0f172a; --text-muted: #64748b;
-            --user-bubble: #0f172a; --bot-bubble: #f8fafc;
-        }
-        /* 2. Cyberpunk */
-        [data-theme="cyberpunk"] {
-            --bg-app: #020205; --bg-sidebar: #050510; --bg-panel: #0a0a1a; --bg-input: #121225;
-            --border: #ff00ff; --primary: #00e5ff; --primary-glow: rgba(0, 229, 255, 0.6);
-            --text-main: #e0faff; --text-muted: #ff0099; --user-bubble: #ff0099; --bot-bubble: #0a0a1a;
-        }
-        /* 3. Midnight */
-        [data-theme="midnight"] {
-            --bg-app: #0f172a; --bg-sidebar: #1e293b; --bg-panel: #1e293b; --bg-input: #334155;
-            --border: #334155; --primary: #38bdf8; --text-main: #f8fafc; --text-muted: #94a3b8;
-            --user-bubble: #0284c7; --bot-bubble: #1e293b;
-        }
-        /* 4. Synthwave (NEW) */
-        [data-theme="synthwave"] {
-            --bg-app: #2b213a; --bg-sidebar: #241b2f; --bg-panel: #241b2f; --bg-input: #432c58;
-            --border: #ff71ce; --primary: #b967ff; --text-main: #fff; --text-muted: #01cdfe;
-            --user-bubble: #b967ff; --bot-bubble: #241b2f;
-        }
-        /* 5. Gruvbox (NEW) */
-        [data-theme="gruvbox"] {
-            --bg-app: #282828; --bg-sidebar: #1d2021; --bg-panel: #32302f; --bg-input: #504945;
-            --border: #665c54; --primary: #fabd2f; --text-main: #ebdbb2; --text-muted: #a89984;
-            --user-bubble: #d79921; --bot-bubble: #3c3836;
-        }
-        /* 6. Lavender (NEW) */
-        [data-theme="lavender"] {
-            --bg-app: #fdfbff; --bg-sidebar: #f5f3ff; --bg-panel: #fff; --bg-input: #f3e8ff;
-            --border: #e9d5ff; --primary: #9333ea; --text-main: #4c1d95; --text-muted: #8b5cf6;
-            --user-bubble: #a855f7; --bot-bubble: #f5f3ff;
-        }
-        /* 7. Gold Luxury (NEW) */
-        [data-theme="luxury"] {
-            --bg-app: #000000; --bg-sidebar: #0a0a0a; --bg-panel: #111; --bg-input: #1a1a1a;
-            --border: #d4af37; --primary: #d4af37; --primary-glow: rgba(212, 175, 55, 0.5);
-            --text-main: #f0e6d2; --text-muted: #8a7c5d; --user-bubble: #d4af37; --bot-bubble: #111;
-        }
-        /* 8. Forest (NEW) */
-        [data-theme="forest"] {
-            --bg-app: #051a14; --bg-sidebar: #02120e; --bg-panel: #0a261c; --bg-input: #11382b;
-            --border: #2d6a4f; --primary: #52b788; --text-main: #d8f3dc; --text-muted: #74c69d;
-            --user-bubble: #40916c; --bot-bubble: #0a261c;
-        }
-        /* 9. Dracula */
-        [data-theme="dracula"] {
-            --bg-app: #282a36; --bg-sidebar: #21222c; --bg-panel: #282a36; --bg-input: #44475a;
-            --border: #6272a4; --primary: #ff79c6; --text-main: #f8f8f2; --text-muted: #bd93f9;
-            --user-bubble: #bd93f9; --bot-bubble: #44475a;
-        }
-        /* 10. Solarized (NEW) */
-        [data-theme="solarized"] {
-            --bg-app: #002b36; --bg-sidebar: #073642; --bg-panel: #073642; --bg-input: #586e75;
-            --border: #586e75; --primary: #268bd2; --text-main: #93a1a1; --text-muted: #657b83;
-            --user-bubble: #2aa198; --bot-bubble: #073642;
-        }
-        /* 11. Neumorphism */
-        [data-theme="neumorphism"] {
-            --bg-app: #e0e5ec; --bg-sidebar: #e0e5ec; --bg-panel: #e0e5ec; --bg-input: #e0e5ec;
-            --border: transparent; --primary: #6d5dfc; --text-main: #4a4a4a; --text-muted: #888;
-            --user-bubble: #6d5dfc; --bot-bubble: #e0e5ec;
-            --shadow-card: 9px 9px 16px rgb(163,177,198,0.6), -9px -9px 16px rgba(255,255,255, 0.5);
-        }
-        /* 12. Monokai (NEW) */
-        [data-theme="monokai"] {
-            --bg-app: #272822; --bg-sidebar: #1e1f1c; --bg-panel: #272822; --bg-input: #3e3d32;
-            --border: #75715e; --primary: #a6e22e; --text-main: #f8f8f2; --text-muted: #75715e;
-            --user-bubble: #f92672; --bot-bubble: #3e3d32;
-        }
+        /* --- THEMES --- */
+        [data-theme="light"] { --bg-app: #ffffff; --bg-sidebar: #f8fafc; --bg-panel: #ffffff; --bg-input: #f1f5f9; --border: #e2e8f0; --primary: #0f172a; --text-main: #0f172a; --text-muted: #64748b; --user-bubble: #0f172a; --bot-bubble: #f8fafc; }
+        [data-theme="cyberpunk"] { --bg-app: #020205; --bg-sidebar: #050510; --bg-panel: #0a0a1a; --bg-input: #121225; --border: #ff00ff; --primary: #00e5ff; --primary-glow: rgba(0, 229, 255, 0.6); --text-main: #e0faff; --text-muted: #ff0099; --user-bubble: #ff0099; --bot-bubble: #0a0a1a; }
+        [data-theme="midnight"] { --bg-app: #0f172a; --bg-sidebar: #1e293b; --bg-panel: #1e293b; --bg-input: #334155; --border: #334155; --primary: #38bdf8; --text-main: #f8fafc; --text-muted: #94a3b8; --user-bubble: #0284c7; --bot-bubble: #1e293b; }
+        [data-theme="synthwave"] { --bg-app: #2b213a; --bg-sidebar: #241b2f; --bg-panel: #241b2f; --bg-input: #432c58; --border: #ff71ce; --primary: #b967ff; --text-main: #fff; --text-muted: #01cdfe; --user-bubble: #b967ff; --bot-bubble: #241b2f; }
+        [data-theme="gruvbox"] { --bg-app: #282828; --bg-sidebar: #1d2021; --bg-panel: #32302f; --bg-input: #504945; --border: #665c54; --primary: #fabd2f; --text-main: #ebdbb2; --text-muted: #a89984; --user-bubble: #d79921; --bot-bubble: #3c3836; }
+        [data-theme="lavender"] { --bg-app: #fdfbff; --bg-sidebar: #f5f3ff; --bg-panel: #fff; --bg-input: #f3e8ff; --border: #e9d5ff; --primary: #9333ea; --text-main: #4c1d95; --text-muted: #8b5cf6; --user-bubble: #a855f7; --bot-bubble: #f5f3ff; }
+        [data-theme="luxury"] { --bg-app: #000000; --bg-sidebar: #0a0a0a; --bg-panel: #111; --bg-input: #1a1a1a; --border: #d4af37; --primary: #d4af37; --primary-glow: rgba(212, 175, 55, 0.5); --text-main: #f0e6d2; --text-muted: #8a7c5d; --user-bubble: #d4af37; --bot-bubble: #111; }
+        [data-theme="forest"] { --bg-app: #051a14; --bg-sidebar: #02120e; --bg-panel: #0a261c; --bg-input: #11382b; --border: #2d6a4f; --primary: #52b788; --text-main: #d8f3dc; --text-muted: #74c69d; --user-bubble: #40916c; --bot-bubble: #0a261c; }
+        [data-theme="dracula"] { --bg-app: #282a36; --bg-sidebar: #21222c; --bg-panel: #282a36; --bg-input: #44475a; --border: #6272a4; --primary: #ff79c6; --text-main: #f8f8f2; --text-muted: #bd93f9; --user-bubble: #bd93f9; --bot-bubble: #44475a; }
+        [data-theme="solarized"] { --bg-app: #002b36; --bg-sidebar: #073642; --bg-panel: #073642; --bg-input: #586e75; --border: #586e75; --primary: #268bd2; --text-main: #93a1a1; --text-muted: #657b83; --user-bubble: #2aa198; --bot-bubble: #073642; }
+        [data-theme="neumorphism"] { --bg-app: #e0e5ec; --bg-sidebar: #e0e5ec; --bg-panel: #e0e5ec; --bg-input: #e0e5ec; --border: transparent; --primary: #6d5dfc; --text-main: #4a4a4a; --text-muted: #888; --user-bubble: #6d5dfc; --bot-bubble: #e0e5ec; --shadow-card: 9px 9px 16px rgb(163,177,198,0.6), -9px -9px 16px rgba(255,255,255, 0.5); }
+        [data-theme="monokai"] { --bg-app: #272822; --bg-sidebar: #1e1f1c; --bg-panel: #272822; --bg-input: #3e3d32; --border: #75715e; --primary: #a6e22e; --text-main: #f8f8f2; --text-muted: #75715e; --user-bubble: #f92672; --bot-bubble: #3e3d32; }
 
         /* --- GLOBAL RESET --- */
         * { margin: 0; padding: 0; box-sizing: border-box; outline: none; }
@@ -128,7 +65,6 @@
             transition: background 0.4s ease, color 0.4s ease;
         }
 
-        /* --- LAYOUT GRID --- */
         .app-container { display: flex; width: 100%; height: 100%; }
 
         /* --- SIDEBAR --- */
@@ -139,10 +75,9 @@
         }
         
         .logo-area { display: flex; align-items: center; gap: 12px; padding: 0 8px; }
-        .logo-icon {
-            width: 32px; height: 32px; background: var(--primary); border-radius: 8px;
-            display: grid; place-items: center; color: white; font-weight: 800; font-size: 18px;
-            box-shadow: 0 0 15px var(--primary-glow);
+        .logo-img {
+            width: 36px; height: 36px; border-radius: 8px; object-fit: cover;
+            box-shadow: 0 0 15px var(--primary-glow); border: 2px solid var(--border);
         }
         .logo-text { font-size: 20px; font-weight: 700; letter-spacing: -0.5px; }
 
@@ -183,13 +118,16 @@
         
         .chat-wrapper { flex: 1; overflow-y: auto; padding: 40px 0; display: flex; flex-direction: column; scroll-behavior: smooth; }
         
-        /* Empty State (Welcome) */
+        /* Welcome Screen */
         .welcome-screen {
             display: flex; flex-direction: column; align-items: center; justify-content: center;
             height: 100%; text-align: center; padding: 20px; opacity: 1; transition: opacity 0.3s;
         }
         .welcome-screen.hidden { display: none; opacity: 0; }
-        .welcome-icon { font-size: 48px; color: var(--primary); margin-bottom: 24px; }
+        .welcome-logo {
+            width: 80px; height: 80px; border-radius: 20px; object-fit: cover; margin-bottom: 24px;
+            box-shadow: 0 10px 40px var(--primary-glow); border: 2px solid var(--border);
+        }
         .welcome-title { font-size: 32px; font-weight: 700; margin-bottom: 12px; }
         .welcome-subtitle { color: var(--text-muted); max-width: 500px; margin-bottom: 40px; }
         
@@ -209,11 +147,12 @@
         .message-row.bot { background: var(--bg-app); }
         
         .msg-avatar {
-            width: 32px; height: 32px; border-radius: 6px; flex-shrink: 0;
-            display: grid; place-items: center; font-size: 14px;
+            width: 32px; height: 32px; border-radius: 8px; flex-shrink: 0;
+            display: grid; place-items: center; font-size: 14px; overflow: hidden;
         }
         .msg-avatar.user { background: var(--text-muted); color: var(--bg-app); }
-        .msg-avatar.bot { background: var(--primary); color: white; }
+        .msg-avatar.bot { background: transparent; }
+        .msg-avatar.bot img { width: 100%; height: 100%; object-fit: cover; }
 
         .msg-bubble {
             flex: 1; font-size: 16px; line-height: 1.6; color: var(--text-main);
@@ -222,49 +161,26 @@
         .msg-bubble p { margin-bottom: 12px; }
         .msg-bubble p:last-child { margin-bottom: 0; }
         
-        /* Code Blocks */
-        pre {
-            background: #0d0d0d; border-radius: 8px; margin: 12px 0; border: 1px solid #333;
-            overflow: hidden; position: relative;
-        }
-        .code-header {
-            display: flex; justify-content: space-between; align-items: center;
-            background: #1a1a1a; padding: 6px 12px; font-size: 12px; color: #888; border-bottom: 1px solid #333;
-        }
+        pre { background: #0d0d0d; border-radius: 8px; margin: 12px 0; border: 1px solid #333; overflow: hidden; position: relative; }
+        .code-header { display: flex; justify-content: space-between; align-items: center; background: #1a1a1a; padding: 6px 12px; font-size: 12px; color: #888; border-bottom: 1px solid #333; }
         pre code { display: block; padding: 12px; overflow-x: auto; font-family: var(--font-code); font-size: 14px; color: #ccc; }
         
-        /* Input Area */
-        .input-section {
-            padding: 24px; background: var(--bg-app); position: relative;
-        }
+        .input-section { padding: 24px; background: var(--bg-app); position: relative; }
         .input-box {
-            max-width: 800px; margin: 0 auto; background: var(--bg-input);
-            border: 1px solid var(--border); border-radius: 20px; padding: 12px;
-            display: flex; align-items: flex-end; gap: 12px; box-shadow: var(--shadow-card);
-            transition: border-color 0.2s;
+            max-width: 800px; margin: 0 auto; background: var(--bg-input); border: 1px solid var(--border); border-radius: 20px; padding: 12px;
+            display: flex; align-items: flex-end; gap: 12px; box-shadow: var(--shadow-card); transition: border-color 0.2s;
         }
         .input-box:focus-within { border-color: var(--primary); }
+        textarea { flex: 1; background: transparent; border: none; color: var(--text-main); font-size: 16px; font-family: inherit; resize: none; max-height: 200px; padding: 8px 0; min-height: 24px; }
         
-        textarea {
-            flex: 1; background: transparent; border: none; color: var(--text-main);
-            font-size: 16px; font-family: inherit; resize: none; max-height: 200px;
-            padding: 8px 0; min-height: 24px;
-        }
-        
-        .send-btn {
-            width: 36px; height: 36px; border-radius: 10px; background: var(--primary);
-            color: white; border: none; cursor: pointer; display: grid; place-items: center;
-            transition: 0.2s;
-        }
+        .send-btn { width: 36px; height: 36px; border-radius: 10px; background: var(--primary); color: white; border: none; cursor: pointer; display: grid; place-items: center; transition: 0.2s; }
         .send-btn:hover { filter: brightness(1.1); }
         .send-btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
-        /* Mobile Menu */
         .mobile-toggle { display: none; font-size: 20px; cursor: pointer; }
         .overlay { position: fixed; inset: 0; background: black; opacity: 0; pointer-events: none; transition: 0.3s; z-index: 40; }
         .overlay.active { opacity: 0.5; pointer-events: all; }
 
-        /* Settings Modal */
         .modal {
             position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.9);
             background: var(--bg-sidebar); padding: 24px; border-radius: 16px; border: 1px solid var(--border);
@@ -272,7 +188,6 @@
             box-shadow: 0 20px 50px rgba(0,0,0,0.5);
         }
         .modal.open { transform: translate(-50%, -50%) scale(1); opacity: 1; pointer-events: all; }
-        
         select { width: 100%; padding: 12px; background: var(--bg-input); border: 1px solid var(--border); color: var(--text-main); border-radius: 8px; margin-top: 8px; outline: none; }
 
         @keyframes fadeUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
@@ -325,11 +240,10 @@
         <!-- SIDEBAR -->
         <aside class="sidebar" id="sidebar">
             <div class="logo-area">
-                <div class="logo-icon">Tegych logo.png</div>
+                <img src="Tegych logo.png" alt="Logo" class="logo-img">
                 <div class="logo-text">Tegych AI</div>
             </div>
 
-            <!-- Model Switcher -->
             <div class="model-switcher" id="model-switcher" data-mode="flash">
                 <div class="slider"></div>
                 <div class="model-btn active" onclick="setModel('flash')">Flash ⚡</div>
@@ -340,18 +254,12 @@
                 <div class="nav-label">Workspace</div>
                 <div class="nav-item active" onclick="newChat()"><i class="fas fa-plus"></i> New Chat</div>
                 <div class="nav-item"><i class="fas fa-compass"></i> Discover</div>
-                <div class="nav-item"><i class="fas fa-archive"></i> Library</div>
                 
                 <div class="nav-label" style="margin-top:20px;">Tools</div>
                 <div class="nav-item" onclick="toggleSettings()"><i class="fas fa-cog"></i> Settings</div>
                 <div class="nav-item" onclick="exportChat()"><i class="fas fa-download"></i> Export Chat</div>
+                <div class="nav-item" onclick="clearAllData()" style="color:#ef4444;"><i class="fas fa-trash"></i> Reset All</div>
             </nav>
-
-            <div style="padding:12px; background:var(--bg-panel); border-radius:12px; border:1px solid var(--border);">
-                <div style="font-size:12px; color:var(--text-muted);">Current Plan</div>
-                <div style="font-weight:700; margin-bottom:4px;">Enterprise Team</div>
-                <div style="font-size:10px; color:var(--primary);">Unlimited Access</div>
-            </div>
         </aside>
 
         <!-- MAIN CONTENT -->
@@ -363,7 +271,6 @@
                 </div>
                 <div style="display:flex; gap:12px;">
                     <i class="far fa-star" style="color:var(--text-muted); cursor:pointer;"></i>
-                    <i class="fas fa-share-alt" style="color:var(--text-muted); cursor:pointer;"></i>
                 </div>
             </div>
 
@@ -371,9 +278,9 @@
                 
                 <!-- WELCOME SCREEN -->
                 <div class="welcome-screen" id="welcome-screen">
-                    <div class="welcome-icon"><i class="fas fa-robot"></i></div>
+                    <img src="Tegych logo.png" alt="Tegych" class="welcome-logo">
                     <h1 class="welcome-title">How can Tegych help you?</h1>
-                    <p class="welcome-subtitle">Advanced AI model capable of coding, analysis, and creative writing. Select a mode or start typing.</p>
+                    <p class="welcome-subtitle">Advanced AI model capable of coding, analysis, and creative writing. Auto-saving enabled.</p>
                     
                     <div class="suggestion-grid">
                         <div class="suggestion-card" onclick="setInput('Write a Python script to parse CSV')">
@@ -406,9 +313,6 @@
                     <textarea id="user-input" rows="1" placeholder="Message Tegych..." oninput="autoResize(this)"></textarea>
                     <button class="send-btn" id="send-btn" onclick="sendMessage()"><i class="fas fa-arrow-up"></i></button>
                 </div>
-                <div style="text-align:center; font-size:11px; color:var(--text-muted); margin-top:10px;">
-                    © 2025 Tegcompany. All rights reserved.
-                </div>
             </div>
         </main>
     </div>
@@ -417,15 +321,18 @@
         // --- CONFIG ---
         const API_KEY = "8fVDXLED6cbXbT0ObTYuBhitYkjB5ABV"; // ⚠️ ENTER API KEY HERE
         const API_URL = "https://api.mistral.ai/v1/chat/completions";
+        
+        // --- DEFAULT SYSTEM PROMPT ---
+        const SYSTEM_PROMPT = { 
+            role: "system", 
+            content: "You are Tegych AI, a helpful and expert assistant. " +
+                     "Detect the user's language. If Russian, answer Russian. If English, answer English. " +
+                     "Use Markdown formatting." 
+        };
 
         let state = {
-            model: 'flash', // flash = small, pro = medium/large
-            history: [{ 
-                role: "system", 
-                content: "You are Tegych AI, a helpful and expert assistant. I am NOT Mistral. " +
-                         "Detect the user's language. If Russian, answer Russian. If English, answer English. " +
-                         "Use Markdown formatting." 
-            }]
+            model: localStorage.getItem('tegych_model') || 'flash',
+            history: JSON.parse(localStorage.getItem('tegych_history')) || [ SYSTEM_PROMPT ]
         };
 
         const dom = {
@@ -438,6 +345,28 @@
 
         // --- INIT ---
         document.addEventListener('DOMContentLoaded', () => {
+            // Load Saved Theme
+            const savedTheme = localStorage.getItem('tegych_theme') || 'dark';
+            setTheme(savedTheme, false); // Don't save again on init
+            document.getElementById('theme-select').value = savedTheme;
+
+            // Load Saved Model
+            setModel(state.model, false);
+
+            // Load Saved History
+            if (state.history.length > 1) {
+                dom.welcome.classList.add('hidden');
+                // Re-render chat
+                state.history.forEach(msg => {
+                    if (msg.role !== 'system') {
+                        appendMessage(msg.role === 'assistant' ? 'bot' : 'user', msg.content);
+                    }
+                });
+                // Scroll to bottom
+                setTimeout(() => { dom.wrapper.scrollTop = dom.wrapper.scrollHeight; }, 100);
+            }
+
+            // Syntax Highlight
             marked.setOptions({
                 highlight: (code, lang) => highlight.highlightAuto(code).value
             });
@@ -453,17 +382,25 @@
 
         // --- FUNCTIONS ---
 
+        function saveState() {
+            localStorage.setItem('tegych_history', JSON.stringify(state.history));
+            localStorage.setItem('tegych_model', state.model);
+        }
+
         function setInput(text) {
             dom.input.value = text;
             dom.input.focus();
             autoResize(dom.input);
         }
 
-        function setModel(mode) {
+        function setModel(mode, save = true) {
             state.model = mode;
             dom.switcher.setAttribute('data-mode', mode);
-            document.querySelectorAll('.model-btn').forEach(btn => btn.classList.remove('active'));
-            // Visual toggle update handled by CSS
+            document.querySelectorAll('.model-btn').forEach(btn => {
+                if(btn.innerText.toLowerCase().includes(mode)) btn.classList.add('active');
+                else btn.classList.remove('active');
+            });
+            if (save) saveState();
         }
 
         function autoResize(el) {
@@ -473,13 +410,22 @@
 
         function newChat() {
             dom.container.innerHTML = '';
-            state.history = [state.history[0]];
+            state.history = [ SYSTEM_PROMPT ];
+            saveState();
             dom.welcome.classList.remove('hidden');
             document.getElementById('chat-title').innerText = "New Session";
         }
 
+        function clearAllData() {
+            if(confirm('Are you sure you want to reset all data and history?')) {
+                localStorage.removeItem('tegych_history');
+                localStorage.removeItem('tegych_model');
+                localStorage.removeItem('tegych_theme');
+                location.reload();
+            }
+        }
+
         function appendMessage(role, text) {
-            // Hide welcome screen on first message
             dom.welcome.classList.add('hidden');
 
             const row = document.createElement('div');
@@ -488,10 +434,15 @@
             const container = document.createElement('div');
             container.className = 'message-container';
             
-            // Avatar
+            // Avatar (Logo or User Icon)
             const avatar = document.createElement('div');
             avatar.className = `msg-avatar ${role}`;
-            avatar.innerHTML = role === 'user' ? '<i class="fas fa-user"></i>' : 'T'; // T for Tegych
+            
+            if (role === 'user') {
+                avatar.innerHTML = '<i class="fas fa-user"></i>';
+            } else {
+                avatar.innerHTML = '<img src="Tegych logo.png" alt="Tegych">';
+            }
             
             // Bubble
             const bubble = document.createElement('div');
@@ -500,8 +451,8 @@
             if (role === 'user') {
                 bubble.innerText = text;
             } else {
-                bubble.innerHTML = marked.parse(text); // Render Markdown
-                // Add copy buttons to code blocks
+                bubble.innerHTML = marked.parse(text); 
+                // Copy buttons
                 bubble.querySelectorAll('pre').forEach(pre => {
                     const header = document.createElement('div');
                     header.className = 'code-header';
@@ -521,7 +472,6 @@
             row.appendChild(container);
             dom.container.appendChild(row);
             
-            // Auto scroll
             dom.wrapper.scrollTop = dom.wrapper.scrollHeight;
             return bubble;
         }
@@ -531,13 +481,14 @@
             if (!text) return;
 
             dom.input.value = '';
-            dom.input.style.height = 'auto'; // Reset height
+            dom.input.style.height = 'auto'; 
             
             appendMessage('user', text);
             state.history.push({ role: "user", content: text });
+            saveState(); // Save after user msg
 
-            // Create placeholder for AI response
-            const botBubble = appendMessage('bot', '<span class="typing-dots">Typing...</span>');
+            // Placeholder
+            const botBubble = appendMessage('bot', 'Typing...');
             
             try {
                 const modelId = state.model === 'pro' ? 'mistral-medium' : 'mistral-small-latest';
@@ -551,8 +502,7 @@
                     body: JSON.stringify({
                         model: modelId,
                         messages: state.history,
-                        temperature: 0.7,
-                        stream: false // Using standard fetch for simplicity in this demo, simulating typing
+                        temperature: 0.7
                     })
                 });
 
@@ -561,14 +511,8 @@
                 const data = await response.json();
                 const aiText = data.choices[0].message.content;
                 
-                // Simulate Typewriter Effect
-                botBubble.innerHTML = ''; // Clear "Typing..."
-                let i = 0;
-                // For long texts, instant render is better for UX, but let's do a fast chunk render
-                // Actually, for markdown, typing effect is tricky. Let's do a Fade In effect instead.
+                // Update bubble content
                 botBubble.innerHTML = marked.parse(aiText);
-                
-                // Re-add copy headers
                 botBubble.querySelectorAll('pre').forEach(pre => {
                     const header = document.createElement('div');
                     header.className = 'code-header';
@@ -577,6 +521,7 @@
                 });
 
                 state.history.push({ role: "assistant", content: aiText });
+                saveState(); // Save after bot msg
                 document.getElementById('chat-title').innerText = text.substring(0, 20) + "...";
 
             } catch (error) {
@@ -595,8 +540,9 @@
             document.querySelector('.overlay').classList.toggle('active');
         }
 
-        function setTheme(theme) {
+        function setTheme(theme, save = true) {
             document.body.setAttribute('data-theme', theme);
+            if(save) localStorage.setItem('tegych_theme', theme);
         }
 
         function copyCode(btn) {
