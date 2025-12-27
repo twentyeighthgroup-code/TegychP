@@ -15,6 +15,7 @@
     
     <!-- Code Highlighting -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+    <!-- Scripts loaded with defer to ensure order -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/4.3.0/marked.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
 
@@ -366,9 +367,14 @@
                 setTimeout(() => { dom.wrapper.scrollTop = dom.wrapper.scrollHeight; }, 100);
             }
 
-            // Syntax Highlight
+            // Syntax Highlight (Fixed for HLJS 11+)
             marked.setOptions({
-                highlight: (code, lang) => highlight.highlightAuto(code).value
+                highlight: function(code, lang) {
+                    if (typeof hljs !== 'undefined') {
+                        return hljs.highlightAuto(code).value;
+                    }
+                    return code;
+                }
             });
             
             // Textarea Enter key
