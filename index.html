@@ -15,7 +15,6 @@
     
     <!-- Code Highlighting -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
-    <!-- Scripts loaded with defer to ensure order -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/4.3.0/marked.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
 
@@ -185,10 +184,19 @@
         .modal {
             position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.9);
             background: var(--bg-sidebar); padding: 24px; border-radius: 16px; border: 1px solid var(--border);
-            width: 90%; max-width: 400px; z-index: 100; opacity: 0; pointer-events: none; transition: 0.2s;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            width: 90%; max-width: 450px; z-index: 100; opacity: 0; pointer-events: none; transition: 0.2s;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5); max-height: 85vh; overflow-y: auto;
         }
         .modal.open { transform: translate(-50%, -50%) scale(1); opacity: 1; pointer-events: all; }
+        
+        /* Docs Specific */
+        .docs-section { margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+        .docs-section:last-child { border-bottom: none; margin-bottom: 0; }
+        .docs-title { font-size: 14px; font-weight: 700; color: var(--text-main); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .docs-text { font-size: 14px; line-height: 1.6; color: var(--text-muted); }
+        .company-badge { display: inline-flex; align-items: center; gap: 6px; padding: 6px 10px; background: var(--primary-glow); color: var(--primary); border-radius: 6px; font-weight: 600; font-size: 13px; margin-top: 8px; }
+        .version-tag { font-family: var(--font-code); font-size: 11px; background: var(--bg-input); padding: 4px 8px; border-radius: 4px; color: var(--text-muted); display: inline-block; margin-top: 4px; }
+
         select { width: 100%; padding: 12px; background: var(--bg-input); border: 1px solid var(--border); color: var(--text-main); border-radius: 8px; margin-top: 8px; outline: none; }
 
         @keyframes fadeUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
@@ -205,13 +213,13 @@
 </head>
 <body data-theme="dark">
 
-    <div class="overlay" onclick="toggleSidebar()"></div>
+    <div class="overlay" onclick="closeAll()"></div>
 
     <!-- SETTINGS MODAL -->
     <div class="modal" id="settings-modal">
         <div style="display:flex; justify-content:space-between; margin-bottom:20px;">
             <h3>Workspace Settings</h3>
-            <i class="fas fa-times" onclick="toggleSettings()" style="cursor:pointer"></i>
+            <i class="fas fa-times" onclick="closeAll()" style="cursor:pointer"></i>
         </div>
         
         <div style="margin-bottom:20px;">
@@ -233,7 +241,47 @@
             </select>
         </div>
         
-        <button onclick="toggleSettings()" style="width:100%; padding:12px; background:var(--primary); color:white; border:none; border-radius:8px; font-weight:600; cursor:pointer;">Save & Close</button>
+        <button onclick="closeAll()" style="width:100%; padding:12px; background:var(--primary); color:white; border:none; border-radius:8px; font-weight:600; cursor:pointer;">Save & Close</button>
+    </div>
+
+    <!-- DOCUMENTATION MODAL -->
+    <div class="modal" id="docs-modal">
+        <div style="display:flex; justify-content:space-between; margin-bottom:20px;">
+            <div style="display:flex; align-items:center; gap:10px;">
+                <img src="Tegych logo.png" style="width:24px; height:24px; border-radius:4px;">
+                <h3 style="margin:0;">Documentation</h3>
+            </div>
+            <i class="fas fa-times" onclick="closeAll()" style="cursor:pointer"></i>
+        </div>
+
+        <div class="docs-section">
+            <div class="docs-title">System Architecture</div>
+            <div class="docs-text">
+                Tegych AI utilizes a dual-model architecture to optimize for both speed and reasoning capabilities.
+                <ul style="margin-top:8px; padding-left:20px;">
+                    <li><strong>Flash Mode:</strong> Powered by <em>Mistral Small</em>. Optimized for low-latency, rapid responses, and general conversation. Ideal for quick queries.</li>
+                    <li><strong>Ultra Mode:</strong> Powered by <em>Mistral Medium</em>. Optimized for high-reasoning tasks, code generation, and complex analysis.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="docs-section">
+            <div class="docs-title">Developer</div>
+            <div class="docs-text">
+                Developed and maintained by <strong>Tegcompany</strong>. We focus on creating human-centric AI interfaces with enterprise-grade reliability.
+                <div class="company-badge">
+                    <i class="fas fa-building"></i> Tegcompany Inc.
+                </div>
+            </div>
+        </div>
+
+        <div class="docs-section">
+            <div class="docs-title">Privacy & Data</div>
+            <div class="docs-text">
+                All chat history is stored locally within your browser (LocalStorage). Tegcompany does not retain conversation logs on central servers to ensure maximum privacy.
+            </div>
+            <div class="version-tag">Build v2.1.0 Stable</div>
+        </div>
     </div>
 
     <div class="app-container">
@@ -254,10 +302,10 @@
             <nav class="nav-group">
                 <div class="nav-label">Workspace</div>
                 <div class="nav-item active" onclick="newChat()"><i class="fas fa-plus"></i> New Chat</div>
-                <div class="nav-item"><i class="fas fa-compass"></i> Discover</div>
                 
                 <div class="nav-label" style="margin-top:20px;">Tools</div>
-                <div class="nav-item" onclick="toggleSettings()"><i class="fas fa-cog"></i> Settings</div>
+                <div class="nav-item" onclick="openDocs()"><i class="fas fa-book"></i> Documentation</div>
+                <div class="nav-item" onclick="openSettings()"><i class="fas fa-cog"></i> Settings</div>
                 <div class="nav-item" onclick="exportChat()"><i class="fas fa-download"></i> Export Chat</div>
                 <div class="nav-item" onclick="clearAllData()" style="color:#ef4444;"><i class="fas fa-trash"></i> Reset All</div>
             </nav>
@@ -541,9 +589,20 @@
             document.querySelector('.overlay').classList.toggle('active');
         }
 
-        function toggleSettings() {
-            document.getElementById('settings-modal').classList.toggle('open');
-            document.querySelector('.overlay').classList.toggle('active');
+        function openSettings() {
+            document.getElementById('settings-modal').classList.add('open');
+            document.querySelector('.overlay').classList.add('active');
+        }
+
+        function openDocs() {
+            document.getElementById('docs-modal').classList.add('open');
+            document.querySelector('.overlay').classList.add('active');
+        }
+
+        function closeAll() {
+            document.querySelectorAll('.modal').forEach(m => m.classList.remove('open'));
+            document.querySelector('.overlay').classList.remove('active');
+            document.getElementById('sidebar').classList.remove('active');
         }
 
         function setTheme(theme, save = true) {
